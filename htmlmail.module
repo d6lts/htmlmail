@@ -1,0 +1,23 @@
+<?php
+/* $Id$ */
+
+/**
+ * This is the HTML Mail module to allow system email to send in HTML format.
+ */
+ 
+function htmlmail_help($section='') {
+  $output = '';
+  switch ($section) {
+    case "admin/help#htmlmail":
+      $output = '<p>'.  t("This is the HTML Mail module to allow system email to send in HTML format."). '</p>';
+      break;
+  }
+  return $output;
+}
+
+
+
+
+
+
+?>

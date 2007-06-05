@@ -1,0 +1,4 @@
+; $Id$
+name = HTML Mail
+description = "Enable HTML in system emails."
+
