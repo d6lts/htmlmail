@@ -74,7 +74,7 @@ function htmlmail_admin() {
     '#default_value' => variable_get('htmlmail_testaddr', variable_get('site_mail', '')),
 		'#size' => 40,
 		'#maxlength' => 128,
-    '#description' => t('Enter the email address for test emails, defaults to site email.')
+    '#description' => t('Enter the email address for test emails, defaults to site email. ' . l("Send test email", "admin/settings/htmlmail/test"))
   );
 
   $form['htmlmail_settings']['htmlmail_autop'] = array(
