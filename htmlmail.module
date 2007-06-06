@@ -4,7 +4,7 @@
 /**
  * This is the HTML Mail module to allow system email to send in HTML format.
  */
- 
+
 function htmlmail_help($section='') {
   $output = '';
   switch ($section) {
@@ -19,24 +19,18 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
   $headers['Content-Type'] = 'text/html; charset="us-ascii';
 	
 	// The paragraph an break stuff
-  if (variable_get('htmlmail_autop', '') == 1) {
+  if (variable_get('htmlmail_autop', '1') == 1) {
 	  $body = _mail_autop($body);
 	}
   // Insert the preformatted HTML so the end user only needs to enter what goes between the <body> tags.
 	// this of course can be overridden in the admin settings for this module.
-	if (variable_get('htmlmail_preformat', '') == 1) {
-    $header = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n" .
-              '<html xmlns="http://www.w3.org/1999/xhtml">' . "\n" .
-              '<head>' .
-              '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />' . "\n" .
-              '</head>' . "\n" .
-              '<body>' . "\n";
-
-	  $body = $header . $body;
-		$body .= '</body>' . "\n" .
-             '</html>' . "\n";
+	if (variable_get('htmlmail_preformat', '1') == 1) {
+    $body = "<html>\n<head></head>\n<body>\n" . $body . "</body>\n</html>\n";
 	}
-	
+
+  if (variable_get('htmlmail_urlfilter', '1') == 1) {
+	  $body = _htmlmail_url($body);
+	}
   return;
 }
 
@@ -48,13 +42,40 @@ function htmlmail_menu() {
     'callback' => 'drupal_get_form',
     'callback arguments' => 'htmlmail_admin',
     'description' => t('Configure HTML Mail administration options.'),
-    'access' => user_access('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
+    'access' => user_access('access administration pages')
    );
+	 
+   $items[] = array(
+	    'path' => 'admin/settings/htmlmail/settings',
+      'title' => t('Settings'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => 'htmlmail_admin',
+      'access' => user_access('access administration pages'),
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+			'weight' => '-1'
+   );
+	 
+   $items[] = array(
+		 'path' => 'admin/settings/htmlmail/test',
+     'title' => t('Test mail'),
+     'callback' => 'drupal_get_form',
+     'callback arguments' => array('htmlmail_admin_test_form'),
+     'type' => MENU_LOCAL_TASK,
+     'access' => user_access('access administration pages'),
+   );
+	 
   return $items;
 }
 
 function htmlmail_admin() {
+  $form['htmlmail_settings']['htmlmail_testaddr'] = array(
+	  '#type' => 'textfield',
+    '#title' => t('Address for test emails'),
+    '#default_value' => variable_get('htmlmail_testaddr', variable_get('site_mail', '')),
+		'#size' => 40,
+		'#maxlength' => 128,
+    '#description' => t('Enter the email address for test emails, defaults to site email.')
+  );
 
   $form['htmlmail_settings']['htmlmail_autop'] = array(
 	  '#type' => 'checkbox',
@@ -69,9 +90,117 @@ function htmlmail_admin() {
     '#default_value' => variable_get('htmlmail_preformat', '1'),
     '#description' => t('Automagically inserts the &lt;HTML&gt; &lt;HEAD&gt; &lt;BODY&gt; tags, untick if you want control over this.')
   );
-  return system_settings_form($form);
 	
+	$form['htmlmail_settings']['htmlmail_urlfilter'] = array(
+	  '#type' => 'checkbox',
+    '#title' => t('URL Filter'),
+    '#default_value' => variable_get('htmlmail_urlfilter', '1'),
+    '#description' => t('Automatically converts text web addresses (URLs, e-mail addresses, ftp links, etc.) into hyperlinks.')
+  );
+  return system_settings_form($form);
 }
+
+function htmlmail_admin_test_form($form_values = NULL) {
+  $form['test_subject'] = array(
+	  '#type' => 'textfield',
+    '#title' => t('Subject'),
+		'#size' => 40,
+		'#default_value' => variable_get('htmlmail_test_subject',''),
+		'#maxlength' => 128,
+  );
+  $form['test_body'] = array(
+	  '#type' => 'textarea',
+    '#title' => t('Body'),
+		'#rows' => 20,
+		'#default_value' => variable_get('htmlmail_test_body',''),
+		'#description' => t('Formatted in HTML.')
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+	  '#value' => t('Submit'),
+  );
+	return $form;
+}
+
+function htmlmail_admin_test_form_submit($form_id, $form_values) {
+  $addr = variable_get('htmlmail_testaddr', variable_get('site_mail', ''));
+  if ($form_values['test_subject']) {
+    variable_set('htmlmail_test_subject', $form_values['test_subject']);
+  }
+	if ($form_values['test_body']) {
+    variable_set('htmlmail_test_body', $form_values['test_body']);
+  }
+  
+	if (drupal_mail('htmlmail-test', $addr, $form_values['test_subject'], $form_values['test_body'], $addr)) {
+	  drupal_set_message('Test mail sent.');
+	}
+	else {
+	  drupal_set_message('drupal_mail failed');
+	}
+	
+  
+
+}
+
+/**
+ * URL filter. Automatically converts text web addresses (URLs, e-mail addresses,
+ * ftp links, etc.) into hyperlinks.
+ */
+function _htmlmail_url($text) {
+  // Pass length to regexp callback
+  _htmlmail_url_trim(NULL, 72);
+
+  $text   = ' '. $text .' ';
+
+  // Match absolute URLs.
+  $text = preg_replace_callback("`(<p>|<li>|<br\s*/?>|[ \n\r\t\(])((http://|https://|ftp://|mailto:|smb://|afp://|file://|gopher://|news://|ssl://|sslv2://|sslv3://|tls://|tcp://|udp://)([a-zA-Z0-9@:%_+*~#?&=.,/;-]*[a-zA-Z0-9@:%_+*~#&=/;-]))([.,?!]*?)(?=(</p>|</li>|<br\s*/?>|[ \n\r\t\)]))`i", '_htmlmail_url_parse_full_links', $text);
+
+  // Match e-mail addresses.
+  $text = preg_replace("`(<p>|<li>|<br\s*/?>|[ \n\r\t\(])([A-Za-z0-9._-]+@[A-Za-z0-9._+-]+\.[A-Za-z]{2,4})([.,?!]*?)(?=(</p>|</li>|<br\s*/?>|[ \n\r\t\)]))`i", '\1<a href="mailto:\2">\2</a>\3', $text);
+
+  // Match www domains/addresses.
+  $text = preg_replace_callback("`(<p>|<li>|[ \n\r\t\(])(www\.[a-zA-Z0-9@:%_+*~#?&=.,/;-]*[a-zA-Z0-9@:%_+~#\&=/;-])([.,?!]*?)(?=(</p>|</li>|<br\s*/?>|[ \n\r\t\)]))`i", '_htmlmail_url_parse_partial_links', $text);
+  $text = substr($text, 1, -1);
+
+  return $text;
+}
+
+/**
+ * Make links out of absolute URLs.
+ */
+function _htmlmail_url_parse_full_links($match) {
+  $match[2] = decode_entities($match[2]);
+  $caption = check_plain(_htmlmail_url_trim($match[2]));
+  $match[2] = check_url($match[2]);
+  return $match[1] . '<a href="'. $match[2] .'" title="'. $match[2] .'">'. $caption .'</a>'. $match[5];
+}
+
+/**
+ * Make links out of domain names starting with "www."
+ */
+function _htmlmail_url_parse_partial_links($match) {
+  $match[2] = decode_entities($match[2]);
+  $caption = check_plain(_htmlmail_url_trim($match[2]));
+  $match[2] = check_plain($match[2]);
+  return $match[1] . '<a href="http://'. $match[2] .'" title="'. $match[2] .'">'. $caption .'</a>'. $match[3];
+}
+
+/**
+ * Shortens long URLs to http://www.example.com/long/url...
+ */
+function _htmlmail_url_trim($text, $length = NULL) {
+  static $_length;
+  if ($length !== NULL) {
+    $_length = $length;
+  }
+
+  if (strlen($text) > $_length) {
+    $text = substr($text, 0, $_length) .'...';
+  }
+
+  return $text;
+}
+
 
 /**
  * Convert line breaks into <p> and <br> in an intelligent fashion.
