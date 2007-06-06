@@ -88,7 +88,7 @@ function htmlmail_admin() {
 	  '#type' => 'checkbox',
     '#title' => t('Preformat HTML code'),
     '#default_value' => variable_get('htmlmail_preformat', '1'),
-    '#description' => t('Automagically inserts the &lt;HTML&gt; &lt;HEAD&gt; &lt;BODY&gt; tags, untick if you want control over this.')
+    '#description' => t('Automagically inserts the &lt;HTML&gt; &lt;HEAD&gt; &lt;BODY&gt; tags, untick if you want control over this. You should check this if using a WYSIWYG editor.')
   );
 	
 	$form['htmlmail_settings']['htmlmail_urlfilter'] = array(
