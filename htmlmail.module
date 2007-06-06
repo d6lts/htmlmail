@@ -20,7 +20,7 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
 	
 	// The paragraph an break stuff
   if (variable_get('htmlmail_autop', '1') == 1) {
-	  $body = _mail_autop($body);
+	  $body = _htmlmail_autop($body);
 	}
   // Insert the preformatted HTML so the end user only needs to enter what goes between the <body> tags.
 	// this of course can be overridden in the admin settings for this module.
@@ -206,7 +206,7 @@ function _htmlmail_url_trim($text, $length = NULL) {
  * Convert line breaks into <p> and <br> in an intelligent fashion.
  * Based on: http://photomatt.net/scripts/autop
  */
-function _mail_autop($text) {
+function _htmlmail_autop($text) {
   // All block level tags
   $block = '(?:table|thead|tfoot|caption|colgroup|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|select|form|blockquote|address|p|h[1-6])';
 
