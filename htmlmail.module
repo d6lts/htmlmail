@@ -16,7 +16,7 @@ function htmlmail_help($section='') {
 }
 
 function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender, &$headers) {
-  $headers['Content-Type'] = 'text/html; charset="us-ascii';
+  $headers['Content-Type'] = 'text/html; charset="utf-8"';
 	
 	// The paragraph an break stuff
   if (variable_get('htmlmail_autop', '1') == 1) {
