@@ -25,7 +25,12 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
   // Insert the preformatted HTML so the end user only needs to enter what goes between the <body> tags.
 	// this of course can be overridden in the admin settings for this module.
 	if (variable_get('htmlmail_preformat', '1') == 1) {
-    $body = "<html>\n<head></head>\n<body>\n" . $body . "</body>\n</html>\n";
+    $body = "<html>\n" . 
+		        "<head>\n" .
+						"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" . 
+						"</head>\n" .
+						"<body>\n" . $body . "</body>\n" . 
+						"</html>\n";
 	}
 
   if (variable_get('htmlmail_urlfilter', '1') == 1) {
