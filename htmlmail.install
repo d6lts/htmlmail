@@ -1,0 +1,18 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Installation for HTML Mail
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function htmlmail_uninstall() {
+  variable_del('htmlmail_css');
+  variable_del('htmlmail_header');
+  variable_del('htmlmail_footer');
+  variable_del('htmlmail_template');
+  variable_del('htmlmail_test');
+}
