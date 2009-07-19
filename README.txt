@@ -1,7 +1,44 @@
-HTML Mail empowers Drupal with the ability to send emails in HTML. I know that this is widely frowned upon but we should not be inflexible to it.
+/* $Id$ */
 
-This module presently is very simple in operation. It changes email headers to tell the recipient the email is in Raw HTML or "HTML email", as opposed to HTML as a multipart MIME attachment or embedded.
+HTML Mail
+---------
 
-By default, template tags are inserted and all you have to worry about is what goes between the body tags. There is an option to override this and an entire HTML document could then be inserted into the email body.
+HTML Mail empowers Drupal with the ability to send emails in HTML, providing
+formatting and semantic markup capabilities in e-mail that are not available
+with plain text.
 
-Remember that many email clients will not be happy with certain code, your CSS may conflict with a web-mail providers CSS and HTML in email may expose security hazards. Beyond this, if your still really, really must have HTML in your email, ie. my current employer d:-{), you may find this module useful.
+This module is very simple in operation. It changes headers in all outgoing
+e-mail modifying e-mail sent from Drupal to be HTML with the option of header,
+footer and CSS inclusion.
+
+For a full description of the module, visit the project page:
+  http://drupal.org/project/htmlmail
+
+To submit bug reports and feature suggestions, or to track changes:
+  http://drupal.org/project/issues/htmlmail
+
+  
+Installation
+------------
+
+Install as usual, see http://drupal.org/node/70151 for further information.
+
+
+Customisation
+-------------
+E-mails can be themed by copying htmlmail.tpl.php to you active theme's 
+directory and editing the contents.
+
+Important
+---------
+
+Remember that many email clients will not be happy with certain code, your 
+CSS may conflict with a web-mail providers CSS and HTML in email may expose 
+security hazards. Beyond this, if your still really, really must have HTML in 
+your email, you may find this module useful.
+
+
+Maintainers
+-----------
+
+Chris Herberte - http://drupal.org/user/1171
