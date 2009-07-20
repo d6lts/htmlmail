@@ -80,10 +80,10 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
 
 
 function theme_htmlmail($body) {
-  $template = _htmlmail_template('path') .'/'. _htmlmail_template('file') .'.tpl.php';
+  $template = _htmlmail_template('path') .'/'. _htmlmail_template('file');
   $variables = array(
     'body' => $body,
-    'path' => url(_htmlmail_template('path'), NULL, NULL, TRUE),
+    'path' => url('', NULL, NULL, TRUE) . _htmlmail_template('path'),
     'header' => variable_get('htmlmail_header', ''),
     'footer' => variable_get('htmlmail_footer', ''),
     'css' => variable_get('htmlmail_css', ''),
@@ -206,7 +206,7 @@ function _htmlmail_template($type) {
   $template = variable_get('htmlmail_template', '');
   switch ($type) {
     case 'file':
-      $output = empty($template) ? 'htmlmail' : basename($template, '.tpl.php');
+      $output = empty($template) ? 'htmlmail.tpl.php' : basename($template);
       break;
     case 'path':
       $output = empty($template) ? drupal_get_path('module', 'htmlmail') : dirname($template);
