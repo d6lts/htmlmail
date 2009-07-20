@@ -38,10 +38,10 @@ function htmlmail_menu() {
     'callback arguments' => 'htmlmail_admin',
     'access' => user_access('access administration pages'),
     'type' => MENU_DEFAULT_LOCAL_TASK,
-	  'weight' => '-2'
+    'weight' => '-2'
   );
   $items[] = array(
-	  'path' => 'admin/settings/htmlmail/template',
+    'path' => 'admin/settings/htmlmail/template',
     'title' => t('Template'),
     'callback' => 'drupal_get_form',
     'callback arguments' => array('htmlmail_template_settings'),
@@ -50,7 +50,7 @@ function htmlmail_menu() {
     'weight' => '-1',
   );
   $items[] = array(
-	  'path' => 'admin/settings/htmlmail/test',
+    'path' => 'admin/settings/htmlmail/test',
     'title' => t('Send Test'),
     'callback' => 'drupal_get_form',
     'callback arguments' => array('htmlmail_test_form'),
@@ -60,21 +60,24 @@ function htmlmail_menu() {
   return $items;
 }
 
+/**
+ * Implementation of hook_mail_alter().
+ */
 function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender, &$headers) {
   $headers['Content-Type'] = 'text/html; charset="utf-8"';
-	
-	// The paragraph an break stuff
+
+  // The paragraph an break stuff
   if (variable_get('htmlmail_autop', '1') == 1) {
-	  $body = _filter_autop($body);
-	}
+    $body = _filter_autop($body);
+  }
+
+  if (variable_get('htmlmail_urlfilter', '1') == 1) {
+    // defaults to 72 as there is no filter 0 -- make filters a configuration option?
+    $body = _filter_url($body, 0);
+  }
 
   // Theme from template htmlmail.tpl.php
   $body = theme('htmlmail', $body);
-
-  if (variable_get('htmlmail_urlfilter', '1') == 1) {
-		// defaults to 72 as there is no filter 0 -- make filters a configuration option?
-    $body = _filter_url($body, 0);
-  }
 
   if (variable_get('htmlmail_emogrifier', '0') == 1) {
     $body = _htmlmail_emogrify($body);
@@ -98,13 +101,13 @@ function theme_htmlmail($body) {
 
 function htmlmail_admin_settings() {
   $form['htmlmail_autop'] = array(
-	  '#type' => 'checkbox',
+    '#type' => 'checkbox',
     '#title' => t('Line break converter'),
     '#default_value' => variable_get('htmlmail_autop', '1'),
     '#description' => t('Converts line breaks into HTML (i.e. &lt;br&gt; and &lt;p&gt; tags).'),
   );
-	$form['htmlmail_urlfilter'] = array(
-	  '#type' => 'checkbox',
+  $form['htmlmail_urlfilter'] = array(
+    '#type' => 'checkbox',
     '#title' => t('URL Filter'),
     '#default_value' => variable_get('htmlmail_urlfilter', '1'),
     '#description' => t('Turns web and e-mail addresses into clickable links. URLs longer than 72 characters will be truncated.'),
@@ -170,9 +173,9 @@ function htmlmail_test_form($form_values = NULL) {
   );
   $form['submit'] = array(
     '#type' => 'submit',
-	  '#value' => t('Submit'),
+    '#value' => t('Submit'),
   );
-	return $form;
+  return $form;
 }
 
 function htmlmail_test_form_submit($form_id, $form_values) {
@@ -183,12 +186,12 @@ function htmlmail_test_form_submit($form_id, $form_values) {
   );
   variable_set('htmlmail_test', $defaults);
 
-	if (drupal_mail('htmlmail-test', $form_values['to'], $form_values['subject'], $form_values['body'], $form_values['to'])) {
-	  drupal_set_message('Test mail sent.');
-	}
-	else {
-	  drupal_set_message('drupal_mail failed');
-	}
+  if (drupal_mail('htmlmail-test', $form_values['to'], $form_values['subject'], $form_values['body'], $form_values['to'])) {
+    drupal_set_message('Test mail sent.');
+  }
+  else {
+    drupal_set_message('drupal_mail failed');
+  }
 }
 
 
