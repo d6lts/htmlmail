@@ -75,6 +75,10 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
 		// defaults to 72 as there is no filter 0 -- make filters a configuration option?
     $body = _filter_url($body, 0);
   }
+
+  if (variable_get('htmlmail_emogrifier', '0') == 1) {
+    $body = _htmlmail_emogrify($body);
+  }
   return;
 }
 
@@ -93,23 +97,24 @@ function theme_htmlmail($body) {
 
 
 function htmlmail_admin_settings() {
-  $form['htmlmail_settings']['htmlmail_autop'] = array(
+  $form['htmlmail_autop'] = array(
 	  '#type' => 'checkbox',
     '#title' => t('Line break converter'),
     '#default_value' => variable_get('htmlmail_autop', '1'),
-    '#description' => t('Converts line breaks into HTML (i.e. &lt;br&gt; and &lt;p&gt; tags, ala filter.module).')
+    '#description' => t('Converts line breaks into HTML (i.e. &lt;br&gt; and &lt;p&gt; tags).'),
   );
-	$form['htmlmail_settings']['htmlmail_urlfilter'] = array(
+	$form['htmlmail_urlfilter'] = array(
 	  '#type' => 'checkbox',
     '#title' => t('URL Filter'),
     '#default_value' => variable_get('htmlmail_urlfilter', '1'),
-    '#description' => t('Automatically converts text web addresses (URLs, e-mail addresses, ftp links, etc.) into hyperlinks.')
-  );	
-  $form['htmlmail_settings']['htmlmail_preformat'] = array(
-	  '#type' => 'checkbox',
-    '#title' => t('Preformat HTML code'),
-    '#default_value' => variable_get('htmlmail_preformat', '1'),
-    '#description' => t('Automagically inserts the &lt;HTML&gt; &lt;HEAD&gt; &lt;BODY&gt; tags, untick if you want control over this. You should check this if using a WYSIWYG editor.')
+    '#description' => t('Turns web and e-mail addresses into clickable links. URLs longer than 72 characters will be truncated.'),
+  );
+  $form['htmlmail_emogrifier'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Emogrifier'),
+    '#default_value' => variable_get('htmlmail_emogrifier', '0'),
+    '#description' => t('Insert your CSS definitions as inline styles into HTML tags for Outlook 2007 and Google Gmail.'),
+    '#disabled' => !extension_loaded('dom'),
   );
   return system_settings_form($form);
 }
@@ -171,13 +176,13 @@ function htmlmail_test_form($form_values = NULL) {
 }
 
 function htmlmail_test_form_submit($form_id, $form_values) {
-  variable_set('htmlmail_test', array(
-      'to' => $form_values['to'],
-      'subject' => $form_values['subject'],
-      'body' => $form_values['body'],
-    )
+  $defaults = array(
+    'to' => $form_values['to'],
+    'subject' => $form_values['subject'],
+    'body' => $form_values['body']
   );
-  
+  variable_set('htmlmail_test', $defaults);
+
 	if (drupal_mail('htmlmail-test', $form_values['to'], $form_values['subject'], $form_values['body'], $form_values['to'])) {
 	  drupal_set_message('Test mail sent.');
 	}
@@ -186,6 +191,53 @@ function htmlmail_test_form_submit($form_id, $form_values) {
 	}
 }
 
+
+/**
+ * If the Emogrifier <http://www.pelagodesign.com/sidecar/emogrifier/> exists,
+ * the CSS styles inside the the $message['body'] are inserted into the other
+ * HTML tags within the same $message['body'] as inline style attributes, 
+ * based on CSS selectors.
+ *
+ * This function is based on code in the simplenews_template module.
+ *
+ * This emogrifier differs from that of simplenews_template in that it permits
+ * modules or users to adjoin CSS into the $message['body'] using the HTML 
+ * <style> tag.  The function searches the entire body for style tags, 
+ * concatenates them in order of appearance in the file, then sends them to
+ * the Emogrifier script. 
+ *
+ * Note that the method modifies the $message['body'] directly, and the 
+ * return value is the modified $message['body'] string as well. 
+ *
+ * @param $message
+ *           The message array to be sent. This function works directly 
+ *           on the $message['body'].
+ * @return $message['body']
+ *           The modified message body string with inlined CSS applied.
+ */
+function _htmlmail_emogrify(&$body) {
+  $path = drupal_get_path('module', 'htmlmail') ."/emogrifier/emogrifier.php";
+  if (is_file($path)) {
+    $style = array();
+    // Pull out the contents of any style tags
+    if (preg_match_all("@<style[^>]*>(.*)</style>@Usi", $body, $matches, PREG_PATTERN_ORDER)) {
+      $style = $matches[1];
+    }
+    // Emogrify can't handle several CSS rules on one line. As a precaution,
+    // we therefore insert LF after each closing bracket.
+    $style = preg_replace('/}\s*/', "}\n", implode("\n", $style));
+
+    // Inline the CSS rules.
+    include_once $path;
+    // get and reset error levels so we dont get DOMDocument::loadHTML() errors
+    $errorlevel = error_reporting();
+    error_reporting(0);
+    $emogrifier = new Emogrifier($body, $style);
+    $body = $emogrifier->emogrify();
+    error_reporting($errorlevel);
+  }
+  return $body;
+}
 
 /**
  * Scan theme's directory for htmlmail templates: Return array for form select options
