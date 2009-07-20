@@ -99,7 +99,7 @@ function htmlmail_test_form_submit($form, &$form_state) {
     'body' => $form_state['values']['body'],
   );
   if (drupal_mail('htmlmail', 'htmlmail_test', $form_state['values']['to'], language_default(), $params)) {
-    drupal_set_message('HTML Mail test message sent.');
+    drupal_set_message(t('HTML Mail test message sent.'));
   }
 }
 
