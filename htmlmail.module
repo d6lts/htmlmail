@@ -13,7 +13,7 @@ function htmlmail_help($section='') {
   switch ($section) {
     case 'admin/help#htmlmail':
     case 'admin/settings/htmlmail':
-      $output = '<p>'.  t("HTML Mail provides formatting and semantic markup capabilities in e-mail that are not available with plain text. All system emails are effected if this module is enabled.") .'</p>';
+      $output = '<p>'.  t("HTML Mail provides formatting and semantic markup capabilities in e-mail that are not available with plain text. All system emails are effected if this module is enabled. Additional HTML Mail templates, ie: <strong>htmlmail-<em>name</em>.tpl.php</strong> will be detected if present anywhere under the current theme directory.") .'</p>';
   }
   return $output;
 }
@@ -85,7 +85,9 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
   return;
 }
 
-
+/**
+ * Theme function to load htmlmail.tpl.php
+ */
 function theme_htmlmail($body) {
   $template = _htmlmail_template('path') .'/'. _htmlmail_template('file');
   $variables = array(
