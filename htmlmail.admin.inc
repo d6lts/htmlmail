@@ -30,13 +30,6 @@ function htmlmail_admin_settings() {
 }
 
 function htmlmail_template_settings() {
-  $form['htmlmail_template'] = array(
-    '#type' => 'select',
-    '#title' => t('Template'),
-    '#default_value' => variable_get('htmlmail_template', ''),
-    '#description' => t('Select from default or HTML Mail templates installed in the current themes\'s directory.'),
-    '#options' => _htmlmail_get_templates(),
-  );
   $form['htmlmail_header'] = array(
     '#type' => 'textarea',
     '#title' => t('Header HTML'),

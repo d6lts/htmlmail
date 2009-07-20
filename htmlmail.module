@@ -89,9 +89,8 @@ function htmlmail_mail_alter(&$message) {
 function htmlmail_theme() {
   return array(
     'htmlmail' => array(
-      'template' => _htmlmail_template('file'),
+      'template' => 'htmlmail',
       'arguments' => array('body' => NULL),
-      'path' => _htmlmail_template('path'),
     ),
   );
 }
@@ -102,7 +101,7 @@ function htmlmail_theme() {
  * @see htmlmail.tpl.php
  */
 function template_preprocess_htmlmail(&$variables) {
-  $variables['path'] = url(_htmlmail_template('path'), array('absolute' => TRUE));
+  $variables['path'] = url($variables['directory'], array('absolute' => TRUE));
   $variables['header'] = variable_get('htmlmail_header', '');
   $variables['footer'] = variable_get('htmlmail_footer', '');
   $variables['css'] = variable_get('htmlmail_css', '');
@@ -165,32 +164,4 @@ function _htmlmail_emogrify(&$message) {
     error_reporting($errorlevel);
   }
   return $message['body'];
-}
-
-/**
- * Scan theme's directory for htmlmail templates: Return array for form select options
- */
-function _htmlmail_get_templates() {
-  $templates = array('' => 'Use Default');
-  $files = file_scan_directory(path_to_theme(), '/^htmlmail-.*\.tpl\.php$/');
-  foreach ($files as $file) {
-    $templates[$file->filename] = $file->name;
-  }
-  return $templates;
-}
-
-/**
- * Build and return template path or filename, module directory if no template selected.
- */
-function _htmlmail_template($type) {
-  $template = variable_get('htmlmail_template', '');
-  switch ($type) {
-    case 'file':
-      $output = empty($template) ? 'htmlmail' : basename($template, '.tpl.php');
-      break;
-    case 'path':
-      $output = empty($template) ? drupal_get_path('module', 'htmlmail') : dirname($template);
-      break;
-  }
-  return $output;
 }
