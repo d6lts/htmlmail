@@ -2,5 +2,9 @@
 name = HTML Mail
 description = "Enable HTML in system emails"
 package = Mail
-core = 6.x
-php = 5.0
+core = 7.x
+
+files[] = htmlmail.module
+files[] = htmlmail.admin.inc
+files[] = htmlmail.install
+files[] = htmlmail.tpl.php
