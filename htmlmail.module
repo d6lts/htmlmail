@@ -38,13 +38,22 @@ function htmlmail_menu() {
     'callback arguments' => 'htmlmail_admin',
     'access' => user_access('access administration pages'),
     'type' => MENU_DEFAULT_LOCAL_TASK,
-	  'weight' => '-1'
+	  'weight' => '-2'
+  );
+  $items[] = array(
+	  'path' => 'admin/settings/htmlmail/template',
+    'title' => t('Template'),
+    'callback' => 'drupal_get_form',
+    'callback arguments' => array('htmlmail_template_settings'),
+    'type' => MENU_LOCAL_TASK,
+    'access' => user_access('access administration pages'),
+    'weight' => '-1',
   );
   $items[] = array(
 	  'path' => 'admin/settings/htmlmail/test',
     'title' => t('Send Test'),
     'callback' => 'drupal_get_form',
-    'callback arguments' => array('htmlmail_admin_test_form'),
+    'callback arguments' => array('htmlmail_test_form'),
     'type' => MENU_LOCAL_TASK,
     'access' => user_access('access administration pages'),
   );
@@ -58,30 +67,28 @@ function htmlmail_mail_alter($mailkey, &$recipient, &$subject, &$body, &$sender,
   if (variable_get('htmlmail_autop', '1') == 1) {
 	  $body = _filter_autop($body);
 	}
-  // Insert the preformatted HTML so the end user only needs to enter what goes between the <body> tags.
-	// this of course can be overridden in the admin settings for this module.
-	if (variable_get('htmlmail_preformat', '1') == 1) {
-     $body = theme('htmlmail', $body);
-	}
+
+  // Theme from template htmlmail.tpl.php
+  $body = theme('htmlmail', $body);
 
   if (variable_get('htmlmail_urlfilter', '1') == 1) {
 		// defaults to 72 as there is no filter 0 -- make filters a configuration option?
     $body = _filter_url($body, 0);
   }
-
-
   return;
 }
 
 
 function theme_htmlmail($body) {
-  $output = "<html>\n" . 
-		        "<head>\n" .
-						"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" . 
-						"</head>\n" .
-						"<body>\n" . $body . "</body>\n" . 
-						"</html>\n";
-  return $output;
+  $template = _htmlmail_template('path') .'/'. _htmlmail_template('file') .'.tpl.php';
+  $variables = array(
+    'body' => $body,
+    'path' => url(_htmlmail_template('path'), NULL, NULL, TRUE),
+    'header' => variable_get('htmlmail_header', ''),
+    'footer' => variable_get('htmlmail_footer', ''),
+    'css' => variable_get('htmlmail_css', ''),
+  );
+  return _phptemplate_render($template, $variables);
 }
 
 
@@ -107,7 +114,33 @@ function htmlmail_admin_settings() {
   return system_settings_form($form);
 }
 
-function htmlmail_admin_test_form($form_values = NULL) {
+function htmlmail_template_settings() {
+  $form['htmlmail_template'] = array(
+    '#type' => 'select',
+    '#title' => t('Template'),
+    '#default_value' => variable_get('htmlmail_template', ''),
+    '#description' => t('Select from default or HTML Mail templates installed in the current themes\'s directory.'),
+    '#options' => _htmlmail_get_templates(),
+  );
+  $form['htmlmail_header'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Header HTML'),
+    '#default_value' => variable_get('htmlmail_header', ''),
+  );
+  $form['htmlmail_footer'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Footer HTML'),
+    '#default_value' => variable_get('htmlmail_footer', ''),
+  );
+  $form['htmlmail_css'] = array(
+    '#type' => 'textarea',
+    '#title' => t('CSS'),
+    '#default_value' => variable_get('htmlmail_css', ''),
+  );
+  return system_settings_form($form);
+}
+
+function htmlmail_test_form($form_values = NULL) {
   $defaults = variable_get('htmlmail_test', array());
   $form['to'] = array(
     '#type' => 'textfield',
@@ -137,11 +170,12 @@ function htmlmail_admin_test_form($form_values = NULL) {
 	return $form;
 }
 
-function htmlmail_admin_test_form_submit($form_id, $form_values) {
+function htmlmail_test_form_submit($form_id, $form_values) {
   variable_set('htmlmail_test', array(
-    'to' => $form_values['to'],
-    'subject' => $form_values['subject'],
-    'body' => $form_values['body'])
+      'to' => $form_values['to'],
+      'subject' => $form_values['subject'],
+      'body' => $form_values['body'],
+    )
   );
   
 	if (drupal_mail('htmlmail-test', $form_values['to'], $form_values['subject'], $form_values['body'], $form_values['to'])) {
