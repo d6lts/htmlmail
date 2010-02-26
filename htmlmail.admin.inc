@@ -7,6 +7,7 @@
  */
 
 function htmlmail_admin_settings() {
+  $token_module_exists = module_exists('token');
   $form['htmlmail_autop'] = array(
     '#type' => 'checkbox',
     '#title' => t('Line break converter'),
@@ -26,6 +27,13 @@ function htmlmail_admin_settings() {
     '#description' => t('Insert your CSS definitions as inline styles into HTML tags for Outlook 2007 and Google Gmail.'),
     '#disabled' => !extension_loaded('dom'),
   );
+  $form['htmlmail_token'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Token support'),
+    '#default_value' => variable_get('htmlmail_token', '0'),
+    '#description' => t('Make use of the <strong><a href="http://drupal.org/project/token">Token</a></strong> module in order to tune up your mail header and footer. <em>You need to have the module installed.</em>'),
+    '#disabled' => !$token_module_exists,
+  );
   return system_settings_form($form);
 }
 
@@ -33,13 +41,33 @@ function htmlmail_template_settings() {
   $form['htmlmail_header'] = array(
     '#type' => 'textarea',
     '#title' => t('Header HTML'),
+    '#rows' => 6,
     '#default_value' => variable_get('htmlmail_header', ''),
   );
+  if (module_exists('token') && variable_get('htmlmail_token', '0')) {
+    $form['htmlmail_header_tokens'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Replacement patterns'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#description' => theme('htmlmail_token_help'),
+    );
+  }
   $form['htmlmail_footer'] = array(
     '#type' => 'textarea',
     '#title' => t('Footer HTML'),
+    '#rows' => 6,
     '#default_value' => variable_get('htmlmail_footer', ''),
   );
+  if (module_exists('token') && variable_get('htmlmail_token', '0')) {
+    $form['htmlmail_footer_tokens'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Replacement patterns'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#description' => theme('htmlmail_token_help'),
+    );
+  }
   $form['htmlmail_css'] = array(
     '#type' => 'textarea',
     '#title' => t('CSS'),
