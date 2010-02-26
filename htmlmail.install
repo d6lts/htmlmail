@@ -10,9 +10,16 @@
  * Implementation of hook_uninstall().
  */
 function htmlmail_uninstall() {
-  variable_del('htmlmail_css');
-  variable_del('htmlmail_header');
-  variable_del('htmlmail_footer');
-  variable_del('htmlmail_template');
-  variable_del('htmlmail_test');
+  db_query("DELETE FROM {variable} WHERE name LIKE 'htmlmail_%'");
+  cache_clear_all('variables', 'cache');
+}
+
+/**
+ * Implementation of hook_update_n().
+ * Update module's weight to avoid conflicts with other mail_alter modules.
+ */
+function htmlmail_update_6001() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {system} SET weight = 1 WHERE name = 'htmlmail'");
+  return $ret;
 }
