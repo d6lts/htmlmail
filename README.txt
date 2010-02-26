@@ -35,6 +35,12 @@ folder to your current theme's folder.
 admin-> settings -> performance
 [Clear Cached Data]
 
+
+For tips and resources on building HTML e-mails see:
+* http://www.campaignmonitor.com/css/
+* http://www.mailchimp.com/articles/email_marketing_guide/
+* http://css-tricks.com/using-css-in-html-emails-the-real-story/
+
 Important
 ---------
 
