@@ -29,6 +29,12 @@ Customisation
 E-mails can be themed by copying htmlmail.tpl.php to you active theme's 
 directory and editing the contents.
 
+To install templates, copy htmlmail.tpl.php and html_images/ from the template
+folder to your current theme's folder. 
+*** Remember clear cached data on performance settings page! ***
+admin-> settings -> performance
+[Clear Cached Data]
+
 Important
 ---------
 
