@@ -7,7 +7,6 @@
  */
 
 function htmlmail_admin_settings() {
-  $token_module_exists = module_exists('token');
   $form['htmlmail_autop'] = array(
     '#type' => 'checkbox',
     '#title' => t('Line break converter'),
@@ -24,16 +23,24 @@ function htmlmail_admin_settings() {
     '#type' => 'checkbox',
     '#title' => t('Emogrifier'),
     '#default_value' => variable_get('htmlmail_emogrifier', '0'),
-    '#description' => t('Insert your CSS definitions as inline styles into HTML tags for Outlook 2007 and Google Gmail.'),
+    '#description' => t('Insert your CSS definitions as inline styles into HTML tags for Outlook 2007 and Google Gmail.<br /><em>Checkbox will be disabled if DOM extension is not loaded.</em>'),
     '#disabled' => !extension_loaded('dom'),
   );
   $form['htmlmail_token'] = array(
     '#type' => 'checkbox',
     '#title' => t('Token support'),
     '#default_value' => variable_get('htmlmail_token', '0'),
-    '#description' => t('Make use of the <strong><a href="http://drupal.org/project/token">Token</a></strong> module in order to tune up your mail header and footer. <em>You need to have the module installed.</em>'),
-    '#disabled' => !$token_module_exists,
+    '#description' => t('Make use of the <strong><a href="http://drupal.org/project/token">Token</a></strong> module in order to tune up your mail header and footer.<br /><em>You need to have the module installed.</em>'),
+    '#disabled' => !module_exists('token'),
   );
+  $form['htmlmail_rel_to_abs'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Convert relative links to absolute'),
+    '#default_value' => variable_get('htmlmail_rel_to_abs', '0'),
+    '#description' => t('Make use of the <strong><a href="http://drupal.org/project/rel_to_abs">Relative Path to Absolute URLs</a></strong> module to fix broken image links when using a WYSIWYG, untick if you want control over this.<br /><em>You need to have the module installed.</em>'),
+    '#disabled' => !module_exists('rel_to_abs'),
+  );
+
   return system_settings_form($form);
 }
 

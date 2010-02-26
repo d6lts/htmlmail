@@ -82,6 +82,10 @@ function htmlmail_mail_alter(&$message) {
     $message['body'] = _htmlmail_emogrify($message);
   }
 
+  // Convert relative urls to absolute if rel_to_abs is enabled.
+  if (module_exists('rel_to_abs') && variable_get('htmlmail_rel_to_abs', 1)) {
+    $message['body'] = rel_to_abs_filter('prepare', 0, -1, $message['body']);
+  }
 }
 
 /**
