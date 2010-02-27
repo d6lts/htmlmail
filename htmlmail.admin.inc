@@ -40,7 +40,12 @@ function htmlmail_admin_settings() {
     '#description' => t('Make use of the <strong><a href="http://drupal.org/project/rel_to_abs">Relative Path to Absolute URLs</a></strong> module to fix broken image links when using a WYSIWYG, untick if you want control over this.<br /><em>You need to have the module installed.</em>'),
     '#disabled' => !module_exists('rel_to_abs'),
   );
-
+  $form['htmlmail_debug'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Debug'),
+    '#default_value' => variable_get('htmlmail_debug', '0'),
+    '#description' => t('Add message key to bottom of email. Useful for theme template suggestion.'),
+  );
   return system_settings_form($form);
 }
 

@@ -76,7 +76,7 @@ function htmlmail_mail_alter(&$message) {
   }
 
   // Theme from template htmlmail.tpl.php
-  $message['body'] = theme('htmlmail', $message['body']);
+  $message['body'] = theme('htmlmail', $message['body'], $message['id']);
 
   if (variable_get('htmlmail_emogrifier', '0')) {
     $message['body'] = _htmlmail_emogrify($message);
@@ -86,6 +86,11 @@ function htmlmail_mail_alter(&$message) {
   if (module_exists('rel_to_abs') && variable_get('htmlmail_rel_to_abs', 1)) {
     $message['body'] = rel_to_abs_filter('prepare', 0, -1, $message['body']);
   }
+
+  // Send the message key in email for theme template suggestions
+  if (variable_get('htmlmail_debug', '0')) {
+    $message['body'] .= '<p> Message Key ID: '. $message['id'] .'</p>';
+  }
 }
 
 /**
@@ -94,9 +99,8 @@ function htmlmail_mail_alter(&$message) {
 function htmlmail_theme() {
   $items['htmlmail'] = array(
     'template' => 'htmlmail',
-    'arguments' => array('body' => NULL),
+    'arguments' => array('body' => NULL, 'key' => NULL),
   );
-  
   if (module_exists('token')) {
     $items['htmlmail_token_help'] = array(
       'arguments' => array('prefix' => '[', 'suffix' => ']'),
@@ -110,9 +114,7 @@ function htmlmail_theme() {
  */ 
 function theme_htmlmail_token_help($prefix = '[', $suffix = ']') {
   token_include();
-
   $full_list = array_merge(token_get_list('user'), token_get_list('profile'));
-
   $headers = array(t('Token'), t('Replacement value'));
   $rows = array();
   foreach ($full_list as $key => $category) {
@@ -135,12 +137,10 @@ function theme_htmlmail_token_help($prefix = '[', $suffix = ']') {
  * @see htmlmail.tpl.php
  */
 function template_preprocess_htmlmail(&$variables) {
-  // path for linking images -- do we need this with tokens??
   $variables['path'] = url($variables['directory'], array('absolute' => TRUE));
   if (module_exists('token') && variable_get('htmlmail_token', '0')) {
     global $user;
     $types = array('user' => $user, 'profile' => $user);
-  
     $variables['header'] = token_replace_multiple(variable_get('htmlmail_header', ''), $types);
     $variables['footer'] = token_replace_multiple(variable_get('htmlmail_footer', ''), $types);
   }
@@ -149,8 +149,10 @@ function template_preprocess_htmlmail(&$variables) {
     $variables['footer'] = variable_get('htmlmail_footer', '');
   }
   $variables['css'] = variable_get('htmlmail_css', '');
+  $module = preg_replace('/_.*$/', '', $variables['key']);
+  $variables['template_files'][] = 'htmlmail-'. $module;
+  $variables['template_files'][] = 'htmlmail-'. $variables['key'];
 }
-
 
 /**
  * Implementation of hook_mail().

@@ -24,17 +24,27 @@ Installation
 Install as usual, see http://drupal.org/node/70151 for further information.
 
 
-Customisation
--------------
+Theming
+-------
 E-mails can be themed by copying htmlmail.tpl.php to you active theme's 
 directory and editing the contents.
 
-To install templates, copy htmlmail.tpl.php and html_images/ from the template
+To install the example template, copy htmlmail.tpl.php and html_images/ from the template
 folder to your current theme's folder. 
+
 *** Remember clear cached data on performance settings page! ***
 admin-> settings -> performance
 [Clear Cached Data]
 
+Template suggestions per module allow seperate templates which effect the emails coming from the
+particular module. For user module:
+eg. htmlmail-user.tpl.php
+
+Creating the above file will override email theming template for email coming from the user module.
+You may place the template in your theme's directory but remember that a copy of
+the default htmlmail.tpl.php must reside in your theme directory as well for this to work.
+
+Again, clear cache to load the new template.
 
 For tips and resources on building HTML e-mails see:
 * http://www.campaignmonitor.com/css/
