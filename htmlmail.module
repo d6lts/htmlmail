@@ -60,36 +60,51 @@ function htmlmail_menu() {
  */
 function htmlmail_mail_alter(&$message) {
 
-  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed;';
+  // Match plain exclusions settings
+  if ($plain_settings = variable_get('htmlmail_plain_settings', '')) {
+    $items = preg_split('/(\r\n?|\n)/', $plain_settings);
+
+    // Note: Drupal bug if module name contains underscore this may break (fixed in D7)
+    $plain_match = in_array(preg_replace('/_.*$/', '', $message['id']), $items);
+
+    // reverse $plain_match if type is include
+    if (variable_get('htmlmail_plain_type', 0)) {
+      $plain_match = !$plain_match;
+    }
+  }
+
+  if (!$plain_match) { // All good, make mail html
+    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed;';
   
-  // message body may be an array
-  $message['body'] = is_array($message['body']) ? implode("\n\n", $message['body']) : $message['body'];
+    // message body may be an array
+    $message['body'] = is_array($message['body']) ? implode("\n\n", $message['body']) : $message['body'];
 
-  // The paragraph an break stuff
-  if (variable_get('htmlmail_autop', '1')) {
-    $message['body'] = _filter_autop($message['body']);
-  }
+    // The paragraph an break stuff
+    if (variable_get('htmlmail_autop', '1')) {
+      $message['body'] = _filter_autop($message['body']);
+    }
 
-  if (variable_get('htmlmail_urlfilter', '1')) {
-  // defaults to 72 as there is no filter 0 -- make filters a configuration option?
-    $message['body'] = _filter_url($message['body'], 0);
-  }
+    if (variable_get('htmlmail_urlfilter', '1')) {
+    // defaults to 72 as there is no filter 0 -- make filters a configuration option?
+      $message['body'] = _filter_url($message['body'], 0);
+    }
 
-  // Theme from template htmlmail.tpl.php
-  $message['body'] = theme('htmlmail', $message['body'], $message['id']);
+    // Theme from template htmlmail.tpl.php
+    $message['body'] = theme('htmlmail', $message['body'], $message['id']);
 
-  if (variable_get('htmlmail_emogrifier', '0')) {
-    $message['body'] = _htmlmail_emogrify($message);
-  }
+    if (variable_get('htmlmail_emogrifier', '0')) {
+      $message['body'] = _htmlmail_emogrify($message);
+    }
 
-  // Convert relative urls to absolute if rel_to_abs is enabled.
-  if (module_exists('rel_to_abs') && variable_get('htmlmail_rel_to_abs', 1)) {
-    $message['body'] = rel_to_abs_filter('prepare', 0, -1, $message['body']);
-  }
+    // Convert relative urls to absolute if rel_to_abs is enabled.
+    if (module_exists('rel_to_abs') && variable_get('htmlmail_rel_to_abs', 1)) {
+      $message['body'] = rel_to_abs_filter('prepare', 0, -1, $message['body']);
+    }
 
-  // Send the message key in email for theme template suggestions
-  if (variable_get('htmlmail_debug', '0')) {
-    $message['body'] .= '<p> Message Key ID: '. $message['id'] .'</p>';
+    // Send the message key in email for theme template suggestions
+    if (variable_get('htmlmail_debug', '0')) {
+      $message['body'] .= '<p> Message Key ID: '. $message['id'] .'</p>';
+    }
   }
 }
 
@@ -130,7 +145,6 @@ function theme_htmlmail_token_help($prefix = '[', $suffix = ']') {
   return $output;
 }
 
-
 /**
  * Process variables to format e-mail.
  *
@@ -159,7 +173,7 @@ function template_preprocess_htmlmail(&$variables) {
  */
 function htmlmail_mail($key, &$message, $params) {
   switch ($key) {
-  case 'htmlmail_test':
+  case 'test':
     $message['subject'] = $params['subject'];
     $message['body'] = $params['body'];
     break;

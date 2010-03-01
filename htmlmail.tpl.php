@@ -27,7 +27,6 @@
  * http://css-tricks.com/using-css-in-html-emails-the-real-story/
  *
  */
-
 ?>
 <html>
 <head>
