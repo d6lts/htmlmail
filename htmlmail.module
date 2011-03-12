@@ -74,7 +74,7 @@ function htmlmail_mail_alter(&$message) {
 
   if (!$plain_match) { // All good, make mail html
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed;';
-  
+
     // message body may be an array
     $message['body'] = is_array($message['body']) ? implode("\n\n", $message['body']) : $message['body'];
 
@@ -125,7 +125,7 @@ function htmlmail_theme() {
 
 /**
  *  Token support
- */ 
+ */
 function theme_htmlmail_token_help($prefix = '[', $suffix = ']') {
   token_include();
   $full_list = array_merge(token_get_list('user'), token_get_list('profile'));
@@ -182,22 +182,22 @@ function htmlmail_mail($key, &$message, $params) {
 /**
  * If the Emogrifier <http://www.pelagodesign.com/sidecar/emogrifier/> exists,
  * the CSS styles inside the the $message['body'] are inserted into the other
- * HTML tags within the same $message['body'] as inline style attributes, 
+ * HTML tags within the same $message['body'] as inline style attributes,
  * based on CSS selectors.
  *
  * This function is based on code in the simplenews_template module.
  *
  * This emogrifier differs from that of simplenews_template in that it permits
- * modules or users to adjoin CSS into the $message['body'] using the HTML 
- * <style> tag.  The function searches the entire body for style tags, 
+ * modules or users to adjoin CSS into the $message['body'] using the HTML
+ * <style> tag.  The function searches the entire body for style tags,
  * concatenates them in order of appearance in the file, then sends them to
- * the Emogrifier script. 
+ * the Emogrifier script.
  *
- * Note that the method modifies the $message['body'] directly, and the 
- * return value is the modified $message['body'] string as well. 
+ * Note that the method modifies the $message['body'] directly, and the
+ * return value is the modified $message['body'] string as well.
  *
  * @param $message
- *           The message array to be sent. This function works directly 
+ *           The message array to be sent. This function works directly
  *           on the $message['body'].
  * @return $message['body']
  *           The modified message body string with inlined CSS applied.
