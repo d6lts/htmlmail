@@ -25,6 +25,6 @@ function htmlmail_uninstall() {
  */
 function htmlmail_update_6001() {
   $results = array();
-  $results[] = db_query("UPDATE {system} SET weight = 1 WHERE name = 'htmlmail'");
+  $results[] = update_sql("UPDATE {system} SET weight = 1 WHERE name = 'htmlmail'");
   return $results;
 }
