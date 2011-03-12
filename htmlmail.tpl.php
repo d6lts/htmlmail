@@ -14,11 +14,12 @@
  *
  * The following variables are available in this template:
  *
- *  - $body    : message body
- *  - $header  : template header
- *  - $footer  : template footer
- *  - $css     : template css
- *  - $path    : path to theme template (for images, etc)
+ *  - $body      : message body
+ *  - $header    : template header
+ *  - $footer    : template footer
+ *  - $css       : template css
+ *  - $directory : directory containing the theme template
+ *  - $path      : absolute URL of the theme directory (for images, etc)
  *
  * For tips and resources on building HTML e-mails see:
  * http://www.campaignmonitor.com/css/
