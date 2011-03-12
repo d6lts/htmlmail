@@ -15,6 +15,7 @@
  * The following variables are available in this template:
  *
  *  - $body      : message body
+ *  - $key       : message id
  *  - $header    : template header
  *  - $footer    : template footer
  *  - $css       : template css
