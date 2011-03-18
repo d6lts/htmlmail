@@ -7,5 +7,5 @@ files[] = htmlmail.install
 files[] = htmlmail.mail.inc
 configure = admin/config/system/htmlmail
 package = Mail
-core = 7.x
+core = 6.x
 php = 5.0
