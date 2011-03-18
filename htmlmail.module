@@ -63,8 +63,13 @@ function htmlmail_mail_alter(&$message) {
   if ($plain_settings = variable_get('htmlmail_plain_settings', '')) {
     $items = preg_split('/(\r\n?|\n)/', $plain_settings);
 
-    // Note: Drupal bug if module name contains underscore this may break (fixed in D7)
-    $plain_match = in_array(preg_replace('/_.*$/', '', $message['id']), $items);
+    $plain_match = FALSE;
+    foreach($items as $item) {
+      if (!strncmp($message['id'], $item, strlen($item))) {
+        $plain_match = TRUE;
+        break;
+      }
+    }
 
     // reverse $plain_match if type is include
     if (variable_get('htmlmail_plain_type', 0)) {
