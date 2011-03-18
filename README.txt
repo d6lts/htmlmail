@@ -1,120 +1,65 @@
+
 HTML Mail
+---------
 
-   HTML Mail lets you theme your outgoing messages the same way you theme
-   the rest of your website.
+HTML Mail empowers Drupal with the ability to send emails in HTML, providing
+formatting and semantic markup capabilities in e-mail that are not available
+with plain text.
 
-   For a full description of the module, visit the [1]project page.
+This module is very simple in operation. It changes headers in all outgoing
+e-mail modifying e-mail sent from Drupal to be HTML with the option of header,
+footer and CSS inclusion.
 
-   To submit bug reports and feature suggestions, visit the [2]issue
-   queue.
+For a full description of the module, visit the project page:
+  http://drupal.org/project/htmlmail
 
-Requirements
+To submit bug reports and feature suggestions, or to track changes:
+  http://drupal.org/project/issues/htmlmail
 
-   HTML Mail requires the [3]Mail System module.
-
+  
 Installation
+------------
 
-   Install as usual; see [4]Installing contributed modules (Drupal 7) for
-   further information.
+Install as usual, see http://drupal.org/node/70151 for further information.
 
-   The following additional modules, while not required, are highly
-   recommended:
-     * [5]Emogrifier
-     * [6]Pathologic
-     * [7]Transliteration
-       Requires a [8]patch.
-
-Configuration
-
-   Visit the Mail System settings page at admin/config/system/mailsystem
-   to select which parts of Drupal will use HTML Mail instead of the
-   [9]default [10]mail system.
-
-   Visit the HTML Mail settings page at admin/config/system/htmlmail to
-   select a theme, pre-filter, and post-filter for your emails.
 
 Theming
+-------
+E-mails can be themed by copying htmlmail.tpl.php to you active theme's 
+directory and editing the contents.
 
-   The email message text goes through four transformations before
-   sending:
-    1. The Text format pre-filter from the module settings page is
-       applied. This should be the same text format that your website uses
-       for contributed content such as comments or blog postings. For
-       consistency and security, it should include the the [11]Correct
-       faulty and chopped off HTML from [12]filter.module, or a better
-       replacement such as [13]HTML Purifier or [14]htmLawed.
-    2. A theme template is applied. The default template is the included
-       htmlmail.tpl.php file. You may copy this file to your theme
-       directory and use it to customize the contents and formatting of
-       your emails. The comments within the file contain complete
-       documentation on its usage.
-    3. The message may be wrapped in a website theme selected on the
-       module settings page. Creating an email-specific theme lets you use
-       the full power of the [15]drupal theme system to format your
-       emails.
-    4. The Text format post-filter from the module settings page is
-       applied. For best results, this should be an email-specific input
-       format containing the following text format filters:
-          + [16]Transliteration
-          + [17]Emogrifier
-          + [18]Pathologic
-          + [19]Correct faulty and chopped off HTML
+To install the example template, copy htmlmail.tpl.php and html_images/ from the template
+folder to your current theme's folder. 
 
-Related Modules
+*** Remember clear cached data on performance settings page! ***
+admin-> settings -> performance
+[Clear Cached Data]
 
-   Emogrifier : http://drupal.org/project/emogrifier
+Template suggestions per module allow seperate templates which effect the emails coming from the
+particular module. For user module:
+eg. htmlmail-user.tpl.php
 
-   HTML Mail : http://drupal.org/project/htmlmail
+Creating the above file will override email theming template for email coming from the user module.
+You may place the template in your theme's directory but remember that a copy of
+the default htmlmail.tpl.php must reside in your theme directory as well for this to work.
 
-   HTML Purifier : http://drupal.org/project/htmlpurifier
+Again, clear cache to load the new template.
 
-   htmLawed : http://drupal.org/project/htmlawed
+For tips and resources on building HTML e-mails see:
+* http://www.campaignmonitor.com/css/
+* http://www.mailchimp.com/articles/email_marketing_guide/
+* http://css-tricks.com/using-css-in-html-emails-the-real-story/
 
-   Mail System : http://drupal.org/project/mailsystem
+Important
+---------
 
-   Pathologic : http://drupal.org/project/pathologic
+Remember that many email clients will not be happy with certain code, your 
+CSS may conflict with a web-mail providers CSS and HTML in email may expose 
+security hazards. Beyond this, if your still really, really must have HTML in 
+your email, you may find this module useful.
 
-   Transliteration : http://drupal.org/project/transliteration
-
-Documentation
-
-   filter.module :
-   http://api.drupal.org/api/drupal/modules--filter--filter.module/7
-
-   Installing contributed modules (Drupal 7) :
-   http://drupal.org/node/895232
-
-   Theming guide : http://drupal.org/documentation/theme
-
-   Standard filters :
-   http://api.drupal.org/api/drupal/modules--filter--filter.module/group/s
-   tandard_filters/7
 
 Maintainers
+-----------
 
-     * [20]Chris Herberte
-     * [21]Bob Vincent
-
-References
-
-   1. http://drupal.org/project/htmlmail
-   2. http://drupal.org/project/issues/htmlmail
-   3. http://drupal.org/project/mailsystem
-   4. http://drupal.org/node/895232
-   5. http://drupal.org/project/emogrifier
-   6. http://drupal.org/project/pathologic
-   7. http://drupal.org/project/transliteration
-   8. http://drupal.org/node/1095278#comment-4219530
-   9. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
-  10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
-  11. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7
-  12. http://api.drupal.org/api/drupal/modules--filter--filter.module/7
-  13. http://drupal.org/project/htmlpurifier
-  14. http://drupal.org/project/htmlawed
-  15. http://drupal.org/documentation/theme
-  16. http://drupal.org/node/1095278#comment-4219530
-  17. http://drupal.org/project/emogrifier
-  18. http://drupal.org/project/pathologic
-  19. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7
-  20. http://drupal.org/user/1171
-  21. http://drupal.org/user/36148
+Chris Herberte - http://drupal.org/user/1171
