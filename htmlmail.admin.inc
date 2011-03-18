@@ -58,12 +58,12 @@ function htmlmail_admin_settings() {
 <p><code>$body</code> : The message body text.</p>
 <p><code>$module</code> : The sending module name, usually the first parameter to drupal_mail().</p>
 <p><code>$key</code> : The email message id.</p>
-<p><code>$header</code> : The header text.</p>
-<p><code>$footer</code> : The footer text.</p>
-<p><code>$css</code> : The css text.</p>
+<p><code>$header</code> : The configured header text.</p>
+<p><code>$footer</code> : The configured footer text.</p>
+<p><code>$css</code> : The configured css style rules.</p>
 <p><code>$debug</code> : TRUE if debugging info should be printed.</p>
 <p><code>$directory</code> : The relative path to the theme template directory.</p>
-<p><code>$path</code> : The absolute URL to the theme directory.</p>
+<p><code>$theme_url</code> : The absolute URL to the theme directory.</p>
 <p>The module calling <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/7">drupal_mail()</a> may set other variables. For instance, the <a href="http://drupal.org/project/webform">Webform module</a> sets a <code>$node</code> variable which may be very useful.</p>
 <p>Other modules may also add or modify theme variables by implementing a <code>MODULENAME_preprocess_htmlmail()</code> <a href="http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7">hook function</a>.</p>'
       // End instructions.

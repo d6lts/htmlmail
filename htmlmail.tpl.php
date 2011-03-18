@@ -55,18 +55,18 @@
  * drupal_mail().
  * 
  * $key : The email message id.
- *
- * $header : The header text.
- *
- * $footer : The footer text.
- *
- * $css : The css text.
+ * 
+ * $header : The configured header text.
+ * 
+ * $footer : The configured footer text.
+ * 
+ * $css : The configured css style rules.
  * 
  * $debug : TRUE if debugging info should be printed.
  * 
  * $directory : The relative path to the theme template directory.
  * 
- * $path : The absolute URL to the theme directory.
+ * $theme_url : The absolute URL to the theme directory.
  * 
  * The module calling [10]drupal_mail() may set other variables. For
  * instance, the [11]Webform module sets a $node variable which may be
@@ -77,18 +77,18 @@
  * 
  * References
  * 
- *  1. http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/7
- *  2. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7
- *  3. http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/7
- *  4. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7
- *  5. http://drupal.org/project/htmlmail
- *  6. http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/7
- *  7. http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_theme/7
- *  8. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/7
- *  9. http://api.drupal.org/api/drupal/modules--user--user.module/7
- * 10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/7
- * 11. http://drupal.org/project/webform
- * 12. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
+ * 1. http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/7
+ * 2. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7
+ * 3. http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/7
+ * 4. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7
+ * 5. http://drupal.org/project/htmlmail
+ * 6. http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/7
+ * 7. http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_theme/7
+ * 8. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/7
+ * 9. http://api.drupal.org/api/drupal/modules--user--user.module/7
+ *   10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/7
+ *   11. http://drupal.org/project/webform
+ *   12. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  ****************************************************** End instructions.
  */
