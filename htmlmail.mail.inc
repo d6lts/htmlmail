@@ -88,7 +88,6 @@ Content-Transfer-Encoding: 8bit
     foreach ($message['headers'] as $name => $value) {
       $mimeheaders[] = $name . ': ' . mime_header_encode($value);
     }
-    $line_endings = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     if (isset($message['headers']['Return-Path']) &&
         !ini_get('safe_mode') &&
         !strpos(ini_get('sendmail_path'), ' -f')) {
@@ -97,17 +96,14 @@ Content-Transfer-Encoding: 8bit
     else {
       $extra = '';
     }
-
+    // To override this, adjust $conf['mail_line_endings'] in settings.php.
+    $line_endings = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     return mail(
       $message['to'],
-      mime_header_encode($message['subject']),
-      // Note: email uses CRLF for line-endings. PHP's API requires LF
-      // on Unix and CRLF on Windows. Drupal automatically guesses the
-      // line-ending format appropriate for your system. If you need to
-      // override this, adjust $conf['mail_line_endings'] in settings.php.
+      // The email might not be sent properly if the subject line contains
+      // newline characters.
+      str_replace("\n", ' ', mime_header_encode($message['subject'])),
       preg_replace('@\r?\n@', $line_endings, $message['body']),
-      // For headers, PHP's API suggests that we use CRLF normally,
-      // but some MTAs incorrectly replace LF with CRLF. See #234403.
       join("\n", $mimeheaders),
       $extra
     );

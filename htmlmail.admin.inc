@@ -178,15 +178,15 @@ function htmlmail_test_form($form_values = NULL) {
  * Sends the test messsage and saves the contents for re-use.
  */
 function htmlmail_test_form_submit($form, &$form_state) {
-  // save form values
+  // Get the form values.
   $defaults = array(
     'to' => $form_state['values']['to'],
     'subject' => $form_state['values']['subject'],
     'body' => $form_state['values']['body'],
   );
-  // set the defaults for reuse
+  // Save the defaults for reuse.
   variable_set('htmlmail_test', $defaults);
-  // send email
+  // Send the email.
   $params = array(
     'subject' => $form_state['values']['subject'],
     'body' => check_markup($form_state['values']['body']['value'], $form_state['values']['body']['format']),
