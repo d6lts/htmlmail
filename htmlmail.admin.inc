@@ -108,7 +108,7 @@ function htmlmail_template_settings() {
     '#rows' => 6,
     '#default_value' => $header['value'],
     '#format' => $header['format'],
-    '#description' => 'Extra HTML markup to add at the top of emails.',
+    '#description' => t('Extra HTML markup to add at the top of emails.'),
   );
   $footer = variable_get('htmlmail_footer', $defaults);
   $form['htmlmail_footer'] = array(
@@ -117,13 +117,13 @@ function htmlmail_template_settings() {
     '#rows' => 6,
     '#default_value' => $footer['value'],
     '#format' => $footer['format'],
-    '#description' => 'Extra HTML markup to add at the bottom of emails.',
+    '#description' => t('Extra HTML markup to add at the bottom of emails.'),
   );
   $form['htmlmail_css'] = array(
     '#type' => 'textarea',
     '#title' => t('CSS'),
     '#default_value' => variable_get('htmlmail_css', ''),
-    '#description' => 'Extra CSS rules to be added to emails.',
+    '#description' => t('Extra CSS rules to be added to emails.'),
   );
   return system_settings_form($form);
 }
