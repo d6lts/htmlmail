@@ -52,13 +52,6 @@ class HTMLMailMailSystem implements MailSystemInterface {
       $message['body'] = preg_replace('@<script type="text/javascript".*</script>@Usi', '', $response->data);
     }
 
-    // Optionally replace css rules with inline styles.
-    // @todo: move this to its own filter module.
-    if (variable_get('htmlmail_emogrifier', '0') &&
-      module_load_include('inc', 'htmlmail', 'emogrifier/emogrifier')) {
-      $message['body'] = _htmlmail_emogrify($message['body']);
-    }
-
     // Optionally apply the selected output filter.
     if ($filter = variable_get('htmlmail_postfilter')) {
       $message['body'] = check_markup($message['body'], $filter);
