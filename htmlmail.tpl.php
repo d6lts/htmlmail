@@ -19,27 +19,27 @@
  * directory for template files in order from most specific to most
  * general.
  *
- * For example, if foo_module sends mail with:
+ * For example, if example\_module sends mail with:
  *
- * drupal_mail("foo_module", "outgoing_message" ...)
+ * drupal\_mail("example\_module", "outgoing\_message" ...)
  *
  * the possible template file names would be:
- *   * htmlmail-foo_module_outgoing_message.tpl.php
- *   * htmlmail-foo_module_outgoing.tpl.php
- *   * htmlmail-foo_module.tpl.php
+ *   * htmlmail-example\_module\_outgoing\_message.tpl.php
+ *   * htmlmail-example\_module\_outgoing.tpl.php
+ *   * htmlmail-example\_module.tpl.php
  *   * htmlmail.tpl.php
  *
- * The $theme_hook_suggestions variable contains an array of suggested
+ * The $theme\_hook\_suggestions variable contains an array of suggested
  * [6]theme [7]hooks, in reverse priority order. For the above example, it
  * would contain:
  *   * htmlmail
- *   * htmlmail-foo_module
- *   * htmlmail-foo_module_outgoing
- *   * htmlmail-foo_module_outgoing_message
+ *   * htmlmail-example\_module
+ *   * htmlmail-example\_module\_outgoing
+ *   * htmlmail-example\_module\_outgoing\_message
  *
  * For another example, to customize the [8]password reset emails sent by
  * the [9]user module, copy htmlmail.tpl.php to your theme directory, and
- * also copy it to htmlmail-user_password_reset.tpl.php, then modify the
+ * also copy it to htmlmail-user\_password\_reset.tpl.php, then modify the
  * latter file. Remember that you will need to put both files in your
  * theme directory for this to work.
  *
@@ -59,7 +59,7 @@
  * $key
  *        The message key, usually the second parameter to drupal_mail().
  *
- * $message_id
+ * \$message\_id
  *        The email message id, usually "{$module}_{$key}".
  *
  * $debug
@@ -68,7 +68,7 @@
  * $directory
  *        The relative path to the theme template directory.
  *
- * $theme_url
+ * $theme\_url
  *        The absolute URL to the theme directory.
  *
  * The module calling [10]drupal_mail() may set other variables. For
@@ -76,7 +76,7 @@
  * very useful.
  *
  * Other modules may also add or modify theme variables by implementing a
- * MODULENAME_preprocess_htmlmail() [12]hook function.
+ * MODULENAME\_preprocess\_htmlmail() [12]hook function.
  *
  * References
  *

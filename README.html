@@ -8,7 +8,7 @@
 </div>
 <div id="installation">
   <h2>Installation</h2>
-  <p>Install as usual; see <a href="http://drupal.org/node/895232">Installing contributed modules (Drupal 7)</a> for further information.</p>
+  <p>Install as usual; see <a href="http://drupal.org/node/70151">Installing contributed modules (Drupal 5 and 6)</a> for further information.</p>
   <p>The following additional modules, while not required, are highly recommended:</p>
   <ul>
     <li>
@@ -25,18 +25,18 @@
 </div>
 <div id="configuration">
   <h2>Configuration</h2>
-  <p>Visit the Mail System settings page at admin/config/system/mailsystem to select which parts of Drupal will use HTML Mail instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
-  <p>Visit the HTML Mail settings page at admin/config/system/htmlmail to select a theme, pre-filter, and post-filter for your emails.</p>
+  <p>Visit the Mail System settings page at <em>admin/config/system/mailsystem</em> to select which parts of Drupal will use HTML Mail instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
+  <p>Visit the HTML Mail settings page at <em>admin/config/system/htmlmail</em> to select a theme, pre-filter, and post-filter for your emails.</p>
 </div>
 <div id="theming">
   <h2>Theming</h2>
   <p>The email message text goes through four transformations before sending:</p>
   <ol style="list-style-type: decimal;">
     <li>
-      <p>The <em>Text format pre-filter</em> from the module settings page is applied. This should be the same text format that your website uses for contributed content such as comments or blog postings. For consistency and security, it should include the the <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7">Correct faulty and chopped off HTML</a> from <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/7">filter.module</a>, or a better replacement such as <a href="http://drupal.org/project/htmlpurifier">HTML Purifier</a> or <a href="http://drupal.org/project/htmlawed">htmLawed</a>.</p>
+      <p>The <em>Text format pre-filter</em> from the module settings page is applied. This should be the same text format that your website uses for contributed content such as comments or blog postings. For consistency and security, it should include the the <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6">Correct faulty and chopped off HTML</a> from <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/6">filter.module</a>, or a better replacement such as <a href="http://drupal.org/project/htmlpurifier">HTML Purifier</a> or <a href="http://drupal.org/project/htmlawed">htmLawed</a>.</p>
     </li>
     <li>
-      <p>A theme template is applied. The default template is the included <em>htmlmail.tpl.php</em> file. You may copy this file to your theme directory and use it to customize the contents and formatting of your emails. The comments within the file contain complete documentation on its usage.</p>
+      <p>A theme template is applied. The default template is the included <code>htmlmail.tpl.php</code> file. You may copy this file to your theme directory and use it to customize the contents and formatting of your emails. The comments within the file contain complete documentation on its usage.</p>
     </li>
     <li>
       <p>The message may be wrapped in a website theme selected on the module settings page. Creating an email-specific theme lets you use the full power of the <a href="http://drupal.org/documentation/theme">drupal theme system</a> to format your emails.</p>
@@ -47,7 +47,7 @@
         <li><a href="http://drupal.org/node/1095278#comment-4219530">Transliteration</a></li>
         <li><a href="http://drupal.org/project/emogrifier">Emogrifier</a></li>
         <li><a href="http://drupal.org/project/pathologic">Pathologic</a></li>
-        <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7">Correct faulty and chopped off HTML</a></li>
+        <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6">Correct faulty and chopped off HTML</a></li>
       </ul>
     </li>
   </ol>
@@ -59,10 +59,6 @@
     <dd>
       <p>http://drupal.org/project/emogrifier</p>
     </dd>
-    <dt>HTML Mail</dt>
-    <dd>
-      <p>http://drupal.org/project/htmlmail</p>
-    </dd>
     <dt>HTML Purifier</dt>
     <dd>
       <p>http://drupal.org/project/htmlpurifier</p>
@@ -70,6 +66,10 @@
     <dt>htmLawed</dt>
     <dd>
       <p>http://drupal.org/project/htmlawed</p>
+    </dd>
+    <dt>Mail MIME</dt>
+    <dd>
+      <p>http://drupal.org/project/mailmime</p>
     </dd>
     <dt>Mail System</dt>
     <dd>
@@ -90,30 +90,27 @@
   <dl>
     <dt>filter.module</dt>
     <dd>
-      <p>http://api.drupal.org/api/drupal/modules--filter--filter.module/7</p>
+      <p>http://api.drupal.org/api/drupal/modules--filter--filter.module/6</p>
     </dd>
-    <dt>Installing contributed modules (Drupal 7)</dt>
+    <dt>Installing contributed modules (Drupal 5 and 6)</dt>
     <dd>
-      <p>http://drupal.org/node/895232</p>
+      <p>http://drupal.org/node/70151</p>
     </dd>
     <dt>Theming guide</dt>
     <dd>
       <p>http://drupal.org/documentation/theme</p>
     </dd>
-    <dt>Standard filters</dt>
-    <dd>
-      <p>http://api.drupal.org/api/drupal/modules--filter--filter.module/group/standard_filters/7</p>
-    </dd>
   </dl>
 </div>
-<div id="maintainers">
-  <h2>Maintainers</h2>
+<div id="original-author">
+  <h2>Original Author</h2>
   <ul>
-    <li>
-      <p><a href="http://drupal.org/user/1171">Chris Herberte</a></p>
-    </li>
-    <li>
-      <p><a href="http://drupal.org/user/36148">Bob Vincent</a></p>
-    </li>
+    <li><a href="http://drupal.org/user/1171">Chris Herberte</a></li>
+  </ul>
+</div>
+<div id="current-maintainer">
+  <h2>Current Maintainer</h2>
+  <ul>
+    <li><a href="http://drupal.org/user/36148">Bob Vincent</a></li>
   </ul>
 </div>

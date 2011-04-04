@@ -17,7 +17,7 @@ module.
 ## Installation
 
 Install as usual; see
-[Installing contributed modules (Drupal 7)](http://drupal.org/node/895232)
+[Installing contributed modules (Drupal 5 and 6)](http://drupal.org/node/70151)
 for further information.
 
 The following additional modules, while not required, are highly recommended:
@@ -32,12 +32,12 @@ The following additional modules, while not required, are highly recommended:
 
 ## Configuration
 
-Visit the Mail System settings page at admin/config/system/mailsystem
+Visit the Mail System settings page at _admin/config/system/mailsystem_
 to select which parts of Drupal will use HTML Mail instead of the
 [default](http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7)
 [mail system](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7).
 
-Visit the HTML Mail settings page at admin/config/system/htmlmail to
+Visit the HTML Mail settings page at _admin/config/system/htmlmail_ to
 select a theme, pre-filter, and post-filter for your emails.
 
 ## Theming
@@ -48,13 +48,14 @@ The email message text goes through four transformations before sending:
     This should be the same text format that your website uses for contributed
     content such as comments or blog postings.  For consistency and security,
     it should include the the
-    [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7)
-    from [filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/7), or a better replacement such as
+    [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6)
+    from [filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/6),
+    or a better replacement such as
     [HTML Purifier](http://drupal.org/project/htmlpurifier) or
     [htmLawed](http://drupal.org/project/htmlawed).
 
 2.  A theme template is applied. The default template is the included
-    *htmlmail.tpl.php* file.  You may copy this file to your theme directory
+    `htmlmail.tpl.php` file.  You may copy this file to your theme directory
     and use it to customize the contents and formatting of your emails.  The
     comments within the file contain complete documentation on its usage.
 
@@ -70,21 +71,21 @@ The email message text goes through four transformations before sending:
     * [Transliteration](http://drupal.org/node/1095278#comment-4219530)
     * [Emogrifier](http://drupal.org/project/emogrifier)
     * [Pathologic](http://drupal.org/project/pathologic)
-    * [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7)
+    * [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6)
 
 ## Related Modules
 
 Emogrifier
 :    http://drupal.org/project/emogrifier
 
-HTML Mail
-:    http://drupal.org/project/htmlmail
-
 HTML Purifier
 :    http://drupal.org/project/htmlpurifier
 
 htmLawed
 :    http://drupal.org/project/htmlawed
+
+Mail MIME
+:    http://drupal.org/project/mailmime
 
 Mail System
 :    http://drupal.org/project/mailsystem
@@ -98,19 +99,18 @@ Transliteration
 ## Documentation
 
 filter.module
-:    http://api.drupal.org/api/drupal/modules--filter--filter.module/7
+:    http://api.drupal.org/api/drupal/modules--filter--filter.module/6
 
-Installing contributed modules (Drupal 7)
-:    http://drupal.org/node/895232
+Installing contributed modules (Drupal 5 and 6)
+:    http://drupal.org/node/70151
 
 Theming guide
 :    http://drupal.org/documentation/theme
 
-Standard filters
-:    http://api.drupal.org/api/drupal/modules--filter--filter.module/group/standard_filters/7
-
-## Maintainers
+## Original Author
 
 * [Chris Herberte](http://drupal.org/user/1171)
+
+## Current Maintainer
 
 * [Bob Vincent](http://drupal.org/user/36148)

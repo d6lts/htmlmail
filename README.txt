@@ -14,8 +14,8 @@ Requirements
 
 Installation
 
-   Install as usual; see [4]Installing contributed modules (Drupal 7) for
-   further information.
+   Install as usual; see [4]Installing contributed modules (Drupal 5 and
+   6) for further information.
 
    The following additional modules, while not required, are highly
    recommended:
@@ -65,14 +65,14 @@ Related Modules
    Emogrifier
           http://drupal.org/project/emogrifier
 
-   HTML Mail
-          http://drupal.org/project/htmlmail
-
    HTML Purifier
           http://drupal.org/project/htmlpurifier
 
    htmLawed
           http://drupal.org/project/htmlawed
+
+   Mail MIME
+          http://drupal.org/project/mailmime
 
    Mail System
           http://drupal.org/project/mailsystem
@@ -87,21 +87,20 @@ Documentation
 
    filter.module
           http://api.drupal.org/api/drupal/modules--filter--filter.module/
-          7
+          6
 
-   Installing contributed modules (Drupal 7)
-          http://drupal.org/node/895232
+   Installing contributed modules (Drupal 5 and 6)
+          http://drupal.org/node/70151
 
    Theming guide
           http://drupal.org/documentation/theme
 
-   Standard filters
-          http://api.drupal.org/api/drupal/modules--filter--filter.module/
-          group/standard_filters/7
-
-Maintainers
+Original Author
 
      * [20]Chris Herberte
+
+Current Maintainer
+
      * [21]Bob Vincent
 
 References
@@ -109,21 +108,21 @@ References
    1. http://drupal.org/project/htmlmail
    2. http://drupal.org/project/issues/htmlmail
    3. http://drupal.org/project/mailsystem
-   4. http://drupal.org/node/895232
+   4. http://drupal.org/node/70151
    5. http://drupal.org/project/emogrifier
    6. http://drupal.org/project/pathologic
    7. http://drupal.org/project/transliteration
    8. http://drupal.org/node/1095278#comment-4219530
    9. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
   10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
-  11. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7
-  12. http://api.drupal.org/api/drupal/modules--filter--filter.module/7
+  11. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6
+  12. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
   13. http://drupal.org/project/htmlpurifier
   14. http://drupal.org/project/htmlawed
   15. http://drupal.org/documentation/theme
   16. http://drupal.org/node/1095278#comment-4219530
   17. http://drupal.org/project/emogrifier
   18. http://drupal.org/project/pathologic
-  19. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/7
+  19. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6
   20. http://drupal.org/user/1171
   21. http://drupal.org/user/36148
