@@ -21,7 +21,7 @@ function htmlmail_help($path, $arg) {
  * Implements hook_menu().
  */
 function htmlmail_menu() {
-  $items['admin/config/system/htmlmail'] = array(
+  $items['admin/settings/htmlmail'] = array(
     'title' => 'HTML Mail',
     'description' => 'Configure HTML Mail system-wide settings.',
     'page callback' => 'drupal_get_form',
@@ -30,29 +30,19 @@ function htmlmail_menu() {
     'theme callback' => 'htmlmail_get_selected_theme',
     'file' => 'htmlmail.admin.inc',
   );
-  $items['admin/config/system/htmlmail/settings'] = array(
+  $items['admin/settings/htmlmail/settings'] = array(
     'title' => 'Settings',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'theme callback' => 'htmlmail_get_selected_theme',
     'weight' => '-2'
   );
-  $items['admin/config/system/htmlmail/test'] = array(
+  $items['admin/settings/htmlmail/test'] = array(
     'title' => 'Send Test',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('htmlmail_test_form'),
     'access arguments' => array('access administration pages'),
     'type' => MENU_LOCAL_TASK,
     'theme callback' => 'htmlmail_get_selected_theme',
-    'file' => 'htmlmail.admin.inc',
-  );
-  // Callback that receives the message via $_POST and displays it on a themed
-  // page.  This is used to format an email message with a Drupal theme.
-  $items['admin/config/system/htmlmail/email'] = array(
-    'title callback' => 'htmlmail_get_post_subject',
-    'page callback' => 'htmlmail_show_email',
-    'theme callback' => 'htmlmail_get_selected_theme',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
     'file' => 'htmlmail.admin.inc',
   );
   return $items;
@@ -166,6 +156,10 @@ function template_preprocess_htmlmail(&$variables) {
   foreach ($parts as $part) {
     $variables['theme_hook_suggestions'][] = $last .= '_' . $part;
   }
+  foreach (module_implements('preprocess_htmlmail') as $module) {
+    $function = $module . '_preprocess_htmlmail';
+    $function($variables);
+  }
 }
 
 /**
@@ -201,10 +195,12 @@ function htmlmail_form_user_profile_form_alter(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_user_presave().
+ * Implements hook_user().
  */
-function htmlmail_user_presave(&$edit, $account, $category) {
-  $edit['data']['htmlmail_plaintext'] = empty($edit['htmlmail_plaintext']) ? 0 : 1;
+function htmlmail_user($op, &$edit, $account, $category) {
+  if ($op == 'submit') {
+    $edit['data']['htmlmail_plaintext'] = empty($edit['htmlmail_plaintext']) ? 0 : 1;
+  }
 }
 
 /**
@@ -213,11 +209,11 @@ function htmlmail_user_presave(&$edit, $account, $category) {
  * Code shamelessly stolen from the og_theme module.
  */
 function htmlmail_get_allowed_themes() {
-  $allowed = &drupal_static(__FUNCTION__);
+  static $allowed;
   if (!isset($allowed)) {
     $allowed = array('' => t('No theme'));
-    module_load_include('inc', 'system', 'system.admin');
     $themes = list_themes();
+    module_load_include('inc', 'system', 'system.admin');
     uasort($themes, 'system_sort_modules_by_info_name');
     foreach ($themes as $key => $value) {
       if ($value->status) {

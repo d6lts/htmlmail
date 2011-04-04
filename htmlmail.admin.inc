@@ -31,9 +31,9 @@ function htmlmail_admin_settings() {
       // Begin instructions.
 '<p>When formatting an email message, Drupal determines the active template directory by looking for <code>htmlmail.tpl.php</code> file in the following locations:</p>
 <ul>
-  <li><a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/7">path_to_theme()</a></li>
-  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7">drupal_get_path(</a>"module", <a href="http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/7">$installed_profile</a>)</li>
-  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7">drupal_get_path(</a>"module", <a href="http://drupal.org/project/htmlmail">"htmlmail"</a>)</li>
+  <li><a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/6">path_to_theme()</a></li>
+  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6">drupal_get_path(</a>"module", <a href="http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6">$installed_profile</a>)</li>
+  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6">drupal_get_path(</a>"module", <a href="http://drupal.org/project/htmlmail">"htmlmail"</a>)</li>
 </ul>
 <p>Once the active template directory is found, Drupal looks in that directory for template files in order from most specific to most general.</p>
 <p>For example, if <code>example\_module</code> sends mail with:</p>
@@ -45,14 +45,14 @@ function htmlmail_admin_settings() {
   <li><code>htmlmail-example\_module.tpl.php</code></li>
   <li><code>htmlmail.tpl.php</code></li>
 </ul>
-<p>The <code>$theme\_hook\_suggestions</code> variable contains an array of suggested <a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/7">theme</a> <a href="http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_theme/7">hooks</a>, in reverse priority order. For the above example, it would contain:</p>
+<p>The <code>$template\_files</code> variable contains an array of suggested <a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/6">theme</a> <a href="http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_theme/6">hooks</a>, in reverse priority order. For the above example, it would contain:</p>
 <ul>
   <li><code>htmlmail</code></li>
   <li><code>htmlmail-example\_module</code></li>
   <li><code>htmlmail-example\_module\_outgoing</code></li>
   <li><code>htmlmail-example\_module\_outgoing\_message</code></li>
 </ul>
-<p>For another example, to customize the <a href="http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/7">password reset</a> emails sent by the <a href="http://api.drupal.org/api/drupal/modules--user--user.module/7">user module</a>, copy <code>htmlmail.tpl.php</code> to your theme directory, and also copy it to <code>htmlmail-user\_password\_reset.tpl.php</code>, then modify the latter file. Remember that you will need to put <em>both</em> files in your theme directory for this to work.</p>
+<p>For another example, to customize the <a href="http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6">password reset</a> emails sent by the <a href="http://api.drupal.org/api/drupal/modules--user--user.module/6">user module</a>, copy <code>htmlmail.tpl.php</code> to your theme directory, and also copy it to <code>htmlmail-user\_password\_reset.tpl.php</code>, then modify the latter file. Remember that you will need to put <em>both</em> files in your theme directory for this to work.</p>
 <p>Template files are cached, so remember to clear the cache by visiting <em>admin/settings/performance</em> after creating, copying, or editing any <code>.tpl.php</code> files.</p>
 <p>The following variables are also available in this template:</p>
 <dl>
@@ -85,8 +85,8 @@ function htmlmail_admin_settings() {
     <p>The absolute URL to the theme directory.</p>
   </dd>
 </dl>
-<p>The module calling <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/7">drupal_mail()</a> may set other variables. For instance, the <a href="http://drupal.org/project/webform">Webform module</a> sets a <code>$node</code> variable which may be very useful.</p>
-<p>Other modules may also add or modify theme variables by implementing a <code>MODULENAME\_preprocess\_htmlmail()</code> <a href="http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7">hook function</a>.</p>'
+<p>The module calling <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6">drupal_mail()</a> may set other variables. For instance, the <a href="http://drupal.org/project/webform">Webform module</a> sets a <code>$node</code> variable which may be very useful.</p>
+<p>Other modules may also add or modify theme variables by implementing a <code>MODULENAME\_preprocess\_htmlmail()</code> hook function.</p>'
       // End instructions.
     ),
   );

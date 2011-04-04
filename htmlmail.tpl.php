@@ -29,9 +29,9 @@
  *   * htmlmail-example\_module.tpl.php
  *   * htmlmail.tpl.php
  *
- * The $theme\_hook\_suggestions variable contains an array of suggested
- * [6]theme [7]hooks, in reverse priority order. For the above example, it
- * would contain:
+ * The $template\_files variable contains an array of suggested [6]theme
+ * [7]hooks, in reverse priority order. For the above example, it would
+ * contain:
  *   * htmlmail
  *   * htmlmail-example\_module
  *   * htmlmail-example\_module\_outgoing
@@ -76,22 +76,21 @@
  * very useful.
  *
  * Other modules may also add or modify theme variables by implementing a
- * MODULENAME\_preprocess\_htmlmail() [12]hook function.
+ * MODULENAME\_preprocess\_htmlmail() hook function.
  *
  * References
  *
- * 1. http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/7
- * 2. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7
- * 3. http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/7
- * 4. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/7
+ * 1. http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/6
+ * 2. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6
+ * 3. http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6
+ * 4. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6
  * 5. http://drupal.org/project/htmlmail
- * 6. http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/7
- * 7. http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_theme/7
- * 8. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/7
- * 9. http://api.drupal.org/api/drupal/modules--user--user.module/7
- * 10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/7
+ * 6. http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/6
+ * 7. http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_theme/6
+ * 8. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6
+ * 9. http://api.drupal.org/api/drupal/modules--user--user.module/6
+ * 10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
  * 11. http://drupal.org/project/webform
- * 12. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  ****************************************************** End instructions.
  */

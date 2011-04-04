@@ -15,7 +15,7 @@ function htmlmail_install() {
 /**
  * Removes variables that are no longer used.
  */
-function htmlmail_update_7200() {
+function htmlmail_update_6200() {
   variable_del('htmlmail_header');
   variable_del('htmlmail_footer');
   variable_del('htmlmail_css');
