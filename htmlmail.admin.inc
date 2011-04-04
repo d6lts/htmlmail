@@ -96,8 +96,12 @@ function htmlmail_admin_settings() {
     '#default_value' => variable_get('htmlmail_theme', ''),
     '#options' => htmlmail_get_allowed_themes(),
     '#description' => t(
-      'You may use a template or a website theme to format your emails. See !readme for details.',
-      array('!readme' => l('README.txt', drupal_get_path('module', 'htmlmail') . '/README.txt'))
+      'You may use a template or a website theme to format your emails. '
+      . 'See <a href="!url">!readme</a> for details.',
+      array(
+        '!readme' => 'README.txt',
+        '!url' => url(drupal_get_path('module', 'htmlmail') . '/README.txt'),
+      )
     ),
   );
   $form['htmlmail_postfilter'] = array(
@@ -105,7 +109,11 @@ function htmlmail_admin_settings() {
     '#title' => t('Text format post-filter'),
     '#default_value' => variable_get('htmlmail_postfilter'),
     '#options' => $formats,
-    '#description' => t('Choose a <a href="/admin/config/content/formats">text format</a> to be used for filtering email messages <em>after</em> the selected theme or template is applied.'),
+    '#description' => t(
+      'Choose a <a href="!url">text format</a> to be used for filtering email '
+      . 'messages <em>after</em> the selected theme or template is applied.',
+      array('!url' => url('/admin/config/content/formats'))
+    ),
   );
   $form['htmlmail_debug'] = array(
     '#type' => 'checkbox',
@@ -132,7 +140,7 @@ function htmlmail_test_form($form_values = NULL) {
   );
 
   // Set the input format to be the same as the selected prefilter format.
-  $defaults['body']['format'] = 
+  $defaults['body']['format'] =
     variable_get('htmlmail_prefilter', filter_fallback_format());
 
   $form['to'] = array(
