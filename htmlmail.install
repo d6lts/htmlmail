@@ -6,13 +6,6 @@
  */
 
 /**
- * Implements hook_install().
- */
-function htmlmail_install() {
-  db_query("UPDATE {system} SET weight = 1 WHERE name = 'htmlmail'");
-}
-
-/**
  * Removes variables that are no longer used.
  */
 function htmlmail_update_6200() {
@@ -25,14 +18,14 @@ function htmlmail_update_6200() {
  * Implements hook_enable().
  */
 function htmlmail_enable() {
-  mailsystem_set(array('htmlmail' => 'HTMLMailMailSystem'));
+  mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
 }
 
 /**
  * Implements hook_disable().
  */
 function htmlmail_disable() {
-  mailsystem_clear(array('htmlmail' => 'HTMLMailMailSystem'));
+  mailsystem_clear(array('htmlmail' => 'HTMLMailSystem'));
 }
 
 /**

@@ -1,111 +1,136 @@
 <?php
 /**
  * @file
- * Implementation of MailSystemInterface.
- * @see http://drupal.org/node/900794
+ * Parses and formats emails for sending using the MailMIME class.
+ *
+ * This is a minimal-effort backport of the 7.x-2.x code, which implements
+ * MailSystemInterface.
+ *
  * @see http://api.drupal.org/api/drupal/includes--mail.inc/interface/MailSystemInterface/7
+ * @see http://drupal.org/project/mailmime
  */
-class HTMLMailMailSystem implements MailSystemInterface {
+
+module_load_include('inc', 'mailmime');
+
+/**
+ * Implements MailSystemInterface.
+ */
+class HTMLMailSystem implements MailSystemInterface {
   /**
    * Format emails according to module settings.
+   *
+   * Parses the message headers and body into a MailMIME object.  If another module
+   * subsequently modifies the body, then format() should be called again before
+   * sending.  This is safe because the $message['body'] is not modified.
+   *
+   * @param $message
+   *   An associative array with at least the following parts:
+   *   - headers: An array of (name => value) email headers.
+   *   - body: The text/plain or text/html message part.
+   *
+   * @return
+   *   The formatted $message, ready for sending.
    */
   public function format(array $message) {
     // Collapse the message body array.
-    $message['body'] =
-      is_array($message['body'])
-      ? implode("\n\n", $message['body'])
-      : $message['body'];
-
-    // Optionally apply an input filter.
-    if ((isset($message['format']) && ($filter = $message['format'])) ||
-        ($filter = variable_get('htmlmail_prefilter'))) {
-      $message['body'] = check_markup($message['body'], $filter);
-    }
-
-    // Apply the template file.
-    $message['body'] = theme('htmlmail', $message);
-
-    // Store a plaintext version.
-    $message['plaintext'] = drupal_html_to_text($message['body']);
-
-    // Send plaintext-only if the recipient prefers it.
-    $recipient = user_load_by_mail($message['to']);
-    if ($recipient && !empty($recipient->data['htmlmail_plaintext'])) {
-      $message['headers']['Content-Type'] = 'text/plain; charset=UTF-8; format=flowed';
-      $message['body'] = $message['plaintext'];
+    $message['body'] = MailMIME::concat($message['body']);
+    // Build a full email message string.
+    $email = MailMIME::encodeEmail($message['headers'], $message['body']);
+    // Parse it into MIME parts.
+    if (!($mime = MailMIME::parse($email))) {
+      watchdog(
+        'HTMLMailSystem',
+        'Could not parse email message.',
+        array(),
+        WATCHDOG_ERROR
+      );
       return $message;
     }
-
-    // Optionally apply the selected theme via internal http request.
-    if ($theme = htmlmail_get_selected_theme($message['theme'])) {
-      $url = url('admin/config/system/htmlmail/email', array('absolute' => TRUE));
-      $data = 'body=' . rawurlencode($message['body'])
-        . '&subject=' . rawurlencode($message['subject'])
-        . '&theme=' . rawurlencode($theme);
-      $options = array(
-        'method' => 'POST',
-        'data' => $data,
-        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
-      );
-      $response = drupal_http_request($url, $options);
-
-      // Strip javascript as it doesn't work through email anyway.
-      $message['body'] = preg_replace('@<script type="text/javascript".*</script>@Usi', '', $response->data);
+    // Work on a copy so that the original $message['body'] remains unchanged.
+    $email = $message;
+    list($email['headers'], $email['body']) = $mime->toEmail($email['headers']);
+    // Theme with htmlmail.tpl.php.
+    $body = theme('htmlmail', $email);
+    // Store the plaintext version.
+    $mime->setTXTBody(drupal_html_to_text($body));
+    // Check to see whether recipient allows non-plaintext.
+    if ( !($recipient = user_load(array('email' => $message['to'])))
+      || empty($recipient->data['htmlmail_plaintext']) ) {
+      // Optionally apply the selected web theme.
+      if ($theme = htmlmail_get_selected_theme($message)) {
+        $body = echo_themed_page($message['subject'], $body, $theme);
+      }
+      // Optionally apply the selected output filter.
+      if ($filter = variable_get('htmlmail_postfilter')) {
+        $body = check_markup($body, $filter);
+      }
+      // Store the fully-themed HTML body.
+      $mime->setHTMLBody($body);
     }
-
-    // Optionally apply the selected output filter.
-    if ($filter = variable_get('htmlmail_postfilter')) {
-      $message['body'] = check_markup($message['body'], $filter);
-    }
-
-    // Store both plaintext and html versions.
-    $boundary = uniqid(time(), 1);
-    $message['headers']['Content-Type'] = "multipart/alternative; charset=utf-8; boundary=\"$boundary\"";
-    $message['headers']['Content-Transfer-Encoding'] = '8bit';
-    $message['headers']['MIME-Version'] = '1.0';
-    $message['body'] = "This is a multi-part message in MIME format.
---$boundary
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-" . $message['plaintext'] . "
-
---$boundary
-Content-Type: text/html; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-" . $message['body'] . "
-
---$boundary--
-";
+    // Store the MailMIME object.
+    $message['MailMIME'] = &$mime;
     return $message;
   }
 
   /**
    * Send an email message.
+   *
+   * @param $message
+   *   An associative array containing at least:
+   *   - headers: An associative array of (name => value) email headers.
+   *   - body: The text/plain or text/html message body.
+   *   - MailMIME: The message, parsed into a MailMIME object.
    */
   public function mail(array $message) {
-    $mimeheaders = array();
-    foreach ($message['headers'] as $name => $value) {
-      $mimeheaders[] = $name . ': ' . mime_header_encode($value);
+    // If message was not parsed into a MailMIME object, abort.
+    if (!isset($message['MailMIME'])) {
+      watchdog(
+        'HTMLMailSystem',
+        '%mailmime part of %message array not set; aborting send.',
+        array('%mailmime' => 'MailMIME', '%message' => '$message'),
+        WATCHDOG_ERROR
+      );
+      return FALSE;
     }
-    if (isset($message['headers']['Return-Path']) &&
-        !ini_get('safe_mode') &&
-        !strpos(ini_get('sendmail_path'), ' -f')) {
-      $extra = '-f ' . $message['headers']['Return-Path'];
+    $mime = &$message['MailMIME'];
+    // Extract headers and body parts.
+    list($headers, $body) = $mime->toEmail($message['headers']);
+    // Ensure that subject is non-null.
+    $message += array('subject' => t('(No subject)'));
+    // Check for empty recipient.
+    if (empty($message['to'])) {
+      if (empty($headers['To'])) {
+        watchdog(
+          'HTMLMailSystem',
+          'Cannot send email about %subject without a recipient.',
+          array('subject' => $message['subject']),
+          WATCHDOG_ERROR
+        );
+        return FALSE;
+      }
+      $message['to'] = $headers['To'];
     }
-    else {
-      $extra = '';
+    // Check for empty body.
+    if (empty($body)) {
+      watchdog(
+        'HTMLMailSystem',
+        'Refusing to send a blank email to %recipient about %subject.',
+        array('%recipient' => $message['to'], '%subject' => $message['subject']),
+        WATCHDOG_WARNING
+      );
+      return FALSE;
     }
-    // To override this, adjust $conf['mail_line_endings'] in settings.php.
-    $line_endings = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
+    $extra = (
+      isset($headers['Return-Path'])
+      && !ini_get('safe_mode')
+      && !strpos(ini_get('sendmail_path'), ' -f')
+    ) ? '-f ' . $headers['Return-Path']
+      : '';
     return mail(
-      $message['to'],
-      // The email might not be sent properly if the subject line contains
-      // newline characters.
-      str_replace("\n", ' ', mime_header_encode($message['subject'])),
-      preg_replace('@\r?\n@', $line_endings, $message['body']),
-      join("\n", $mimeheaders),
+      $mime->encodeHeader('to', $message['to']),
+      $mime->encodeHeader('subject', $message['subject']),
+      $body,
+      $mime->txtHeaders($headers),
       $extra
     );
   }

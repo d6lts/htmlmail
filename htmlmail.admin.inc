@@ -16,7 +16,7 @@ function htmlmail_admin_settings() {
   $form['htmlmail_prefilter'] = array(
     '#type' => 'select',
     '#title' => t('Text format pre-filter'),
-    '#default_value' => variable_get('htmlmail_prefilter'),
+    '#default_value' => variable_get('htmlmail_prefilter', ''),
     '#options' => $formats,
     '#description' => t('Choose a <a href="/admin/config/content/formats">text format</a> to be used for filtering email messages <em>before</em> the selected theme or template is applied.'),
   );
@@ -107,7 +107,7 @@ function htmlmail_admin_settings() {
   $form['htmlmail_postfilter'] = array(
     '#type' => 'select',
     '#title' => t('Text format post-filter'),
-    '#default_value' => variable_get('htmlmail_postfilter'),
+    '#default_value' => variable_get('htmlmail_postfilter', ''),
     '#options' => $formats,
     '#description' => t(
       'Choose a <a href="!url">text format</a> to be used for filtering email '
@@ -131,7 +131,7 @@ function htmlmail_test_form($form_values = NULL) {
   $defaults = variable_get(
     'htmlmail_test',
     array(
-      'to' => variable_get('site_mail'),
+      'to' => variable_get('site_mail', 'user@example.com'),
       'subject' => 'test',
       'body' => array(
         'value' => 'test',
@@ -141,7 +141,7 @@ function htmlmail_test_form($form_values = NULL) {
 
   // Set the input format to be the same as the selected prefilter format.
   $defaults['body']['format'] =
-    variable_get('htmlmail_prefilter', filter_fallback_format());
+    variable_get('htmlmail_prefilter', FILTER_FORMAT_DEFAULT);
 
   $form['to'] = array(
     '#type' => 'textfield',
@@ -158,12 +158,19 @@ function htmlmail_test_form($form_values = NULL) {
     '#required' => TRUE,
   );
   $form['body'] = array(
-    '#type' => 'text_format',
-    '#title' => t('Body'),
-    '#rows' => 20,
-    '#default_value' => $defaults['body']['value'],
-    '#format' => $defaults['body']['format'],
-    '#required' => TRUE,
+    '#type' => 'item',
+    '#tree' => TRUE,
+    'value' => array(
+      '#type' => 'textarea',
+      '#title' => t('Body'),
+      '#rows' => 20,
+      '#default_value' => $defaults['body']['value'],
+      '#required' => TRUE,
+    ),
+    'format' => filter_form(
+      $defaults['body']['format'], NULL,
+      array('body', 'format')
+    ),
   );
   $form['submit'] = array(
     '#type' => 'submit',
