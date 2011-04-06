@@ -114,8 +114,8 @@ and feature requests.
 
 ## Original Author
 
-* [Chris Herberte](http://drupal.org/user/1171)
+*   [Chris Herberte](http://drupal.org/user/1171)
 
 ## Current Maintainer
 
-* [Bob Vincent](http://drupal.org/user/36148)
+*   [Bob Vincent](http://drupal.org/user/36148)
