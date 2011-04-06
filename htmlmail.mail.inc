@@ -48,20 +48,23 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     // Work on a copy so that the original $message['body'] remains unchanged.
     $email = $message;
-    list($email['headers'], $email['body']) = $mime->toEmail($email['headers']);
+    if ( !($email['body'] = $mime->getHTMLBody())
+      && !($email['body'] = $mime->getTXTBody()) ) {
+      $email['body'] = '';
+    }
     // Theme with htmlmail.tpl.php.
     $body = theme('htmlmail', $email);
     // Store the plaintext version.
     $mime->setTXTBody(drupal_html_to_text($body));
     // Check to see whether recipient allows non-plaintext.
-    if ( !($recipient = user_load(array('email' => $message['to'])))
-      || empty($recipient->data['htmlmail_plaintext']) ) {
+    if ( !($recipient = user_load(array('mail' => $message['to'])))
+      || empty($recipient->htmlmail_plaintext) ) {
       // Optionally apply the selected web theme.
       if ($theme = htmlmail_get_selected_theme($message)) {
         $body = echo_themed_page($message['subject'], $body, $theme);
       }
       // Optionally apply the selected output filter.
-      if ($filter = variable_get('htmlmail_postfilter')) {
+      if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
         $body = check_markup($body, $filter);
       }
       // Store the fully-themed HTML body.

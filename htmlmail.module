@@ -6,7 +6,7 @@
  */
 
 function htmlmail_init() {
-  module_load_include('inc', 'htmlmail');
+  module_load_include('inc', 'htmlmail', 'htmlmail.mail');
 }
 
 /**
@@ -31,13 +31,11 @@ function htmlmail_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('htmlmail_admin_settings'),
     'access arguments' => array('administer site configuration'),
-    'theme callback' => 'htmlmail_get_selected_theme',
     'file' => 'htmlmail.admin.inc',
   );
   $items['admin/settings/htmlmail/settings'] = array(
     'title' => 'Settings',
     'type' => MENU_DEFAULT_LOCAL_TASK,
-    'theme callback' => 'htmlmail_get_selected_theme',
     'weight' => '-2'
   );
   $items['admin/settings/htmlmail/test'] = array(
@@ -46,7 +44,6 @@ function htmlmail_menu() {
     'page arguments' => array('htmlmail_test_form'),
     'access arguments' => array('access administration pages'),
     'type' => MENU_LOCAL_TASK,
-    'theme callback' => 'htmlmail_get_selected_theme',
     'file' => 'htmlmail.admin.inc',
   );
   return $items;
@@ -60,6 +57,7 @@ function htmlmail_theme() {
     'htmlmail' => array(
       'render element' => 'elements',
       'template' => 'htmlmail',
+      'arguments' => array('message' => array()),
     ),
   );
 }
@@ -69,12 +67,14 @@ function htmlmail_theme() {
  *
  * @see htmlmail.tpl.php
  */
-function template_preprocess_htmlmail(&$variables) {
+function template_preprocess_htmlmail(array &$variables) {
   $variables['debug'] = variable_get('htmlmail_debug', '0');
   $variables['theme_url'] = url($variables['directory'], array('absolute' => TRUE));
+  $message = $variables['message'];
+  $variables += $message;
   $variables['theme_hook_suggestions'][] = $last = 'htmlmail-' . $variables['module'];
   $parts = array_diff_assoc(
-    explode('_', $variables['message_id'] = $variables['key']),
+    explode('_', $variables['key']),
     explode('_', $variables['module'])
   );
   $variables['key'] = implode('_', $parts);
@@ -91,50 +91,50 @@ function template_preprocess_htmlmail(&$variables) {
  * Implements hook_mail().
  */
 function htmlmail_mail($key, &$message, $params) {
-  switch ($key) {
-  case 'test':
-    $message['subject'] = $params['subject'];
-    $message['body'] = explode("\n\n", $params['body']);
-    break;
-  }
-}
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function htmlmail_form_user_profile_form_alter(&$form, &$form_state) {
-  if ($form['#user_category'] == 'account') {
-    $account = $form['#user'];
-    $form['htmlmail'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('HTML Mail'),
-      '#collapsible' => TRUE,
-    );
-    $form['htmlmail']['htmlmail_plaintext'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Plaintext-only emails'),
-      '#default_value' => empty($account->data['htmlmail_plaintext']) ? FALSE : 1,
-      '#description' => t('The %m module can send emails with fonts, styles, and other HTML formatting.  If you prefer to receive all your emails in plain text, select this option.', array('%m' => 'HTML Mail')),
-    );
-  }
+  $message['module'] = 'htmlmail';
+  $message['key'] = $key;
+  $message['subject'] = $params['subject'];
+  $message['body'] = explode("\n\n", $params['body']);
+  return $message;
 }
 
 /**
  * Implements hook_user().
  */
 function htmlmail_user($op, &$edit, $account, $category) {
-  if ($op == 'submit') {
-    $edit['data']['htmlmail_plaintext'] = empty($edit['htmlmail_plaintext']) ? 0 : 1;
+  switch("$op.$category") {
+    case 'form.account':
+    case 'register.':
+      return array(
+        'htmlmail' => array(
+          '#type' => 'fieldset',
+          '#title' => t('HTML Mail'),
+          '#collapsible' => TRUE,
+          'htmlmail_plaintext' => array(
+            '#type' => 'checkbox',
+            '#title' => t('Plaintext-only emails'),
+            '#default_value' => !empty($account->htmlmail_plaintext),
+            '#description' => t(
+              'The %htmlmail module can send emails with fonts, styles, and '
+              . 'other HTML formatting.  If you prefer to receive all your '
+              . 'emails in plain text, select this option.',
+              array('%htmlmail' => 'HTML Mail')
+            ),
+          ),
+        ),
+      );
+    default:
+      return;
   }
 }
 
 /**
  * Returns an associative array of allowed themes.  The keys are the
  * machine-readable names and the values are the .info file names.
- * Code shamelessly stolen from the og_theme module.
+ * Based on code from the og_theme module.
  */
-function htmlmail_get_allowed_themes() {
-  static $allowed;
+function &htmlmail_get_allowed_themes() {
+  static $allowed = NULL;
   if (!isset($allowed)) {
     $allowed = array('' => t('No theme'));
     $themes = list_themes();
@@ -153,15 +153,13 @@ function htmlmail_get_allowed_themes() {
  * Returns the selected theme to use for outgoing emails.
  * for use in a theme callback function.
  */
-function htmlmail_get_selected_theme(&$selected = NULL) {
-  if (!isset($selected)) {
-    $selected = variable_get('htmlmail_theme', '');
-  }
+function htmlmail_get_selected_theme(&$message = array()) {
+  $selected = isset($message['theme'])
+    ? $message['theme'] : variable_get('htmlmail_theme', '');
   // Make sure the selected theme is allowed.
-  $themes = htmlmail_get_allowed_themes();
-  if (isset($themes[$selected])) {
-    return $selected;
+  $themes = &htmlmail_get_allowed_themes();
+  if (empty($themes[$selected])) {
+    $selected = $GLOBALS['theme'];
   }
-  // If a theme was specified but not allowed, fall back to site defaults.
-  return $GLOBALS['theme'];
+  return $selected;
 }
