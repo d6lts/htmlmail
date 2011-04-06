@@ -157,7 +157,6 @@ function &htmlmail_get_allowed_themes() {
 
 /**
  * Returns the selected theme to use for outgoing emails.
- * for use in a theme callback function.
  */
 function htmlmail_get_selected_theme(&$message = array()) {
   $selected = isset($message['theme'])
