@@ -112,8 +112,9 @@
 <?php print $body; ?>
 </div>
 <?php if ($debug): ?>
-<pre class="htmlmail-debug">
-Theme hook suggestions: <?php print_r($theme_hook_suggestions); ?>
-</pre>
+<hr />
+<div class="htmlmail-debug">
+Theme hook suggestions: <pre><?php print_r($theme_hook_suggestions); ?></pre>
+</div>
 <?php endif; ?>
 <?php
