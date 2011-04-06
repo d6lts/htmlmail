@@ -100,7 +100,10 @@ function htmlmail_mail($key, &$message, $params) {
   $message['module'] = 'htmlmail';
   $message['key'] = $key;
   $message['subject'] = $params['subject'];
-  $message['body'] = explode("\n\n", $params['body']);
+  $message['body'] = explode(
+    MAIL_LINE_ENDINGS . MAIL_LINE_ENDINGS,
+    $params['body']
+  );
   return $message;
 }
 
