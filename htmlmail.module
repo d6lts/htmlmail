@@ -72,10 +72,10 @@ function htmlmail_theme() {
  * @see htmlmail.tpl.php
  */
 function template_preprocess_htmlmail(array &$variables) {
-  $variables['debug'] = variable_get('htmlmail_debug', '0');
-  $variables['theme_url'] = url($variables['directory'], array('absolute' => TRUE));
   $message = $variables['message'];
   $variables += $message;
+  $variables['debug'] = variable_get('htmlmail_debug', '0');
+  $variables['theme_url'] = url($variables['directory'], array('absolute' => TRUE));
   $variables['theme_hook_suggestions'][] = $last = 'htmlmail-' . $variables['module'];
   $parts = array_diff_assoc(
     explode('_', $variables['key']),

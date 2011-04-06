@@ -19,7 +19,7 @@ the possible template file names would be:
 *    `htmlmail-example_module.tpl.php`
 *    `htmlmail.tpl.php`
 
-The `$template_files` variable contains an array of suggested
+The `$theme_hook_suggestions` variable contains an array of suggested
 [theme](http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/6)
 [hooks](http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_theme/6),
 in reverse priority order.  For the above example, it would contain:

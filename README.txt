@@ -27,7 +27,7 @@ Configuration
    [12]default [13]mail system.
 
    Visit the [14]HTML Mail settings page at admin/settings/htmlmail to
-   select a theme, pre-filter, and post-filter for your emails.
+   select a theme, pre-filter, and post-filter for your messages.
 
 Theming
 
@@ -42,7 +42,7 @@ Theming
     2. A theme template is applied. The default template is the included
        htmlmail.tpl.php file. You may copy this file to your theme
        directory and use it to customize the contents and formatting of
-       your emails. The comments within the file contain complete
+       your messages. The comments within the file contain complete
        documentation on its usage.
     3. The message may be wrapped in a website theme selected on the
        module settings page. Creating an email-specific sub-theme lets you

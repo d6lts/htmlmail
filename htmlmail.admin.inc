@@ -48,7 +48,7 @@ function htmlmail_admin_settings() {
   <li><code>htmlmail-example_module.tpl.php</code></li>
   <li><code>htmlmail.tpl.php</code></li>
 </ul>
-<p>The <code>$template_files</code> variable contains an array of suggested <a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/6">theme</a> <a href="http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_theme/6">hooks</a>, in reverse priority order. For the above example, it would contain:</p>
+<p>The <code>$theme_hook_suggestions</code> variable contains an array of suggested <a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/6">theme</a> <a href="http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_theme/6">hooks</a>, in reverse priority order. For the above example, it would contain:</p>
 <ul>
   <li><code>htmlmail</code></li>
   <li><code>htmlmail-example_module</code></li>

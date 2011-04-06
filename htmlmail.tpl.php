@@ -29,9 +29,9 @@
  *   * htmlmail-example_module.tpl.php
  *   * htmlmail.tpl.php
  *
- * The $template_files variable contains an array of suggested [6]theme
- * [7]hooks, in reverse priority order. For the above example, it would
- * contain:
+ * The $theme_hook_suggestions variable contains an array of suggested
+ * [6]theme [7]hooks, in reverse priority order. For the above example, it
+ * would contain:
  *   * htmlmail
  *   * htmlmail-example_module
  *   * htmlmail-example_module_outgoing
