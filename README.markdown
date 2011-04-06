@@ -5,9 +5,11 @@ messages the same way you theme the rest of your website.
 
 ## Requirements
 
-* [Echo](http://drupal.org/project/echo)
-* [Mail MIME](http://drupal.org/project/mailmime)
-* [Mail System](http://drupal.org/project/mailsystem)
+*   [Echo](http://drupal.org/project/echo)
+
+*   [Mail MIME](http://drupal.org/project/mailmime)
+
+*   [Mail System](http://drupal.org/project/mailsystem)
 
 ## Installation
 
@@ -32,8 +34,8 @@ Visit the [Mail System](http://drupal.org/project/mailsystem) settings page at
 [mail system](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7).
 
 Visit the [HTML Mail](http://drupal.org/project/htmlmail) settings page at
-<u>admin/settings/htmlmail</u> to select a theme, pre-filter, and post-filter
-for your emails.
+<u>admin/settings/htmlmail</u> to select a theme, pre-filter,
+and post-filter for your messages.
 
 ## Theming
 
@@ -44,14 +46,15 @@ The email message text goes through four transformations before sending:
     content such as comments or blog postings.  For consistency and security,
     it should include the the
     [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6)
-    from [filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/6),
+    from
+    [filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/6),
     or a better replacement such as
     [HTML Purifier](http://drupal.org/project/htmlpurifier) or
     [htmLawed](http://drupal.org/project/htmlawed).
 
 2.  A theme template is applied. The default template is the included
     `htmlmail.tpl.php` file.  You may copy this file to your theme directory
-    and use it to customize the contents and formatting of your emails.  The
+    and use it to customize the contents and formatting of your messages.  The
     comments within the file contain complete documentation on its usage.
 
 3.  The message may be wrapped in a website theme selected on the module settings
@@ -75,38 +78,38 @@ and feature requests.
 
 ## Related Modules
 
-Emogrifier
+**Emogrifier**
 :    http://drupal.org/project/emogrifier
 
-HTML Purifier
+**HTML Purifier**
 :    http://drupal.org/project/htmlpurifier
 
-htmLawed
+**htmLawed**
 :    http://drupal.org/project/htmlawed
 
-Mail MIME
+**Mail MIME**
 :    http://drupal.org/project/mailmime
 
-Mail System
+**Mail System**
 :    http://drupal.org/project/mailsystem
 
-Pathologic
+**Pathologic**
 :    http://drupal.org/project/pathologic
 
-Transliteration
+**Transliteration**
 :    http://drupal.org/project/transliteration
 
 ## Documentation
 
-filter.module
+**filter.module**
 :    D6: http://api.drupal.org/api/drupal/modules--filter--filter.module/6
 :    D7: http://api.drupal.org/api/drupal/modules--filter--filter.module/7
 
-Installing contributed modules
+**Installing contributed modules**
 :    D6: http://drupal.org/documentation/install/modules-themes/modules-5-6
 :    D7: http://drupal.org/documentation/install/modules-themes/modules-7
 
-Theming guide
+**Theming guide**
 :    http://drupal.org/documentation/theme
 
 ## Original Author

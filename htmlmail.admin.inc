@@ -196,26 +196,20 @@ function htmlmail_test_form_submit($form, &$form_state) {
   // Send the email.
   $params = array(
     'subject' => $form_state['values']['subject'],
-    'body' => check_markup($form_state['values']['body']['value'], $form_state['values']['body']['format']),
+    'body' => check_markup(
+      $form_state['values']['body']['value'],
+      $form_state['values']['body']['format']
+    ),
   );
-  if (drupal_mail('htmlmail', 'test', $form_state['values']['to'], language_default(), $params)) {
+  if (
+    drupal_mail(
+      'htmlmail',
+      'test',
+      $form_state['values']['to'],
+      language_default(),
+      $params
+    )
+  ) {
     drupal_set_message(t('HTML Mail test message sent.'));
   }
-}
-
-/**
- * Displays the email message body passed via POST as a themed page.
- */
-function htmlmail_show_email() {
-  if ($css = variable_get('htmlmail_css', '')) {
-    drupal_add_css($css, array('type' => 'inline'));
-  }
-  return isset($_POST['body']) ? $_POST['body'] : '(Empty)';
-}
-
-/**
- * Returns the email message subject passed via POST for a title callback.
- */
-function htmlmail_get_post_subject($subject) {
-  return check_plain(isset($_POST['subject']) ? $_POST['subject'] :  t($subject));
 }
