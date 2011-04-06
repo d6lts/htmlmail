@@ -19,28 +19,28 @@
  * directory for template files in order from most specific to most
  * general.
  *
- * For example, if example\_module sends mail with:
+ * For example, if example_module sends mail with:
+ * drupal_mail("example_module", "outgoing_message" ...)
  *
- * drupal\_mail("example\_module", "outgoing\_message" ...)
  *
  * the possible template file names would be:
- *   * htmlmail-example\_module\_outgoing\_message.tpl.php
- *   * htmlmail-example\_module\_outgoing.tpl.php
- *   * htmlmail-example\_module.tpl.php
+ *   * htmlmail-example_module_outgoing_message.tpl.php
+ *   * htmlmail-example_module_outgoing.tpl.php
+ *   * htmlmail-example_module.tpl.php
  *   * htmlmail.tpl.php
  *
- * The $template\_files variable contains an array of suggested [6]theme
+ * The $template_files variable contains an array of suggested [6]theme
  * [7]hooks, in reverse priority order. For the above example, it would
  * contain:
  *   * htmlmail
- *   * htmlmail-example\_module
- *   * htmlmail-example\_module\_outgoing
- *   * htmlmail-example\_module\_outgoing\_message
+ *   * htmlmail-example_module
+ *   * htmlmail-example_module_outgoing
+ *   * htmlmail-example_module_outgoing_message
  *
- * For another example, to customize the [8]password reset emails sent by
- * the [9]user module, copy htmlmail.tpl.php to your theme directory, and
- * also copy it to htmlmail-user\_password\_reset.tpl.php, then modify the
- * latter file. Remember that you will need to put both files in your
+ * For another example, to customize the [8]password reset messages sent
+ * by the [9]user module, copy htmlmail.tpl.php to your theme directory,
+ * and also copy it to htmlmail-user_password_reset.tpl.php, then modify
+ * the latter file. Remember that you will need to put both files in your
  * theme directory for this to work.
  *
  * Template files are cached, so remember to clear the cache by visiting
@@ -59,7 +59,7 @@
  * $key
  *        The message key, usually the second parameter to drupal_mail().
  *
- * \$message\_id
+ * $message_id
  *        The email message id, usually "{$module}_{$key}".
  *
  * $debug
@@ -68,7 +68,7 @@
  * $directory
  *        The relative path to the theme template directory.
  *
- * $theme\_url
+ * $theme_url
  *        The absolute URL to the theme directory.
  *
  * The module calling [10]drupal_mail() may set other variables. For
@@ -76,7 +76,7 @@
  * very useful.
  *
  * Other modules may also add or modify theme variables by implementing a
- * MODULENAME\_preprocess\_htmlmail() hook function.
+ * MODULENAME_preprocess_htmlmail(&$variables) hook function.
  *
  * References
  *
