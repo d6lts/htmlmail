@@ -25,7 +25,11 @@ function htmlmail_enable() {
  * Implements hook_disable().
  */
 function htmlmail_disable() {
-  mailsystem_clear(array('htmlmail' => 'HTMLMailSystem'));
+  // Check is necessary because a 6.x-1.x to 6.x-2.x upgrade
+  // may not have mailsystem installed.
+  if (function_exists('mailsystem_clear')) {
+    mailsystem_clear(array('htmlmail' => 'HTMLMailSystem'));
+  }
 }
 
 /**
