@@ -12,7 +12,6 @@
 
 // Always load the class because drupal 6 doesn't have class autoload.
 module_load_include('inc', 'mailmime');
-module_load_include('module', 'mailsystem');
 
 /**
  * Implements MailSystemInterface.
