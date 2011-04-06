@@ -2,10 +2,14 @@
 
 /**
  * @file
- * Send system emails in HTML.
+ * Sends system emails in HTML.
  */
 
+/**
+ * Implements hook_init().
+ */
 function htmlmail_init() {
+  // Always load the class because drupal 6 doesn't have class autoload.
   module_load_include('inc', 'htmlmail', 'htmlmail.mail');
 }
 
