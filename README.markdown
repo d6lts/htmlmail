@@ -5,8 +5,6 @@ messages the same way you theme the rest of your website.
 
 ## Requirements
 
-*   [Echo](http://drupal.org/project/echo)
-
 *   [Mail System](http://drupal.org/project/mailsystem)
 
 ## Installation
@@ -17,11 +15,11 @@ The following additional modules, while not required, are highly recommended:
 
 *   [Emogrifier](http://drupal.org/project/emogrifier)
 
-*   [Filter transliteration](http://drupal.org/project/filter_transliteration)
-
 *   [Mail MIME](http://drupal.org/project/mailmime)
 
 *   [Pathologic](http://drupal.org/project/pathologic)
+
+*   [Transliteration](http://drupal.org/project/filter_transliteration)
 
     *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
 
@@ -86,38 +84,38 @@ and feature requests.
 ## Related Modules
 
 **Emogrifier**
-:    http://drupal.org/project/emogrifier
+:   http://drupal.org/project/emogrifier
 
 **HTML Purifier**
-:    http://drupal.org/project/htmlpurifier
+:   http://drupal.org/project/htmlpurifier
 
 **htmLawed**
-:    http://drupal.org/project/htmlawed
+:   http://drupal.org/project/htmlawed
 
 **Mail MIME**
-:    http://drupal.org/project/mailmime
+:   http://drupal.org/project/mailmime
 
 **Mail System**
-:    http://drupal.org/project/mailsystem
+:   http://drupal.org/project/mailsystem
 
 **Pathologic**
-:    http://drupal.org/project/pathologic
+:   http://drupal.org/project/pathologic
 
 **Transliteration**
-:    http://drupal.org/project/transliteration
+:   http://drupal.org/project/transliteration
 
 ## Documentation
 
 **filter.module**
-:    D6: http://api.drupal.org/api/drupal/modules--filter--filter.module/6
-:    D7: http://api.drupal.org/api/drupal/modules--filter--filter.module/7
+:   D6: http://api.drupal.org/api/drupal/modules--filter--filter.module/6
+:   D7: http://api.drupal.org/api/drupal/modules--filter--filter.module/7
 
 **Installing contributed modules**
-:    D6: http://drupal.org/documentation/install/modules-themes/modules-5-6
-:    D7: http://drupal.org/documentation/install/modules-themes/modules-7
+:   D6: http://drupal.org/documentation/install/modules-themes/modules-5-6
+:   D7: http://drupal.org/documentation/install/modules-themes/modules-7
 
 **Theming guide**
-:    http://drupal.org/documentation/theme
+:   http://drupal.org/documentation/theme
 
 ## Original Author
 

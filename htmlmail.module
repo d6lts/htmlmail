@@ -187,3 +187,17 @@ function htmlmail_get_selected_theme(&$message = array()) {
   }
   return $selected;
 }
+
+/**
+ * Checks whether a given recipient email prefers plaintext-only messages.
+ *
+ * @param $email
+ *   The recipient email address.
+ *
+ * @return
+ *   FALSE if the recipient prefers plaintext-only messages; otherwise TRUE.
+ */
+function htmlmail_is_allowed($email) {
+  return !($recipient = user_load(array('mail' => $email)))
+    || empty($recipient->htmlmail_plaintext);
+}

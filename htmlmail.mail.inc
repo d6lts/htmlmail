@@ -33,26 +33,41 @@ class HTMLMailSystem implements MailSystemInterface {
     // Collapse the message body array.
     if (module_exists('mailmime')) {
       $body = $this->formatMailMIME($message);
+      $plain = $message['MailMIME']->getTXTBody();
     }
     else {
-      $message['headers']['Content-Type'] = 'text/html';
       $message['body'] = implode("\n", $message['body']);
       $body = theme('htmlmail', $message);
+      $plain = drupal_html_to_text($body);
     }
-    // Optionally apply the selected web theme.
-    if (module_exists('echo') && $theme = htmlmail_get_selected_theme($message)) {
-      $body = echo_themed_page($message['subject'], $body, $theme);
-    }
-    // Optionally apply the selected output filter.
-    if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
-      $body = check_markup($body, $filter);
-    }
-    if (module_exists('mailmime')) {
+    // Check to see whether recipient allows non-plaintext.
+    if (htmlmail_is_allowed($message['to'])) {
+      // Optionally apply the selected web theme.
+      if (module_exists('echo') && $theme = htmlmail_get_selected_theme($message)) {
+        $body = echo_themed_page($message['subject'], $body, $theme);
+      }
+      // Optionally apply the selected output filter.
+      if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
+        $body = check_markup($body, $filter);
+      }
       // Store the fully-themed HTML body.
-      $message['MailMIME']->setHTMLBody($body);
+      if (isset($message['MailMIME'])) {
+        $message['MailMIME']->setHTMLBody($body);
+      }
+      else {
+        $message['headers']['Content-Type'] = 'text/html';
+        $message['body'] = $body;
+      }
     }
     else {
-      $message['body'] = $body;
+      if (isset($message['MailMIME'])) {
+        $message['MailMIME']->setHTMLBody('');
+        $message['MailMIME']->setContentType('text/plain');
+      }
+      else {
+        $message['body'] = $plain;
+        $message['headers']['Content-Type'] = 'text/plain';
+      }
     }
     return $message;
   }
@@ -79,18 +94,16 @@ class HTMLMailSystem implements MailSystemInterface {
     // Work on a copy so that the original $message['body'] remains unchanged.
     $email = $message;
     if ( !($email['body'] = $mime->getHTMLBody())
-      && !($email['body'] = $mime->getTXTBody()) ) {
+      && !($email['body'] = $mime->getTXTBody())
+    ) {
       $email['body'] = '';
     }
     // Theme with htmlmail.tpl.php.
     $body = theme('htmlmail', $email);
-    // Store the plaintext version.
+    $mime->setHTMLBody($body);
     $mime->setTXTBody(drupal_html_to_text($body));
-    // Check to see whether recipient allows non-plaintext.
-    if ( !($recipient = user_load(array('mail' => $message['to'])))
-      || empty($recipient->htmlmail_plaintext) ) {
-    }
     $message['MailMIME'] = &$mime;
+    return $body;
   }
 
   /**

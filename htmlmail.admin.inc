@@ -111,8 +111,8 @@ function htmlmail_admin_settings() {
   );
   $form['Step 1']['htmlmail_debug'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Debug'),
-    '#prefix' => '<br /><em>' . t('(Optional)') . '</em>',
+    '#prefix' => '<br />',
+    '#title' => '<em>' . t('(Optional)') . '</em> ' . t('Debug'),
     '#default_value' => variable_get('htmlmail_debug', '0'),
     '#description' => t('Add debugging info.'),
   );
@@ -154,12 +154,12 @@ function htmlmail_admin_settings() {
     '#default_value' => variable_get('htmlmail_postfilter', ''),
     '#options' => $formats,
     '#suffix' => '<p>' . t(
-      'You may choose a <a href="!formats">text format</a> to be used for '
+      'You may choose a <a href="!formats">input format</a> to be used for '
       . 'filtering email messages <em>after</em> theming.  This allows you to '
       . 'use any combination of <a href="!filters">over 200 filter modules</a> '
       . 'to make final changes to your message before sending.',
       array(
-        '!formats' => url('/admin/config/content/formats'),
+        '!formats' => url('admin/settings/filters'),
         '!filters' => url('http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1'),
       )
     ) . '</p><p>' . t(
