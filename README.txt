@@ -6,18 +6,18 @@ HTML Mail
 Requirements
 
      * [2]Echo
-     * [3]Mail MIME
-     * [4]Mail System
+     * [3]Mail System
 
 Installation
 
-   [5]Install as usual.
+   [4]Install as usual.
 
    The following additional modules, while not required, are highly
    recommended:
-     * [6]Emogrifier
-     * [7]Pathologic
-     * [8]Filter transliteration
+     * [5]Emogrifier
+     * [6]Filter transliteration
+     * [7]Mail MIME
+     * [8]Pathologic
        Also available as a [9]patch.
 
 Configuration
@@ -31,34 +31,38 @@ Configuration
 
 Theming
 
-   The email message text goes through four transformations before
+   The email message text goes through three transformations before
    sending:
-    1. The Text format pre-filter from the module settings page is
-       applied. This should be the same text format that your website uses
-       for contributed content such as comments or blog postings. For
-       consistency and security, it should include the the [15]Correct
-       faulty and chopped off HTML from [16]filter.module, or a better
-       replacement such as [17]HTML Purifier or [18]htmLawed.
-    2. A theme template is applied. The default template is the included
-       htmlmail.tpl.php file. You may copy this file to your theme
-       directory and use it to customize the contents and formatting of
-       your messages. The comments within the file contain complete
-       documentation on its usage.
-    3. The message may be wrapped in a website theme selected on the
-       module settings page. Creating an email-specific sub-theme lets you
-       use the full power of the [19]drupal theme system to format your
-       messages.
-    4. The Text format post-filter from the module settings page is
-       applied. For best results, this should be an email-specific input
-       format containing the following text format filters:
-          + [20]Transliteration
-          + [21]Emogrifier
-          + [22]Pathologic
-          + [23]Correct faulty and chopped off HTML
+    1. Template File
+       A template file is applied to your message header, subject, and
+       body text. The default template is the included htmlmail.tpl.php
+       file. You may copy this file to your default theme directory and
+       use it to customize the contents and formatting of your messages.
+       The comments within that file contain complete documentation on its
+       usage.
+    2. Theming
+       (Optional: requires [15]Echo module.) The templated text may be
+       wrapped in a website theme. This lets you use any one of [16]over
+       800 themes to style your messages. Creating an email-specific
+       sub-theme lets you use the full power of the [17]drupal theme
+       system to format your messages.
+    3. Post-filtering
+       You may choose a text format to be used for filtering email
+       messages after theming. This allows you to use any combination of
+       [18]over 200 filter modules to make final changes to your message
+       before sending.
+       Here is a recommended configuration:
+          + [19]Emogrifier Converts stylesheets to inline style rules for
+            consistent display on mobile devices and webmail.
+          + [20]Transliteration Converts non-ASCII text to US-ASCII
+            equivalents. This helps prevent Microsoft "smart-quotes" from
+            appearing as question-marks in Mozilla Thunderbird.
+          + [21]Pathologic Converts relative URLS to absolute URLS so that
+            clickable links in your message will work as intended.
 
 Troubleshooting
 
-   Visit the [24]issue queue for support and feature requests.
+   Visit the [22]issue queue for support and feature requests.
 
 Related Modules
 
@@ -105,37 +109,35 @@ Documentation
 
 Original Author
 
-     * [25]Chris Herberte
+     * [23]Chris Herberte
 
 Current Maintainer
 
-     * [26]Bob Vincent
+     * [24]Bob Vincent
 
 References
 
    1. http://drupal.org/project/htmlmail
    2. http://drupal.org/project/echo
-   3. http://drupal.org/project/mailmime
-   4. http://drupal.org/project/mailsystem
-   5. http://drupal.org/documentation/install/modules-themes/modules-5-6
-   6. http://drupal.org/project/emogrifier
-   7. http://drupal.org/project/pathologic
-   8. http://drupal.org/project/filter_transliteration
+   3. http://drupal.org/project/mailsystem
+   4. http://drupal.org/documentation/install/modules-themes/modules-5-6
+   5. http://drupal.org/project/emogrifier
+   6. http://drupal.org/project/filter_transliteration
+   7. http://drupal.org/project/mailmime
+   8. http://drupal.org/project/pathologic
    9. http://drupal.org/node/1095278#comment-4219530
   10. http://drupal.org/project/mailsystem
   11. http://drupal.org/project/htmlmail
   12. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
   13. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
   14. http://drupal.org/project/htmlmail
-  15. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6
-  16. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
-  17. http://drupal.org/project/htmlpurifier
-  18. http://drupal.org/project/htmlawed
-  19. http://drupal.org/documentation/theme
+  15. http://drupal.org/project/echo
+  16. http://drupal.org/project/themes
+  17. http://drupal.org/documentation/theme
+  18. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
+  19. http://drupal.org/project/emogrifier
   20. http://drupal.org/project/filter_transliteration
-  21. http://drupal.org/project/emogrifier
-  22. http://drupal.org/project/pathologic
-  23. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6
-  24. http://drupal.org/project/issues/htmlmail
-  25. http://drupal.org/user/1171
-  26. http://drupal.org/user/36148
+  21. http://drupal.org/project/pathologic
+  22. http://drupal.org/project/issues/htmlmail
+  23. http://drupal.org/user/1171
+  24. http://drupal.org/user/36148

@@ -6,9 +6,6 @@
     <p><a href="http://drupal.org/project/echo">Echo</a></p>
   </li>
   <li>
-    <p><a href="http://drupal.org/project/mailmime">Mail MIME</a></p>
-  </li>
-  <li>
     <p><a href="http://drupal.org/project/mailsystem">Mail System</a></p>
   </li>
 </ul>
@@ -20,10 +17,13 @@
     <p><a href="http://drupal.org/project/emogrifier">Emogrifier</a></p>
   </li>
   <li>
-    <p><a href="http://drupal.org/project/pathologic">Pathologic</a></p>
+    <p><a href="http://drupal.org/project/filter_transliteration">Filter transliteration</a></p>
   </li>
   <li>
-    <p><a href="http://drupal.org/project/filter_transliteration">Filter transliteration</a></p>
+    <p><a href="http://drupal.org/project/mailmime">Mail MIME</a></p>
+  </li>
+  <li>
+    <p><a href="http://drupal.org/project/pathologic">Pathologic</a></p>
     <p><em>Also available as a <a href="http://drupal.org/node/1095278#comment-4219530">patch</a>.</em></p>
   </li>
 </ul>
@@ -31,24 +31,30 @@
 <p>Visit the <a href="http://drupal.org/project/mailsystem">Mail System</a> settings page at <u>admin/settings/mailsystem</u> to select which parts of Drupal will use <a href="http://drupal.org/project/htmlmail">HTML Mail</a> instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
 <p>Visit the <a href="http://drupal.org/project/htmlmail">HTML Mail</a> settings page at <u>admin/settings/htmlmail</u> to select a theme, pre-filter, and post-filter for your messages.</p>
 <h2>Theming</h2>
-<p>The email message text goes through four transformations before sending:</p>
+<p>The email message text goes through three transformations before sending:</p>
 <ol style="list-style-type: decimal;">
   <li>
-    <p>The <em>Text format pre-filter</em> from the module settings page is applied. This should be the same text format that your website uses for contributed content such as comments or blog postings. For consistency and security, it should include the the <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6">Correct faulty and chopped off HTML</a> from <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/6">filter.module</a>, or a better replacement such as <a href="http://drupal.org/project/htmlpurifier">HTML Purifier</a> or <a href="http://drupal.org/project/htmlawed">htmLawed</a>.</p>
+    <h3>Template File</h3>
+    <p>A template file is applied to your message header, subject, and body text. The default template is the included <code>htmlmail.tpl.php</code> file. You may copy this file to your default theme directory and use it to customize the contents and formatting of your messages. The comments within that file contain complete documentation on its usage.</p>
   </li>
   <li>
-    <p>A theme template is applied. The default template is the included <code>htmlmail.tpl.php</code> file. You may copy this file to your theme directory and use it to customize the contents and formatting of your messages. The comments within the file contain complete documentation on its usage.</p>
+    <h3>Theming</h3>
+    <p><em>(Optional: requires <a href="http://drupal.org/project/echo">Echo</a> module.)</em> The templated text may be wrapped in a website theme. This lets you use any one of <a href="http://drupal.org/project/themes">over 800</a> themes to style your messages. Creating an email-specific sub-theme lets you use the full power of the <a href="http://drupal.org/documentation/theme">drupal theme system</a> to format your messages.</p>
   </li>
   <li>
-    <p>The message may be wrapped in a website theme selected on the module settings page. Creating an email-specific sub-theme lets you use the full power of the <a href="http://drupal.org/documentation/theme">drupal theme system</a> to format your messages.</p>
-  </li>
-  <li>
-    <p>The <em>Text format post-filter</em> from the module settings page is applied. For best results, this should be an email-specific input format containing the following text format filters:</p>
+    <h3>Post-filtering</h3>
+    <p>You may choose a <cite>text format</cite> to be used for filtering email messages <em>after</em> theming. This allows you to use any combination of <a href="http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1">over 200 filter modules</a> to make final changes to your message before sending.</p>
+    <p>Here is a recommended configuration:</p>
     <ul>
-      <li><a href="http://drupal.org/project/filter_transliteration">Transliteration</a></li>
-      <li><a href="http://drupal.org/project/emogrifier">Emogrifier</a></li>
-      <li><a href="http://drupal.org/project/pathologic">Pathologic</a></li>
-      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6">Correct faulty and chopped off HTML</a></li>
+      <li>
+        <p><a href="http://drupal.org/project/emogrifier">Emogrifier</a> Converts stylesheets to inline style rules for consistent display on mobile devices and webmail.</p>
+      </li>
+      <li>
+        <p><a href="http://drupal.org/project/filter_transliteration">Transliteration</a> Converts non-ASCII text to US-ASCII equivalents. This helps prevent Microsoft "smart-quotes" from appearing as question-marks in Mozilla Thunderbird.</p>
+      </li>
+      <li>
+        <p><a href="http://drupal.org/project/pathologic">Pathologic</a> Converts relative URLS to absolute URLS so that clickable links in your message will work as intended.</p>
+      </li>
     </ul>
   </li>
 </ol>

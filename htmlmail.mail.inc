@@ -10,9 +10,6 @@
  * @see http://drupal.org/project/mailmime
  */
 
-// Always load the class because drupal 6 doesn't have class autoload.
-module_load_include('inc', 'mailmime');
-
 /**
  * Implements MailSystemInterface.
  */
@@ -34,6 +31,38 @@ class HTMLMailSystem implements MailSystemInterface {
    */
   public function format(array $message) {
     // Collapse the message body array.
+    if (module_exists('mailmime')) {
+      $body = $this->formatMailMIME($message);
+    }
+    else {
+      $message['headers']['Content-Type'] = 'text/html';
+      $message['body'] = implode("\n", $message['body']);
+      $body = theme('htmlmail', $message);
+    }
+    // Optionally apply the selected web theme.
+    if (module_exists('echo') && $theme = htmlmail_get_selected_theme($message)) {
+      $body = echo_themed_page($message['subject'], $body, $theme);
+    }
+    // Optionally apply the selected output filter.
+    if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
+      $body = check_markup($body, $filter);
+    }
+    if (module_exists('mailmime')) {
+      // Store the fully-themed HTML body.
+      $message['MailMIME']->setHTMLBody($body);
+    }
+    else {
+      $message['body'] = $body;
+    }
+    return $message;
+  }
+
+  /**
+   * Use the MailMime class to format the message body.
+   *
+   * @see http://drupal.org/project/mailmime
+   */
+  public function formatMailMIME(array &$message) {
     $message['body'] = MailMIME::concat($message['body']);
     // Build a full email message string.
     $email = MailMIME::encodeEmail($message['headers'], $message['body']);
@@ -60,20 +89,8 @@ class HTMLMailSystem implements MailSystemInterface {
     // Check to see whether recipient allows non-plaintext.
     if ( !($recipient = user_load(array('mail' => $message['to'])))
       || empty($recipient->htmlmail_plaintext) ) {
-      // Optionally apply the selected web theme.
-      if ($theme = htmlmail_get_selected_theme($message)) {
-        $body = echo_themed_page($message['subject'], $body, $theme);
-      }
-      // Optionally apply the selected output filter.
-      if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
-        $body = check_markup($body, $filter);
-      }
-      // Store the fully-themed HTML body.
-      $mime->setHTMLBody($body);
     }
-    // Store the MailMIME object.
     $message['MailMIME'] = &$mime;
-    return $message;
   }
 
   /**
@@ -86,24 +103,12 @@ class HTMLMailSystem implements MailSystemInterface {
    *   - MailMIME: The message, parsed into a MailMIME object.
    */
   public function mail(array $message) {
-    // If message was not parsed into a MailMIME object, abort.
-    if (!isset($message['MailMIME'])) {
-      watchdog(
-        'HTMLMailSystem',
-        '%mailmime part of %message array not set; aborting send.',
-        array('%mailmime' => 'MailMIME', '%message' => '$message'),
-        WATCHDOG_ERROR
-      );
-      return FALSE;
-    }
-    $mime = &$message['MailMIME'];
-    // Extract headers and body parts.
-    list($headers, $body) = $mime->toEmail($message['headers']);
+    $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     // Ensure that subject is non-null.
     $message += array('subject' => t('(No subject)'));
     // Check for empty recipient.
     if (empty($message['to'])) {
-      if (empty($headers['To'])) {
+      if (empty($message['headers']['To'])) {
         watchdog(
           'HTMLMailSystem',
           'Cannot send email about %subject without a recipient.',
@@ -112,7 +117,20 @@ class HTMLMailSystem implements MailSystemInterface {
         );
         return FALSE;
       }
-      $message['to'] = $headers['To'];
+      $message['to'] = $message['headers']['To'];
+    }
+    if (isset($message['MailMIME'])) {
+      $mime = &$message['MailMIME'];
+      $to = $mime->encodeHeader('to', $message['to']);
+      $subject = $mime->encodeHeader('subject', $message['subject']);
+      list($headers, $body) = $mime->toEmail($message['headers']);
+      $headers = $mime->txtHeaders($headers);
+    }
+    else {
+      $to = mime_header_encode($message['to']);
+      $subject = mime_header_encode($message['subject']);
+      $body = preg_replace('#\r?\n#', $eol, $message['body']);
+      $headers = $this->txtHeaders($message['headers']);
     }
     // Check for empty body.
     if (empty($body)) {
@@ -130,12 +148,21 @@ class HTMLMailSystem implements MailSystemInterface {
       && !strpos(ini_get('sendmail_path'), ' -f')
     ) ? '-f ' . $headers['Return-Path']
       : '';
-    return mail(
-      $mime->encodeHeader('to', $message['to']),
-      $mime->encodeHeader('subject', $message['subject']),
-      $body,
-      $mime->txtHeaders($headers),
-      $extra
-    );
+    return mail($to, $subject, $body, $headers, $extra);
+  }
+
+  public function txtHeaders(array $headers) {
+    $output = array();
+    foreach ($headers as $name => $value) {
+      if (is_array($value)) {
+        foreach ($value as $val) {
+          $output[] = "$name: $val";
+        }
+      }
+      else {
+        $output[] = "$name: $value";
+      }
+    }
+    return implode("\n", $output);
   }
 }

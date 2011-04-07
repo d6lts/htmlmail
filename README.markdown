@@ -7,8 +7,6 @@ messages the same way you theme the rest of your website.
 
 *   [Echo](http://drupal.org/project/echo)
 
-*   [Mail MIME](http://drupal.org/project/mailmime)
-
 *   [Mail System](http://drupal.org/project/mailsystem)
 
 ## Installation
@@ -19,9 +17,11 @@ The following additional modules, while not required, are highly recommended:
 
 *   [Emogrifier](http://drupal.org/project/emogrifier)
 
-*   [Pathologic](http://drupal.org/project/pathologic)
-
 *   [Filter transliteration](http://drupal.org/project/filter_transliteration)
+
+*   [Mail MIME](http://drupal.org/project/mailmime)
+
+*   [Pathologic](http://drupal.org/project/pathologic)
 
     *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
 
@@ -39,37 +39,44 @@ and post-filter for your messages.
 
 ## Theming
 
-The email message text goes through four transformations before sending:
+The email message text goes through three transformations before sending:
 
-1.  The *Text format pre-filter* from the module settings page is applied.
-    This should be the same text format that your website uses for contributed
-    content such as comments or blog postings.  For consistency and security,
-    it should include the the
-    [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6)
-    from
-    [filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/6),
-    or a better replacement such as
-    [HTML Purifier](http://drupal.org/project/htmlpurifier) or
-    [htmLawed](http://drupal.org/project/htmlawed).
+1.  <h3>Template File</h3>
+    A template file is applied to your message header, subject, and body text.
+    The default template is the included `htmlmail.tpl.php` file.  You may copy
+    this file to your default theme directory and use it to customize the
+    contents and formatting of your messages.  The comments within that file
+    contain complete documentation on its usage.
 
-2.  A theme template is applied. The default template is the included
-    `htmlmail.tpl.php` file.  You may copy this file to your theme directory
-    and use it to customize the contents and formatting of your messages.  The
-    comments within the file contain complete documentation on its usage.
+2.  <h3>Theming</h3>
+    *(Optional: requires [Echo](http://drupal.org/project/echo) module.)*
+    The templated text may be wrapped in a website theme.  This lets you
+    use any one of [over 800](http://drupal.org/project/themes) themes to
+    style your messages.  Creating an email-specific sub-theme lets you use
+    the full power of the
+    [drupal theme system](http://drupal.org/documentation/theme)
+    to format your messages.
 
-3.  The message may be wrapped in a website theme selected on the module settings
-    page.  Creating an email-specific sub-theme lets you use the full power of
-    the [drupal theme system](http://drupal.org/documentation/theme) to format
-    your messages.
+3.  <h3>Post-filtering</h3>
+    You may choose a <cite>text format</cite> to be used for filtering email
+    messages *after* theming. This allows you to use any combination of
+    [over 200 filter modules](http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1)
+    to make final changes to your message before sending.
 
-4.  The *Text format post-filter* from the module settings page is applied. For
-    best results, this should be an email-specific input format containing the
-    following text format filters:
+    Here is a recommended configuration:
 
-    * [Transliteration](http://drupal.org/project/filter_transliteration)
-    * [Emogrifier](http://drupal.org/project/emogrifier)
-    * [Pathologic](http://drupal.org/project/pathologic)
-    * [Correct faulty and chopped off HTML](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6)
+    *   [Emogrifier](http://drupal.org/project/emogrifier)
+        Converts stylesheets to inline style rules for consistent display on
+        mobile devices and webmail.
+
+    *   [Transliteration](http://drupal.org/project/filter_transliteration)
+        Converts non-ASCII text to US-ASCII equivalents.  This helps prevent
+        Microsoft "smart-quotes" from appearing as question-marks in
+        Mozilla Thunderbird.
+
+    *   [Pathologic](http://drupal.org/project/pathologic)
+        Converts relative URLS to absolute URLS so that clickable links in
+        your message will work as intended.
 
 ## Troubleshooting
 

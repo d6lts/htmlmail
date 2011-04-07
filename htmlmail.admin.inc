@@ -18,27 +18,24 @@ function htmlmail_admin_settings() {
     '#title' => '<h3>' . t('Step 1') . '</h3>',
     '#collapsible' => FALSE,
   );
-  $form['Step 1']['htmlmail_prefilter'] = array(
-    '#type' => 'select',
-    '#title' => t('Text format pre-filter'),
-    '#default_value' => variable_get('htmlmail_prefilter', ''),
-    '#options' => $formats,
-    '#description' => t('Choose a <a href="/admin/config/content/formats">text format</a> to be used for filtering email messages <em>before</em> the selected theme or template is applied.'),
-  );
-  $form['Step 2'] = array(
+  $form['Step 1']['htmlmail_template'] = array(
     '#type' => 'fieldset',
-    '#title' => '<h3>' . t('Step 2') . '</h3>',
-    '#collapsible' => FALSE,
-  );
-  $form['Step 2']['htmlmail_template'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Template file'),
+    '#prefix' => '<strong>' . t('Template file:') . '</strong><br />'
+    . t(
+      'A template file is applied to your message header, subject, and body '
+      . 'text.  You may copy the <a href="!uri">!template</a> file to your '
+      . 'default theme directory and use it to customize your messages.',
+      array(
+        '!uri' => url('http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php'),
+        '!template' => '<code>htmlmail.tpl.php</code>'
+      )
+    ),
+    '#title' => t('Instructions'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['Step 2']['htmlmail_template']['instructions'] = array(
+  $form['Step 1']['htmlmail_template']['instructions'] = array(
     '#type' => 'item',
-    '#title' => 'Instructions',
     '#suffix' => t(
       // Begin instructions.
 '<p>When formatting an email message, Drupal determines the active template directory by looking for <code>htmlmail.tpl.php</code> file in the following locations:</p>
@@ -112,47 +109,81 @@ function htmlmail_admin_settings() {
       // End instructions.
     ),
   );
-  $form['Step 2']['htmlmail_debug'] = array(
+  $form['Step 1']['htmlmail_debug'] = array(
     '#type' => 'checkbox',
-    '#prefix' => '<br /><em>' . t('(Optional)') . '</em>',
     '#title' => t('Debug'),
+    '#prefix' => '<br /><em>' . t('(Optional)') . '</em>',
     '#default_value' => variable_get('htmlmail_debug', '0'),
-    '#description' => t('Add debugging info to email.'),
+    '#description' => t('Add debugging info.'),
+  );
+  $form['Step 2'] = array(
+    '#type' => 'fieldset',
+    '#title' => '<h3>' . t('Step 2') . '</h3>',
+    '#collapsible' => FALSE,
+  );
+  $form['Step 2']['htmlmail_theme'] = array(
+    '#type' => 'select',
+    '#title' => t('Theming'),
+    '#default_value' => variable_get('htmlmail_theme', ''),
+    '#options' => htmlmail_get_allowed_themes(),
+    '#disabled' => !module_exists('echo'),
+    '#prefix' => module_exists('echo') ? '': '<em>' . t(
+      'Disabled: requires the <a href="!echo">Echo</a> module.',
+      array('!echo' => url('http://drupal.org/project/echo'))
+    ) . '</em>',
+    '#suffix' => t(
+      'The templated text may be wrapped in a website theme.  This lets you '
+      . 'use any one of <a href="%themes">over 800</a> themes to style your '
+      . 'messages.  Creating an email-specific sub-theme lets you use the full '
+      . 'power of the <a href="%theme_system">drupal theme system</a> to '
+      . 'format your messages.',
+      array(
+        '%themes' => 'http://drupal.org/project/themes',
+        '%theme_system' => 'http://drupal.org/documentation/theme',
+      )
+    ),
   );
   $form['Step 3'] = array(
     '#type' => 'fieldset',
     '#title' => '<h3>' . t('Step 3') . '</h3>',
     '#collapsible' => FALSE,
   );
-  $form['Step 3']['htmlmail_theme'] = array(
+  $form['Step 3']['htmlmail_postfilter'] = array(
     '#type' => 'select',
-    '#title' => t('Theme to use for emails'),
-    '#default_value' => variable_get('htmlmail_theme', ''),
-    '#options' => htmlmail_get_allowed_themes(),
-    '#description' => t(
-      'You may use a template or a website theme to format your emails. '
-      . 'See <a href="!url">!readme</a> for details.',
-      array(
-        '!readme' => 'README.txt',
-        '!url' => url(drupal_get_path('module', 'htmlmail') . '/README.txt'),
-      )
-    ),
-  );
-  $form['Step 4'] = array(
-    '#type' => 'fieldset',
-    '#title' => '<h3>' . t('Step 4') . '</h3>',
-    '#collapsible' => FALSE,
-  );
-  $form['Step 4']['htmlmail_postfilter'] = array(
-    '#type' => 'select',
-    '#title' => t('Text format post-filter'),
+    '#title' => t('Post-filtering'),
     '#default_value' => variable_get('htmlmail_postfilter', ''),
     '#options' => $formats,
-    '#description' => t(
-      'Choose a <a href="!url">text format</a> to be used for filtering email '
-      . 'messages <em>after</em> the selected theme or template is applied.',
-      array('!url' => url('/admin/config/content/formats'))
-    ),
+    '#suffix' => '<p>' . t(
+      'You may choose a <a href="!formats">text format</a> to be used for '
+      . 'filtering email messages <em>after</em> theming.  This allows you to '
+      . 'use any combination of <a href="!filters">over 200 filter modules</a> '
+      . 'to make final changes to your message before sending.',
+      array(
+        '!formats' => url('/admin/config/content/formats'),
+        '!filters' => url('http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1'),
+      )
+    ) . '</p><p>' . t(
+      'Here is a recommended configuration:'
+    ) . '</p><ul><li><dl><dt>' . t(
+      '<a href="!emogrifier">Emogrifier</a>',
+      array('!emogrifier' => url('http://drupal.org/project/emogrifier'))
+    ) . '</dt><dd>' . t(
+      'Converts stylesheets to inline style rules for consistent display on '
+      . 'mobile devices and webmail.'
+    ) . '</dd></dl></li><li><dl><dt>' . t(
+      '<a href="!transliteration">Transliteration</a>',
+      array('!transliteration' => url('http;//drupal.org/project/filter_transliteration'))
+    ) . '</dt><dd>' . t(
+      'Converts non-ASCII text to US-ASCII equivalents. This helps prevent '
+      . 'Microsoft <q>smart-quotes</q> from appearing as question-marks in '
+      . 'Mozilla Thunderbird.'
+    ) . '</dd></dl></li><li><dl><dt>' . t(
+      '<a href="!pathologic">Pathologic</a>',
+      array('!pathologic' => url('http://drupal.org/project/pathologic'))
+    ) . '</dt><dd>' . t(
+      'Converts relative URLS to absolute URLS so that clickable links in your '
+      . 'message will work as intended.'
+    ) . '</dd></dl></ul>'
   );
   return system_settings_form($form);
 }

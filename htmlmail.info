@@ -1,8 +1,6 @@
 package = Mail
 name = HTML Mail
 description = "Enables HTML in system emails."
-dependencies[] = echo
-dependencies[] = mailmime
 dependencies[] = mailsystem
 php = 5.0
 core = 6.x

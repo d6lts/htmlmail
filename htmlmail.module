@@ -9,42 +9,23 @@
  * Implements hook_init().
  */
 function htmlmail_init() {
-  // Check all requirements in case an admin upgraded from 6.x-1.x to 6.x-2.x.
-  $requirements = array(
-    'echo' => 'Echo',
-    'mailmime' => 'Mail MIME',
-    'mailsystem' => 'Mail System',
-  );
-  foreach($requirements as $module => $name) {
-    if (module_exists($module)) {
-      unset($requirements[$module]);
-      continue;
-    }
+  // Check requirements.
+  if (!module_exists('mailsystem')) {
     drupal_set_message(
-      t('Please install the required <a href="%url">%name</a> module.',
+      t('Please install the required <a href="!mailsystem">Mail System</a> '
+        . 'module, then re-enable <a href="!htmlmail">HTML Mail</a>',
         array(
-          '%url' => "http://drupal.org/project/$module",
-          '%name' => $name,
-        )
-      )
-    );
-  }
-  if (!empty($requirements)) {
-    module_disable(array('htmlmail'));
-    drupal_set_message(
-      t('The %branch branch of the <a href="%url">%name</a> module has new '
-        . 'dependencies.  Install and enable the dependent modules, then re-'
-        . 'enable <a href="%url">%name</a>.',
-        array(
-          '%branch' => '6.x-2.x',
-          '%url' => "http://drupal.org/project/htmlmail",
-          '%name' => 'HTML Mail',
+          '!mailsystem' => url('http://drupal.org/project/mailsystem'),
+          '!htmlmail' => url('http://drupal.org/project/htmlmail'),
         )
       )
     );
     drupal_goto('admin/build/modules');
   }
-  // Always load the class because drupal 6 doesn't have class autoload.
+  // Drupal 6 doesn't have class autoload.
+  if (module_exists('mailmime')) {
+    module_load_include('inc', 'mailmime');
+  }
   module_load_include('inc', 'htmlmail', 'htmlmail.mail');
 }
 
