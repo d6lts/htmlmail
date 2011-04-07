@@ -1,9 +1,9 @@
 When formatting an email message, Drupal determines the active template
 directory by looking for `htmlmail.tpl.php` file in the following locations:
 
-*    [`path_to_theme()`](http://api.drupal.org/api/drupal/includes--theme.inc/function/path\_to\_theme/6)
-*    [`drupal_get_path(`](http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6)"module", [$installed_profile](http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6))
-*    [`drupal_get_path(`](http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6)"module", ["htmlmail"](http://drupal.org/project/htmlmail))
+*    [`path_to_theme()`](http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/6)
+*    [`drupal_get_path(`](http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6)`"module", `[`$installed_profile`](http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6)`)`
+*    [`drupal_get_path(`](http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6)`"module", `[`"htmlmail"`](http://drupal.org/project/htmlmail)`)`
 
 Once the active template directory is found, Drupal looks in that directory
 for template files in order from most specific to most general.
