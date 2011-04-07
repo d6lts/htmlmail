@@ -13,21 +13,33 @@ function htmlmail_admin_settings() {
   foreach (filter_formats() as $id => $filter) {
     $formats[$id] = $filter->name;
   }
-  $form['htmlmail_prefilter'] = array(
+  $form['Step 1'] = array(
+    '#type' => 'fieldset',
+    '#title' => '<h2>' . t('Step 1') . '</h2>',
+    '#collapsible' => FALSE,
+  );
+  $form['Step 1']['htmlmail_prefilter'] = array(
     '#type' => 'select',
     '#title' => t('Text format pre-filter'),
     '#default_value' => variable_get('htmlmail_prefilter', ''),
     '#options' => $formats,
     '#description' => t('Choose a <a href="/admin/config/content/formats">text format</a> to be used for filtering email messages <em>before</em> the selected theme or template is applied.'),
   );
-  $form['htmlmail_template'] = array(
+  $form['Step 2'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Template file documentation'),
+    '#title' => '<h2>' . t('Step 2') . '</h2>',
+    '#collapsible' => FALSE,
+  );
+  $form['Step 2']['htmlmail_template'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Template file'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['htmlmail_template']['info'] = array(
-    '#markup' => t(
+  $form['Step 2']['htmlmail_template']['instructions'] = array(
+    '#type' => 'item',
+    '#title' => 'Instructions',
+    '#suffix' => t(
       // Begin instructions.
 '<p>When formatting an email message, Drupal determines the active template directory by looking for <code>htmlmail.tpl.php</code> file in the following locations:</p>
 <ul>
@@ -100,7 +112,19 @@ function htmlmail_admin_settings() {
       // End instructions.
     ),
   );
-  $form['htmlmail_theme'] = array(
+  $form['Step 2']['htmlmail_debug'] = array(
+    '#type' => 'checkbox',
+    '#prefix' => '<br /><em>' . t('(Optional)') . '</em>',
+    '#title' => t('Debug'),
+    '#default_value' => variable_get('htmlmail_debug', '0'),
+    '#description' => t('Add debugging info to email.'),
+  );
+  $form['Step 3'] = array(
+    '#type' => 'fieldset',
+    '#title' => '<h2>' . t('Step 3') . '</h2>',
+    '#collapsible' => FALSE,
+  );
+  $form['Step 3']['htmlmail_theme'] = array(
     '#type' => 'select',
     '#title' => t('Theme to use for emails'),
     '#default_value' => variable_get('htmlmail_theme', ''),
@@ -114,7 +138,12 @@ function htmlmail_admin_settings() {
       )
     ),
   );
-  $form['htmlmail_postfilter'] = array(
+  $form['Step 4'] = array(
+    '#type' => 'fieldset',
+    '#title' => '<h2>' . t('Step 4') . '</h2>',
+    '#collapsible' => FALSE,
+  );
+  $form['Step 4']['htmlmail_postfilter'] = array(
     '#type' => 'select',
     '#title' => t('Text format post-filter'),
     '#default_value' => variable_get('htmlmail_postfilter', ''),
@@ -124,12 +153,6 @@ function htmlmail_admin_settings() {
       . 'messages <em>after</em> the selected theme or template is applied.',
       array('!url' => url('/admin/config/content/formats'))
     ),
-  );
-  $form['htmlmail_debug'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Debug'),
-    '#default_value' => variable_get('htmlmail_debug', '0'),
-    '#description' => t('Add debugging info to email.'),
   );
   return system_settings_form($form);
 }
