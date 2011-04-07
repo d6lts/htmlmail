@@ -36,8 +36,10 @@ function htmlmail_help($path, $arg) {
   switch ($path) {
     case 'admin/settings/htmlmail':
       return '<h2>' . t('Theming') . '</h2><p>' . t('The email message goes through three transformations before sending:') . '</p>';
-    default:
+    case 'admin/help#htmlmail':
       return '<p>' . t("HTML Mail provides formatting and semantic markup capabilities in email that are not available with plain text.") . '</p>';
+    default:
+      return '';
   }
 }
 
