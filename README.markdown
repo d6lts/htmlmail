@@ -49,8 +49,8 @@ Visit the [Mail System](http://drupal.org/project/mailsystem) settings page at
 [mail system](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7).
 
 Visit the [HTML Mail](http://drupal.org/project/htmlmail) settings page at
-<u>admin/settings/htmlmail</u> to select a theme, pre-filter,
-and post-filter for your messages.
+<u>admin/settings/htmlmail</u> to select a theme and post-filter for your
+messages.
 
 ## Theming
 
