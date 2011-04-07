@@ -13,15 +13,32 @@ messages the same way you theme the rest of your website.
 
 The following additional modules, while not required, are highly recommended:
 
+*   [Echo](http://drupal.org/project/echo)
+
+    :   Wraps your messages in a drupal theme.  Now you can "brand" your
+         messages with the same logo, header, fonts, and styles as your website.
+
 *   [Emogrifier](http://drupal.org/project/emogrifier)
+
+    :   Converts stylesheets to inline style rules, for consistent display on
+        mobile devices and webmail.
 
 *   [Mail MIME](http://drupal.org/project/mailmime)
 
+    :   Provides a text/plain alternative to text/html emails, and automatically
+        converts image references to inline image attachments.
+
 *   [Pathologic](http://drupal.org/project/pathologic)
+
+    :   Converts urls from relative to absolute, so clickable links in your
+        email messages work as intended.
 
 *   [Transliteration](http://drupal.org/project/filter_transliteration)
 
-    *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
+    :   Converts non-ASCII characters to their US-ASCII equivalents, such
+        as from Microsoft "smart-quotes" to regular quotes.
+
+    :   *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
 
 ## Configuration
 
@@ -82,6 +99,9 @@ Visit the [issue queue](http://drupal.org/project/issues/htmlmail) for support
 and feature requests.
 
 ## Related Modules
+
+**Echo**
+:   http://drupal.org/project/ecoh
 
 **Emogrifier**
 :   http://drupal.org/project/emogrifier
