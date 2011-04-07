@@ -12,6 +12,7 @@ function htmlmail_update_6200() {
   variable_del('htmlmail_header');
   variable_del('htmlmail_footer');
   variable_del('htmlmail_css');
+  return array();
 }
 
 /**
