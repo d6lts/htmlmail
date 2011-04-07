@@ -12,8 +12,8 @@
  * directory by looking for htmlmail.tpl.php file in the following
  * locations:
  *   * [1]path_to_theme()
- *   * [2]drupal_get_path("module", [3]$installed_profile)
- *   * [4]drupal_get_path("module", [5]"htmlmail")
+ *   * [2]drupal_get_path("module",[3]$installed_profile)
+ *   * [4]drupal_get_path("module",[5]"htmlmail")
  *
  * Once the active template directory is found, Drupal looks in that
  * directory for template files in order from most specific to most

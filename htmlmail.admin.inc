@@ -41,8 +41,8 @@ function htmlmail_admin_settings() {
 '<p>When formatting an email message, Drupal determines the active template directory by looking for <code>htmlmail.tpl.php</code> file in the following locations:</p>
 <ul>
   <li><a href="http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/6"><code>path_to_theme()</code></a></li>
-  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6"><code>drupal_get_path(</code></a>"module", <a href="http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6">$installed_profile</a>)</li>
-  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6"><code>drupal_get_path(</code></a>"module", <a href="http://drupal.org/project/htmlmail">"htmlmail"</a>)</li>
+  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6"><code>drupal_get_path</code></a><code>("module",</code><a href="http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6"><code>$installed_profile</code></a><code>)</code></li>
+  <li><a href="http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6"><code>drupal_get_path</code></a><code>("module",</code><a href="http://drupal.org/project/htmlmail"><code>"htmlmail"</code></a><code>)</code></li>
 </ul>
 <p>Once the active template directory is found, Drupal looks in that directory for template files in order from most specific to most general.</p>
 <p>For example, if <code>example_module</code> sends mail with:</p>
