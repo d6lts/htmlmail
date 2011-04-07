@@ -20,6 +20,7 @@ function htmlmail_init() {
         )
       )
     );
+    module_disable(array('htmlmail'));
     drupal_goto('admin/build/modules');
   }
   // Drupal 6 doesn't have class autoload.
