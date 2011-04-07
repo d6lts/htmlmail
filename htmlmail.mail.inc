@@ -164,6 +164,15 @@ class HTMLMailSystem implements MailSystemInterface {
     return mail($to, $subject, $body, $headers, $extra);
   }
 
+  /**
+   * Converts an array of email headers to a text string.
+   *
+   * @param $headers
+   *   An associative array of ('HeaderName' => 'header value') pairs.
+   *
+   * @return
+   *   The concatenated headers as a single string.
+   */
   public function txtHeaders(array $headers) {
     $output = array();
     foreach ($headers as $name => $value) {
