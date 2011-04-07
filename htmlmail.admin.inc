@@ -133,13 +133,13 @@ function htmlmail_admin_settings() {
     ) . '</em>',
     '#suffix' => t(
       'The templated text may be wrapped in a website theme.  This lets you '
-      . 'use any one of <a href="%themes">over 800</a> themes to style your '
+      . 'use any one of <a href="!themes">over 800</a> themes to style your '
       . 'messages.  Creating an email-specific sub-theme lets you use the full '
-      . 'power of the <a href="%theme_system">drupal theme system</a> to '
+      . 'power of the <a href="!theme_system">drupal theme system</a> to '
       . 'format your messages.',
       array(
-        '%themes' => 'http://drupal.org/project/themes',
-        '%theme_system' => 'http://drupal.org/documentation/theme',
+        '!themes' => 'http://drupal.org/project/themes',
+        '!theme_system' => 'http://drupal.org/documentation/theme',
       )
     ),
   );
