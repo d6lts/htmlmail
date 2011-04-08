@@ -82,7 +82,7 @@ function htmlmail_admin_settings() {
 </dl>
 <p><a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6"><code>drupal_mail()</code></a>.</p>
 <dl>
-  <dt><strong><code>$id</code></strong></dt>
+  <dt><strong><code>$message_id</code></strong></dt>
   <dd>
     <p>The email message id, usually <code>"{$module}_{$key}"</code>.</p>
   </dd>

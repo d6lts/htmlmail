@@ -1,15 +1,12 @@
-## HTML Mail
+## [HTML Mail](http://drupal.org/project/htmlmail)
+Lets you theme your outgoing messages the same way you theme the rest of your
+website.
 
-[HTML Mail](http://drupal.org/project/htmlmail) lets you theme your outgoing
-messages the same way you theme the rest of your website.
-
-## Requirements
+## [Requirement](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
 
 *   [Mail System](http://drupal.org/project/mailsystem)
 
-## Installation
-
-[Install as usual.](http://drupal.org/documentation/install/modules-themes/modules-5-6)
+## [Installation](http://drupal.org/documentation/install/modules-themes/modules-5-6)
 
 The following additional modules, while not required, are highly recommended:
 
@@ -40,7 +37,7 @@ The following additional modules, while not required, are highly recommended:
 
     :   *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
 
-## Configuration
+## [Configuration](http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png)
 
 Visit the [Mail System](http://drupal.org/project/mailsystem) settings page at
 <u>admin/settings/mailsystem</u> to select which parts of Drupal will use
@@ -52,7 +49,7 @@ Visit the [HTML Mail](http://drupal.org/project/htmlmail) settings page at
 <u>admin/settings/htmlmail</u> to select a theme and post-filter for your
 messages.
 
-## Theming
+## [Theming](http://drupal.org/documentation/theme)
 
 The email message text goes through three transformations before sending:
 
@@ -101,7 +98,7 @@ and feature requests.
 ## Related Modules
 
 **Echo**
-:   http://drupal.org/project/ecoh
+:   http://drupal.org/project/echo
 
 **Emogrifier**
 :   http://drupal.org/project/emogrifier

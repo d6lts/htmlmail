@@ -79,7 +79,6 @@ function htmlmail_theme() {
     'htmlmail' => array(
       'render element' => 'elements',
       'template' => 'htmlmail',
-      'pattern' => 'htmlmail__',
       'arguments' => array('message' => array()),
     ),
   );

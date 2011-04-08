@@ -62,7 +62,7 @@
  *
  * [11]drupal_mail().
  *
- * $id
+ * $message_id
  *        The email message id, usually "{$module}_{$key}".
  *
  * $theme
