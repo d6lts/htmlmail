@@ -55,7 +55,7 @@ The following variables are also available in this template:
 :   The message key, usually the second parameter to
 [`drupal_mail()`](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6).
 
-**`$id`**
+**`$message_id`**
 :   The email message id, usually `"{$module}_{$key}"`.
 
 **`$theme`**

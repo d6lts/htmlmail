@@ -47,12 +47,14 @@
  *  - directory: The relative path to the template directory.
  */
 ?>
+<?php if ($key == 'node'): ?>
 <div class="htmlmail-simplenews-link">
   <a href="<?php echo url('node/' . $params['context']['node']->nid,
-                   array('absolute' => TRUE)); ?>
+                   array('absolute' => TRUE)); ?>">
     Click here to view this message on the web.
   </a>
 </div>
+<?php endif; ?>
 <div class="htmlmail-simplenews-body htmlmail-body">
 <?php print $body; ?>
 </div>
