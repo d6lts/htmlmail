@@ -6,17 +6,17 @@
  *
  * The following variables are available in this template:
  *
- *  - id: The email message id, or "simplenews_$key"
- *  - module: The sending module, or 'simplenews'.
- *  - key: The simplenews action, which may be any of the following:
+ *  - $message_id: The email message id, or "simplenews_$key"
+ *  - $module: The sending module, or 'simplenews'.
+ *  - $key: The simplenews action, which may be any of the following:
  *    - subscribe: New subscriber confirmation message.
  *    - unsubscribe: Unsubscribe confirmation message.
  *    - test: Send a test newsletter to the test address.
  *    - node: Send a newsletter to its subscribers.
- *  - to: The recipient subscriber email address.
- *  - from: The configured sender address.
- *  - language: The language code for this message.
- *  - params: An array containing the following keys:
+ *  - $to: The recipient subscriber email address.
+ *  - $from: The configured sender address.
+ *  - $language: The language code for this message.
+ *  - $params: An array containing the following keys:
  *    - context:  An array containing the following keys:
  *      - account: The recipient subscriber account object, which contains
  *        the following useful properties:
@@ -41,10 +41,11 @@
  *        - nid: The node ID of the newsletter node.
  *        - name: The short name of the newsletter.
  *        - description: The long name or description of the newsletter.
- *  - subject: The message subject line.
- *  - body: The formatted message body.
- *  - headers: An array of email (name => value) pairs.
- *  - directory: The relative path to the template directory.
+ *  - $subject: The message subject line.
+ *  - $body: The formatted message body.
+ *  - $headers: An array of email (name => value) pairs.
+ *  - $template_path: The relative path to the template directory.
+ *  - $template_url: The absolute url to the template directory.
  */
 ?>
 <?php if ($key == 'node' || $key == 'test'): ?>
@@ -64,22 +65,33 @@
   <dl><dt><p>
     To customize your simplenews messages:
   </p></dt><dd><ol><li><p>
-    Copy the following files to your theme directory:
-  </p><ul><li><p>
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>htmlmail.tpl.php</code></a>
-  </p></li><li><p>
+    Copy the
     <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-simplenews.tpl.php"><code>htmlmail-simplenews.tpl.php</code></a>
-  </p></li></ul></li><li><p>
-    Edit your copy of the <code>htmlmail-simplenews.tpl.php</code> file.
-  </p></li></ol></dd><dt><p>
-    Here are the possible template file names:
-  </p></dt><dd><ul>
-    <li><code>htmlmail.tpl.php</code></li>
-<?php foreach ($template_files as $template): ?>
-    <li><code><?php echo str_replace('_', '-', $template) . '.tpl.php'; ?></code></li>
-<?php endforeach; ?>
-  </ul></dd><dt><p>
-    Simplenews sets the <code>$params</code> variable.  For this message,
+    file to the
+    <u><code><?php echo realpath(drupal_get_path('theme', $theme)); ?></code></u>
+    directory of your <u><?php echo ucfirst($theme); ?></u> theme.
+  </p></li><li><p>
+    Rename your copied file to one of the following:
+  </p><ul><li><dl><dt><p>
+    <u><code>htmlmail-simplenews-node.tpl.php</code></u>
+  </p></dt><dd><p>
+    Regular newsletter template.
+  </p></dd></dl></li><li><dl><dt><p>
+    <u><code>htmlmail-simplenews-subscribe.tpl.php</code></u>
+  </p></dt><dd><p>
+    New subscriber confirmation message.
+  </p></dd></dl></li><li><dl><dt><p>
+    <u><code>htmlmail-simplenews-test.tpl.php</code></u>
+  </p></dt><dd><p>
+    Test newsletter.
+  </p></dd></dl></li><li><dl><dt><p>
+    <u><code>htmlmail-simplenews-unsubscribe.tpl.php</code></u>
+  </p></dt><dd><p>
+    Unsubscribe confirmation message.
+  </p></dd></dl></li></ul></li><li><p>
+    Edit the renamed file.
+  </p></li></ul></dd><dt><p>
+    Simplenews sets the <u><code>$params</code></u> variable.  For this message,
   </p></dt><dd><p><code><pre>
 $params = <?php var_export($params); ?>
   </pre></code></p></dd></dl>

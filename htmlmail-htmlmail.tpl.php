@@ -15,13 +15,12 @@
   <dl><dt><p>
     To customize this test message:
   </p></dt><dd><ol><li><p>
-    Copy the following files to your theme directory:
-  </p><ul><li><p>
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>htmlmail.tpl.php</code></a>
-  </p></li><li><p>
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-htmlmail.tpl.php"><code>htmlmail-htmlmail.tpl.php</code></a>
+    Copy
+    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-htmlmail.tpl.php"><code>htmlmail--htmlmail.tpl.php</code></a>
+    to the <u><code><?php echo realpath($directory); ?></code></u>
+    directory of your <q><?php echo ucfirst($theme) ?> theme</q>.
   </p></li></ul></p></li><li><p>
-    Edit your copy of the <code>htmlmail-htmlmail.tpl.php</code> file.
+    Edit your copy of the <u><code>htmlmail-htmlmail.tpl.php</code></u> file.
   </p></li><ol>
 </div>
 <?php endif;

@@ -109,11 +109,11 @@
  */
 ?>
 <div class="htmlmail-body">
-<?php print $body; ?>
+<?php echo $body; ?>
 </div>
 <?php if ($debug):
   $module_template = 'htmlmail-' . str_replace('_', '-', $module);
-  $message_template = 'htmlmail-' . str_replace('_', '-', $message_id);
+  $message_template = 'htmlmail-' . str_replace('_', '-', $message_id); ?>
 <hr />
 <div class="htmlmail-debug">
   <dl><dt><p>
@@ -121,7 +121,9 @@
   </p></dt><dd><ol><li><p>
     Copy the
     <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
-    file to your theme directory.
+    file to the
+    <u><code><?php echo realpath(drupal_get_path('theme', $theme)); ?></code></u>
+    directory of your <u><?php echo ucfirst($theme) ?></u> theme.
   </p></li><li><p>
     Make two more copies in the same directory, called
     <code><?php echo $module_template; ?>.tpl.php</code> and
@@ -134,13 +136,6 @@
     For message-specific customization, edit the
     <code><?php echo $message_template; ?>.tpl.php</code>.
     file.
-  </p></li></ol></dd><dt><p>
-    Here are the possible template file names:
-  </p></dt><dd><ul>
-    <li><code>htmlmail.tpl.php</code></li>
-<?php foreach ($template_files as $template): ?>
-    <li><code><?php echo str_replace('_', '-', $template) . '.tpl.php'; ?></code></li>
-<?php endforeach; ?>
-  </ul></dd></dl>
+  </p></li></ol></dd></dl>
 </div>
 <?php endif;
