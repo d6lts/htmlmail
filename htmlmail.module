@@ -81,6 +81,16 @@ function htmlmail_theme() {
       'template' => 'htmlmail',
       'arguments' => array('message' => array()),
     ),
+    'htmlmail_htmlmail' => array(
+      'render element' => 'elements',
+      'template' => 'htmlmail-htmlmail',
+      'arguments' => array('message' => array()),
+    ),
+    'htmlmail_simplenews' => array(
+      'render element' => 'elements',
+      'template' => 'htmlmail-simplenews',
+      'arguments' => array('message' => array()),
+    ),
   );
 }
 
@@ -97,7 +107,7 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['message_id'] = $variables['module'] . '_' . $variables['key'];
   $template = 'htmlmail-' . str_replace('_', '-', $variables['module']);
   $variables['template_files'][] = $template;
-  $template .= str_replace('_', '-', $variables['key']);
+  $template = 'htmlmail-' . str_replace('_', '-', $variables['message_id']);
   $variables['template_files'][] = $template;
   // Backport of drupal 7 hook_preprocess_HOOK().
   foreach (module_implements('preprocess_htmlmail') as $module) {

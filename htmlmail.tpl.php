@@ -112,8 +112,8 @@
 <?php print $body; ?>
 </div>
 <?php if ($debug):
-  $module_suggestion = 'htmlmail-' . str_replace('_', '-', $module);
-  $message_suggestion = $module_suggestion . str_replace('_', '-', $key); ?>
+  $module_template = 'htmlmail-' . str_replace('_', '-', $module);
+  $message_template = 'htmlmail-' . str_replace('_', '-', $message_id);
 <hr />
 <div class="htmlmail-debug">
   <dl><dt><p>
@@ -124,24 +124,23 @@
     file to your theme directory.
   </p></li><li><p>
     Make two more copies in the same directory, called
-    <code><?php echo $module_suggestion; ?>.tpl.php</code> and
-    <code><?php echo $message_suggestion; ?>.tpl.php</code>.
+    <code><?php echo $module_template; ?>.tpl.php</code> and
+    <code><?php echo $message_template; ?>.tpl.php</code>.
   </p></li><li><p>
     For module-specific customization, edit the
-    <code><?php echo $module_suggestion; ?>.tpl.php</code> and
+    <code><?php echo $module_template; ?>.tpl.php</code> and
     file.
   </p><p>
     For message-specific customization, edit the
-    <code><?php echo $message_suggestion; ?>.tpl.php</code>.
+    <code><?php echo $message_template; ?>.tpl.php</code>.
     file.
   </p></li></ol></dd><dt><p>
     Here are the possible template file names:
   </p></dt><dd><ul>
     <li><code>htmlmail.tpl.php</code></li>
-<?php foreach ($template_files as $suggestion): ?>
-    <li><code><?php echo str_replace('_', '-', $suggestion) . '.tpl.php'; ?></code></li>
+<?php foreach ($template_files as $template): ?>
+    <li><code><?php echo str_replace('_', '-', $template) . '.tpl.php'; ?></code></li>
 <?php endforeach; ?>
   </ul></dd></dl>
 </div>
-<?php endif; ?>
-<?php
+<?php endif;

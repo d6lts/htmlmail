@@ -66,16 +66,17 @@
   </p></dt><dd><ol><li><p>
     Copy the following files to your theme directory:
   </p><ul><li><p>
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/7.x-2.x:/htmlmail.tpl.php"><code>htmlmail.tpl.php</code></a>
+    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>htmlmail.tpl.php</code></a>
   </p></li><li><p>
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/7.x-2.x:/htmlmail--simplenews.tpl.php"><code>htmlmail--simplenews.tpl.php</code></a>
+    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-simplenews.tpl.php"><code>htmlmail-simplenews.tpl.php</code></a>
   </p></li></ul></li><li><p>
-    Edit your copy of the <code>htmlmail--simplenews.tpl.php</code> file.
+    Edit your copy of the <code>htmlmail-simplenews.tpl.php</code> file.
   </p></li></ol></dd><dt><p>
-    Here is the full list of template suggestions:
+    Here are the possible template file names:
   </p></dt><dd><ul>
-<?php foreach ($theme_hook_suggestions as $suggestion): ?>
-    <li><code><?php echo str_replace('__', '--', $suggestion) . '.tpl.php'; ?></code></li>
+    <li><code>htmlmail.tpl.php</code></li>
+<?php foreach ($template_files as $template): ?>
+    <li><code><?php echo str_replace('_', '-', $template) . '.tpl.php'; ?></code></li>
 <?php endforeach; ?>
   </ul></dd><dt><p>
     Simplenews sets the <code>$params</code> variable.  For this message,
@@ -84,4 +85,3 @@ $params = <?php var_export($params); ?>
   </pre></code></p></dd></dl>
 </div>
 <?php endif;
-
