@@ -112,7 +112,7 @@ function htmlmail_admin_settings() {
   );
   $form['Step 2']['htmlmail_theme'] = array(
     '#type' => 'select',
-    '#title' => t('Email them'),
+    '#title' => t('Email theme'),
     '#default_value' => variable_get('htmlmail_theme', ''),
     '#options' => htmlmail_get_allowed_themes(),
     '#suffix' => '<p>' . t(
