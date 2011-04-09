@@ -112,25 +112,26 @@ function htmlmail_admin_settings() {
   );
   $form['Step 2']['htmlmail_theme'] = array(
     '#type' => 'select',
-    '#title' => t('Theming'),
+    '#title' => t('Email them'),
     '#default_value' => variable_get('htmlmail_theme', ''),
     '#options' => htmlmail_get_allowed_themes(),
-    '#disabled' => !module_exists('echo'),
-    '#prefix' => module_exists('echo') ? '': '<em>' . t(
-      'Disabled: requires the <a href="!echo">Echo</a> module.',
-      array('!echo' => url('http://drupal.org/project/echo'))
-    ) . '</em>',
+    '#suffix' => '<p>' . t(
+      'Choose the theme that will hold your customized templates from Step '
+      . '1 above.'
+    ) . '</p><p>'
+    . t( module_exists('echo') ?
+      'The templated text will be styled by your chosen theme.  This lets you '
     '#suffix' => t(
-      'The templated text may be wrapped in a website theme.  This lets you '
+      'The templated text will be styled by your chosen theme.  This lets you '
       . 'use any one of <a href="!themes">over 800</a> themes to style your '
-      . 'messages.  Creating an email-specific sub-theme lets you use the full '
-      . 'power of the <a href="!theme_system">drupal theme system</a> to '
-      . 'format your messages.',
+      . 'messages.  Creating an email-specific sub-theme lets you use the '
+      . 'full power of the <a href="!theme_system">drupal theme system</a> '
+      . 'to format your messages.' : '',
       array(
         '!themes' => 'http://drupal.org/project/themes',
         '!theme_system' => 'http://drupal.org/documentation/theme',
       )
-    ),
+    ) . '</p>',
   );
   $form['Step 3'] = array(
     '#type' => 'fieldset',
