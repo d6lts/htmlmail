@@ -111,10 +111,37 @@
 <div class="htmlmail-body">
 <?php print $body; ?>
 </div>
-<?php if ($debug): ?>
+<?php if ($debug):
+  $module_suggestion = 'htmlmail-' . str_replace('_', '-', $module);
+  $message_suggestion = $module_suggestion . str_replace('_', '-', $key); ?>
 <hr />
 <div class="htmlmail-debug">
-Theme hook suggestions: <pre><?php print_r($theme_hook_suggestions); ?></pre>
+  <dl><dt><p>
+    To customize this message:
+  </p></dt><dd><ol><li><p>
+    Copy the
+    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
+    file to your theme directory.
+  </p></li><li><p>
+    Make two more copies in the same directory, called
+    <code><?php echo $module_suggestion; ?>.tpl.php</code> and
+    <code><?php echo $message_suggestion; ?>.tpl.php</code>.
+  </p></li><li><p>
+    For module-specific customization, edit the
+    <code><?php echo $module_suggestion; ?>.tpl.php</code> and
+    file.
+  </p><p>
+    For message-specific customization, edit the
+    <code><?php echo $message_suggestion; ?>.tpl.php</code>.
+    file.
+  </p></li></ol></dd><dt><p>
+    Here are the possible template file names:
+  </p></dt><dd><ul>
+    <li><code>htmlmail.tpl.php</code></li>
+<?php foreach ($template_files as $suggestion): ?>
+    <li><code><?php echo str_replace('_', '-', $suggestion) . '.tpl.php'; ?></code></li>
+<?php endforeach; ?>
+  </ul></dd></dl>
 </div>
 <?php endif; ?>
 <?php

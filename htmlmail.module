@@ -95,10 +95,10 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['debug'] = variable_get('htmlmail_debug', '0');
   $variables['theme_url'] = url($variables['directory'], array('absolute' => TRUE));
   $variables['message_id'] = $variables['module'] . '_' . $variables['key'];
-  $last = 'htmlmail';
-  foreach (explode('_', $variables['message_id']) as $part) {
-    $variables['theme_hook_suggestions'][] = ($last .= "_$part");
-  }
+  $template = 'htmlmail-' . str_replace('_', '-', $variables['module']);
+  $variables['template_files'][] = $template;
+  $template .= str_replace('_', '-', $variables['key']);
+  $variables['template_files'][] = $template;
   // Backport of drupal 7 hook_preprocess_HOOK().
   foreach (module_implements('preprocess_htmlmail') as $module) {
     $function = $module . '_preprocess_htmlmail';
