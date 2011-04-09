@@ -62,16 +62,16 @@
     1. Template File
        A template file is applied to your message header, subject, and
        body text. The default template is the included htmlmail.tpl.php
-       file. You may copy this file to your default theme directory and
-       use it to customize the contents and formatting of your messages.
-       The comments within that file contain complete documentation on its
-       usage.
+       file. You may copy this file to your email theme directory
+       (selected below), and use it to customize the contents and
+       formatting of your messages. The comments within that file contain
+       complete documentation on its usage.
     2. Theming
-       (Optional: requires [18]Echo module.) The templated text may be
-       wrapped in a website theme. This lets you use any one of [19]over
-       800 themes to style your messages. Creating an email-specific
-       sub-theme lets you use the full power of the [20]drupal theme
-       system to format your messages.
+       You may choose a theme that will hold your templates from Step 1
+       above. If the [18]Echo module.) is installed, this theme will also
+       be used to wrap your templated text in a webpage. You use any one
+       of [19]over 800 themes to style your messages, or [20]create your
+       own for even more power and flexibility.
     3. Post-filtering
        You may choose a text format to be used for filtering email
        messages after theming. This allows you to use any combination of

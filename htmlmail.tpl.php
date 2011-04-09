@@ -8,102 +8,84 @@
  *
  * ========================================================= Begin instructions.
  *
- * When formatting an email message, Drupal determines the active template
- * directory by looking for htmlmail.tpl.php file in the following
- * locations:
- *   * [1]path_to_theme()
- *   * [2]drupal_get_path("module",[3]$installed_profile)
- *   * [4]drupal_get_path("module",[5]"htmlmail")
+ * When formatting an email message with a given $module and $key, [1]HTML
+ * Mail will use the first template file it finds from the following list:
+ *  1. htmlmail-$module-$key.tpl.php
+ *  2. htmlmail-$module.tpl.php
+ *  3. htmlmail.tpl.php
  *
- * Once the active template directory is found, Drupal looks in that
- * directory for template files in order from most specific to most
- * general.
+ * For each filename, [2]HTML Mail looks first in the chosen Email theme
+ * directory, then in its own module directory, before proceeding to the
+ * next filename.
  *
  * For example, if example_module sends mail with:
  * drupal_mail("example_module", "outgoing_message" ...)
  *
  *
  * the possible template file names would be:
- *   * htmlmail-example_module_outgoing_message.tpl.php
- *   * htmlmail-example_module_outgoing.tpl.php
- *   * htmlmail-example_module.tpl.php
- *   * htmlmail.tpl.php
+ *  1. htmlmail-example-module-outgoing-message.tpl.php
+ *  2. htmlmail-example-module.tpl.php
+ *  3. htmlmail.tpl.php
  *
- * The $theme_hook_suggestions variable contains an array of suggested
- * [6]theme [7]hooks, in reverse priority order. For the above example, it
- * would contain:
- *   * htmlmail
- *   * htmlmail-example_module
- *   * htmlmail-example_module_outgoing
- *   * htmlmail-example_module_outgoing_message
- *
- * For another example, to customize the [8]password reset messages sent
- * by the [9]user module, copy htmlmail.tpl.php to your theme directory,
- * and also copy it to htmlmail-user_password_reset.tpl.php, then modify
- * the latter file. Remember that you will need to put both files in your
- * theme directory for this to work.
+ * For another example, to customize the [3]password reset messages sent
+ * by the [4]user module, copy [5]htmlmail.tpl.php to a file called
+ * htmlmail-user-password-reset.tpl.php in your Email theme directory, and
+ * edit the copy.
  *
  * Template files are cached, so remember to clear the cache by visiting
- * admin/settings/performance after creating, copying, or editing any
- * .tpl.php files.
+ * admin/settings/performance after changing any .tpl.php files.
  *
- * The following variables are also available in this template:
+ * The following variables available in this template:
  *
  * $body
  *        The message body text.
  *
  * $module
  *        The sending module name, usually the first parameter to
- *
- * [10]drupal_mail().
+ *        [6]drupal_mail().
  *
  * $key
  *        The message key, usually the second parameter to
- *
- * [11]drupal_mail().
+ *        [7]drupal_mail().
  *
  * $message_id
  *        The email message id, usually "{$module}_{$key}".
  *
  * $theme
- *        The name of the email-specific theme used to embed the message
- *        body into a fully-themed webpage.
+ *        The name of the Email theme used to hold template files. If the
+ *        [8]Echo module is enabled this theme will also be used to
+ *        transform the message body into a fully-themed webpage.
  *
- *        Note: This may be different from the default website theme.
- *        Theme suggestion templates such as html.tpl.php should be copied
- *        to the website theme directory, not the email theme directory.
+ * $template_path
+ *        The relative path to the template directory.
  *
- * $directory
- *        The relative path to the website theme template directory.
- *
- * $theme_url
- *        The absolute URL to the website theme directory.
+ * $template_url
+ *        The absolute URL to the template directory.
  *
  * $debug
- *        TRUE if debugging info should be printed.
+ *        TRUE to add some useful debugging info to the bottom of the
+ *        message.
  *
- * The module calling [12]drupal_mail() may set other variables. For
- * instance, the [13]Webform module sets a $node variable which may be
+ * The module calling [9]drupal_mail() may set other variables. For
+ * instance, the [10]Webform module sets a $node variable which may be
  * very useful.
  *
  * Other modules may also add or modify theme variables by implementing a
- * MODULENAME_preprocess_htmlmail(&$variables) hook function.
+ * MODULENAME_preprocess_htmlmail(&$variables) [11]hook function.
  *
  * References
  *
- * 1. http://api.drupal.org/api/drupal/includes--theme.inc/function/path_to_theme/6
- * 2. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6
- * 3. http://api.drupal.org/api/drupal/developer--globals.php/global/installed_profile/6
- * 4. http://api.drupal.org/api/drupal/includes--common.inc/function/drupal_get_path/6
- * 5. http://drupal.org/project/htmlmail
- * 6. http://api.drupal.org/api/drupal/includes--theme.inc/function/theme/6
- * 7. http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_theme/6
- * 8. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6
- * 9. http://api.drupal.org/api/drupal/modules--user--user.module/6
- * 10. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
- * 11. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
- * 12. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
- * 13. http://drupal.org/project/webform
+ * 1. http://drupal.org/project/htmlmail
+ * 2. http://drupal.org/project/htmlmail
+ * 3. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6
+ * 4. http://api.drupal.org/api/drupal/modules--user--user.module/6
+ * 5. http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php
+ * 6. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
+ * 7. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
+ * 8. http://drupal.org/project/echo
+ * 9. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
+ * 10. http://drupal.org/project/webform
+ * 11. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  * =========================================================== End instructions.
  */
