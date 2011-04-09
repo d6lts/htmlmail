@@ -70,7 +70,7 @@ The email message text goes through three transformations before sending:
     will also be used to wrap your templated text in a webpage.  You use any one
     of [over 800](http://drupal.org/project/themes) themes to style your
     messages, or [create your own](http://drupal.org/documentation/theme) for
-    even more power and flexibility. 
+    even more power and flexibility.
 
 3.  <h3>Post-filtering</h3>
 
