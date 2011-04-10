@@ -41,15 +41,17 @@ The following variables available in this template:
 :   The message body text.
 
 **`$module`**
-:   The sending module name, usually the first parameter to
-    [`drupal_mail()`](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6).
+:   The first argument to
+    [`drupal_mail()`](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6),
+    which is, by convention, the machine-readable name of the sending module.
 
 **`$key`**
-:   The message key, usually the second parameter to
-    [`drupal_mail()`](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6).
+:   The second argument to
+    [`drupal_mail()`](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6),
+    which should give some indication of why this email is being sent.
 
 **`$message_id`**
-:   The email message id, usually `"{$module}_{$key}"`.
+:   The email message id, which should be equal to `"{$module}_{$key}"`.
 
 **`$theme`**
 :   The name of the *Email theme* used to hold template files. If the

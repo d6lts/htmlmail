@@ -66,15 +66,15 @@ function htmlmail_admin_settings() {
   </dd>
   <dt><strong><code>$module</code></strong></dt>
   <dd>
-    <p>The sending module name, usually the first parameter to <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6"><code>drupal_mail()</code></a>.</p>
+    <p>The first argument to <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6"><code>drupal_mail()</code></a>, which is, by convention, the machine-readable name of the sending module.</p>
   </dd>
   <dt><strong><code>$key</code></strong></dt>
   <dd>
-    <p>The message key, usually the second parameter to <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6"><code>drupal_mail()</code></a>.</p>
+    <p>The second argument to <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6"><code>drupal_mail()</code></a>, which should give some indication of why this email is being sent.</p>
   </dd>
   <dt><strong><code>$message_id</code></strong></dt>
   <dd>
-    <p>The email message id, usually <code>"{$module}_{$key}"</code>.</p>
+    <p>The email message id, which should be equal to <code>"{$module}_{$key}"</code>.</p>
   </dd>
   <dt><strong><code>$theme</code></strong></dt>
   <dd>

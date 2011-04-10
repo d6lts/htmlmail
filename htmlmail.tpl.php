@@ -41,15 +41,16 @@
  *        The message body text.
  *
  * $module
- *        The sending module name, usually the first parameter to
- *        [6]drupal_mail().
+ *        The first argument to [6]drupal_mail(), which is, by convention,
+ *        the machine-readable name of the sending module.
  *
  * $key
- *        The message key, usually the second parameter to
- *        [7]drupal_mail().
+ *        The second argument to [7]drupal_mail(), which should give some
+ *        indication of why this email is being sent.
  *
  * $message_id
- *        The email message id, usually "{$module}_{$key}".
+ *        The email message id, which should be equal to
+ *        "{$module}_{$key}".
  *
  * $theme
  *        The name of the Email theme used to hold template files. If the
