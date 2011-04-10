@@ -152,12 +152,13 @@ function htmlmail_admin_settings() {
         . 'scary security warnings when they don\'t have the sender\'s address '
         . 'in their email addressbook.  <a href="!mailmime">Mail MIME</a> also '
         . 'allows <a href="!htmlmail">HTML Mail</a> to handle MIME-formatted '
-        . 'messages sent by other modules, such as <a href="!print">Print</a> '
-        . 'and <a href="!contactattach">Contact Attach</a>.',
+        . 'messages sent by other modules such as '
+        . '<a href="!contactattach">Contact Attach</a> and ',
+        . '<a href="!print">Send by-email</a>. '
         array(
           '!mailmime' => 'http://drupal.org/project/mailmime',
-          '!print' => 'http://drupal.org/project/print',
           '!contactattach' => 'http://drupal.org/project/contact_attach',
+          '!print' => 'http://drupal.org/project/print',
         ),
       )
     ) . '</p>',
