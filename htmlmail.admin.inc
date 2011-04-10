@@ -103,7 +103,7 @@ function htmlmail_admin_settings() {
     '#prefix' => '<br />',
     '#title' => '<em>' . t('(Optional)') . '</em> ' . t('Debug'),
     '#default_value' => variable_get('htmlmail_debug', '0'),
-    '#description' => t('Add debugging info.'),
+    '#description' => t('Add debugging info (Set <code>$debug</code> to <code>TRUE</code>).'),
   );
   $form['Step 2'] = array(
     '#type' => 'fieldset',
