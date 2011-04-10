@@ -131,7 +131,11 @@ function htmlmail_admin_settings() {
           '!themes' => 'http://drupal.org/project/themes',
           '!theme_system' => 'http://drupal.org/documentation/theme',
         )
-      ) : ''
+      ) : t(
+        'If you install and enable the <a href="!echo">Echo</a> module, the '
+        . 'theme you select will also be used to style your messages as if '
+        . 'they were pages on your website.'
+      )
     ) . '</p>',
   );
   $form['Step 3'] = array(
