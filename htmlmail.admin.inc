@@ -136,6 +136,30 @@ function htmlmail_admin_settings() {
         . 'theme you select will also be used to style your messages as if '
         . 'they were pages on your website.'
       )
+    ) . '</p><p>'
+    . (module_exists('mailmime')
+      ? t(
+        'Since you have the <a href="!mailmime">Mail MIME</a> module '
+        . 'installed, your images will be automatically converted to inline '
+        . 'attachments, and a plain-text alternative will be available to '
+        . 'recipients who prefer it.',
+        array('!mailmime' => 'http://drupal.org/project/mailmime')
+      ) : t(
+        'If you install the <a href="!mailmime">Mail MIME</a> module, '
+        . 'images in your emails will be automatically converted to inline '
+        . 'attachments, and a plain-text alternative will be made available. '
+        . 'This prevents your recipients from seeing broken image links and '
+        . 'scary security warnings when they don\'t have the sender\'s address '
+        . 'in their email addressbook.  <a href="!mailmime">Mail MIME</a> also '
+        . 'allows <a href="!htmlmail">HTML Mail</a> to handle MIME-formatted '
+        . 'messages sent by other modules, such as <a href="!print">Print</a> '
+        . 'and <a href="!contactattach">Contact Attach</a>.',
+        array(
+          '!mailmime' => 'http://drupal.org/project/mailmime',
+          '!print' => 'http://drupal.org/project/print',
+          '!contactattach' => 'http://drupal.org/project/contact_attach',
+        ),
+      )
     ) . '</p>',
   );
   $form['Step 3'] = array(
