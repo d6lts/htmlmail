@@ -121,8 +121,6 @@ function htmlmail_admin_settings() {
     ) . '</p><p>'
     . t( module_exists('echo') ?
       'The templated text will be styled by your chosen theme.  This lets you '
-    '#suffix' => t(
-      'The templated text will be styled by your chosen theme.  This lets you '
       . 'use any one of <a href="!themes">over 800</a> themes to style your '
       . 'messages.  Creating an email-specific sub-theme lets you use the '
       . 'full power of the <a href="!theme_system">drupal theme system</a> '
