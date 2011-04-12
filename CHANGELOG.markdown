@@ -1,10 +1,10 @@
 ## Change Log Summary
 
-> *(Note: See the [git repository](http://drupalcode.org/project/htmlmail.git/log/refs/heads/7.x-2.x) for full version)*
+-- *(Note: See the [git repository](http://drupalcode.org/project/htmlmail.git/log/refs/heads/7.x-2.x) for full version)*
 
 November 4, 2008
 
-:   [HTML Mail created](http://drupalcode.org/project/htmlmail.git/commit/64a69aff375ffe42d311963d748866085281896e).
+:   [HTML Mail created](http://drupalcode.org/project/htmlmail.git/commit/64a69aff375ffe42d311963d748866085281896e) by [Chris Herberte](http://drupal.org/user/1171).
 
 July 19, 2009
 
@@ -16,7 +16,7 @@ February 26, 2010
 
 January 1, 2011
 
-:   [Bob Vincent (pillarsdotnet)](http://drupal.org/user/36148) submitted [patches to improve theming](http://drupal.org/node/1012246) of the [7.x-1.x-dev version](http://drupal.org/node/355250).
+:   [Patches to improve theming](http://drupal.org/node/1012246) of the [7.x-1.x-dev version](http://drupal.org/node/355250) submitted by [Bob Vincent (pillarsdotnet)](http://drupal.org/user/36148).
 
 March 10, 2011
 
@@ -24,7 +24,7 @@ March 10, 2011
 
 March 11, 2011
 
-:   [Chris Herberte](http://drupal.org/user/1171) grants [Bob Vincent](http://drupal.org/user/36148) co-maintainer access.
+:   [Bob Vincent](http://drupal.org/user/36148) granted co-maintainer access.
 
 :   [7.x-1.1](http://drupal.org/node/1088882) released *(589 [SLOC](http://www.dwheeler.com/sloccount/), 76k)*.
 
@@ -64,8 +64,8 @@ April 6, 2011
 
 April 7, 2011
 
-:   Dependency on [Echo](http://drupal.org/project/echo) and [Mail MIME](http://drupal.org/project/mailmime) [removed](http://drupalcode.org/project/htmlmail.git/commit/20abfd24ad0006c9312fd8f0a5edcdaed8e5920b).
+:   Dependency on [Echo](http://drupal.org/project/echo) and [Mail MIME](http://drupal.org/project/mailmime) modules [removed](http://drupalcode.org/project/htmlmail.git/commit/20abfd24ad0006c9312fd8f0a5edcdaed8e5920b).
 
 April 9, 2011
 
-:   [Autodetection of template files](http://drupalcode.org/project/htmlmail.git/commit/dd53d4f28cdbe893bb32e31a03ceba34c5240402) in both the selected theme and the html module directory.
+:   [Autodetection of template files](http://drupalcode.org/project/htmlmail.git/commit/dd53d4f28cdbe893bb32e31a03ceba34c5240402) in both module and selected theme directories.
