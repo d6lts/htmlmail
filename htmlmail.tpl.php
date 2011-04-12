@@ -116,17 +116,19 @@
     file to your <u><?php echo ucfirst($theme) ?></u> theme directory
     <u><code><?php echo $theme_path; ?></code></u>.
   </p></li><li><p>
-    Make two more copies in the same directory, called
-    <code><?php echo $module_template; ?>.tpl.php</code> and
-    <code><?php echo $message_template; ?>.tpl.php</code>.
-  </p></li><li><p>
-    For module-specific customization, edit the
-    <code><?php echo $module_template; ?>.tpl.php</code> and
-    file.
+    For module-specific customization, rename your copy to
+    <code><?php echo $module_template; ?>.tpl.php</code>
   </p><p>
-    For message-specific customization, edit the
-    <code><?php echo $message_template; ?>.tpl.php</code>.
-    file.
+    For message-specific customization, rename your copy to
+    <code><?php echo $message_template; ?>.tpl.php</code>
+  </p></li><li><p>
+    Edit the file.
+  </p></li><li><p>
+    Send a test message to make sure your customizations worked.
+  </p></li><li><p>
+    If you think your customizations would be of use to others,
+    please contribute your file as a feature request in the
+    <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
   </p></li></ol></dd></dl>
 </div>
 <?php endif;
