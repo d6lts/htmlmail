@@ -44,6 +44,8 @@
  *  - $subject: The message subject line.
  *  - $body: The formatted message body.
  *  - $headers: An array of email (name => value) pairs.
+ *  - $theme: The name of the selected Email theme.
+ *  - $theme_path: The relative path to the Email theme directory.
  *  - $template_path: The relative path to the template directory.
  *  - $template_url: The absolute url to the template directory.
  */
@@ -64,12 +66,14 @@
 <div class="htmlmail-simplenews-debug htmlmail-debug">
   <dl><dt><p>
     To customize your simplenews messages:
-  </p></dt><dd><ol><li><p>
+  </p></dt><dd><ol><li><p><?php if (empty($theme_path)): ?>
+    Visit <u>admin/build/themes</u> to enable your selected
+    <u><?php echo ucfirst($theme); ?></u> theme.
+  </p></dt><dd><ol><li><p><?php endif; ?>
     Copy the
     <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-simplenews.tpl.php"><code>htmlmail-simplenews.tpl.php</code></a>
-    file to the
-    <u><code><?php echo realpath(drupal_get_path('theme', $theme)); ?></code></u>
-    directory of your <u><?php echo ucfirst($theme); ?></u> theme.
+    file to your <u><?php echo ucfirst($theme); ?></u> theme directory
+    <u><code><?php echo $theme_path; ?></code></u>.
   </p></li><li><p>
     Rename your copied file to one of the following:
   </p><ul><li><dl><dt><p>

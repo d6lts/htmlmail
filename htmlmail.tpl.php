@@ -57,6 +57,12 @@
  *        [8]Echo module is enabled this theme will also be used to
  *        transform the message body into a fully-themed webpage.
  *
+ * $theme_path
+ *        The relative path to the selected Email theme directory.
+ *
+ * $theme_url
+ *        The absolute URL to the selected Email theme directory.
+ *
  * $template_path
  *        The relative path to the template directory.
  *
@@ -101,12 +107,14 @@
 <div class="htmlmail-debug">
   <dl><dt><p>
     To customize this message:
-  </p></dt><dd><ol><li><p>
+  </p></dt><dd><ol><li><p><?php if (empty($theme_path)): ?>
+    Visit <u>admin/build/themes</u> to enable your selected
+    <u><?php echo ucfirst($theme); ?></u> theme.
+  </p></dt><dd><ol><li><p><?php endif; ?>
     Copy the
     <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
-    file to the
-    <u><code><?php echo realpath(drupal_get_path('theme', $theme)); ?></code></u>
-    directory of your <u><?php echo ucfirst($theme) ?></u> theme.
+    file to your <u><?php echo ucfirst($theme) ?></u> theme directory
+    <u><code><?php echo $theme_path; ?></code></u>.
   </p></li><li><p>
     Make two more copies in the same directory, called
     <code><?php echo $module_template; ?>.tpl.php</code> and
