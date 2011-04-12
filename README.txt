@@ -60,7 +60,7 @@
        link) and as comments in the htmlmail.tpl.php file itself.
      * The following options have been removed from the module settings
        page. In their place, any combination of [15]over 200 filter
-       modules may be used in an email-specific [16]text format for
+       modules may be used to create an email-specific [16]text format for
        post-template filtering.
           + [17]Line break converter,
           + [18]URL Filter,

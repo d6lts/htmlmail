@@ -56,7 +56,7 @@ The following additional modules, while not required, are highly recommended:
 *   The following options have been removed from the module settings page.  In
     their place, any combination of
     [over 200 filter modules](http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1)
-    may be used in an email-specific
+    may be used to create an email-specific
     [text format](http://drupal.org/node/779050)
     for post-template filtering.
 
