@@ -43,6 +43,30 @@
     </dl>
   </li>
 </ul>
+<h2><a href="http://drupal.org/node/250790">Updating from previous versions</a></h2>
+<ul>
+  <li>
+    <p>Check the module dependencies, as they have changed. The latest version of <a href="http://drupal.org/project/htmlmail">HTML Mail</a> depends on the <a href="http://drupal.org/project/mailsystem">Mail System</a> module and will not work without it.</p>
+  </li>
+  <li>
+    <p>The user-interface for adding email header and footer text has been removed. Headers and footers may be added by template files and/or by enabling the <a href="http://drupal.org/project/echo">Echo</a> module.</p>
+  </li>
+  <li>
+    <p>Any customized filters should be carefully tested, as some of the template variables have changed. Full documentation is provided both on the module configuration page (Click on the <u>Instructions</u> link) and as comments in the <code>htmlmail.tpl.php</code> file itself.</p>
+  </li>
+  <li>
+    <p>The following options have been removed from the module settings page. In their place, any combination of <a href="http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1">over 200 filter modules</a> may be combined in an email-specific <a href="http://drupal.org/node/213156">text format</a> and used for post-template filtering.</p>
+    <ul>
+      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6">Line break converter</a>,</li>
+      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6">URL Filter</a>,</li>
+      <li>[Emogrifier](http://drupal.org/project/emogrifier,</li>
+      <li><a href="http://drupal.org/project/token">Token support</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>Full MIME handling, including automatic generation of a plaintext alternative part and conversion of images references to inline image attachments, is available simply by enabling the <a href="http://drupal.org/project/mailmime">Mail MIME</a> module.</p>
+  </li>
+</ul>
 <h2><a href="http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png">Configuration</a></h2>
 <p>Visit the <a href="http://drupal.org/project/mailsystem">Mail System</a> settings page at <u>admin/settings/mailsystem</u> to select which parts of Drupal will use <a href="http://drupal.org/project/htmlmail">HTML Mail</a> instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
 <p>Visit the <a href="http://drupal.org/project/htmlmail">HTML Mail</a> settings page at <u>admin/settings/htmlmail</u> to select a theme and post-filter for your messages.</p>

@@ -37,6 +37,39 @@ The following additional modules, while not required, are highly recommended:
 
     :   *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
 
+## [Updating from previous versions](http://drupal.org/node/250790)
+
+*   Check the module dependencies, as they have changed.  The latest version of
+    [HTML Mail](http://drupal.org/project/htmlmail) depends on the
+    [Mail System](http://drupal.org/project/mailsystem) module and will not
+    work without it.
+
+*   The user-interface for adding email header and footer text has been removed.
+    Headers and footers may be added by template files and/or by enabling the
+    [Echo](http://drupal.org/project/echo) module.
+
+*   Any customized filters should be carefully tested, as some of the template
+    variables have changed.  Full documentation is provided both on the module
+    configuration page (Click on the <u>Instructions</u> link) and as comments
+    in the `htmlmail.tpl.php` file itself.
+
+*   The following options have been removed from the module settings page.  In
+    their place, any combination of
+    [over 200 filter modules](http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1)
+    may be combined in an email-specific
+    [text format](http://drupal.org/node/213156) and used for post-template
+    filtering.
+
+    *   [Line break converter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6),
+    *   [URL Filter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6),
+    *   [Emogrifier](http://drupal.org/project/emogrifier,
+    *   [Token support](http://drupal.org/project/token)
+
+*   Full MIME handling, including automatic generation of a plaintext
+    alternative part and conversion of images references to inline image
+    attachments, is available simply by enabling the
+    [Mail MIME](http://drupal.org/project/mailmime) module.
+
 ## [Configuration](http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png)
 
 Visit the [Mail System](http://drupal.org/project/mailsystem) settings page at
