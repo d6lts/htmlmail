@@ -191,7 +191,7 @@ function htmlmail_get_selected_theme(&$message = array()) {
   // Make sure the selected theme is allowed.
   $themes = &htmlmail_get_allowed_themes();
   if (empty($themes[$selected])) {
-    $selected = $GLOBALS['theme'];
+    $selected = '';
   }
   return $selected;
 }
