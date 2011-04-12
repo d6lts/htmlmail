@@ -103,6 +103,7 @@ function template_preprocess_htmlmail(array &$variables) {
   $message = $variables['message'];
   $variables += $message;
   $variables['debug'] = variable_get('htmlmail_debug', '0');
+  $variables['theme'] = htmlmail_get_selected_theme($message);
   $variables['theme_url'] = url($variables['directory'], array('absolute' => TRUE));
   $variables['message_id'] = $variables['module'] . '_' . $variables['key'];
   $template = 'htmlmail-' . str_replace('_', '-', $variables['module']);

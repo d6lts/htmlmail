@@ -153,13 +153,13 @@ function htmlmail_admin_settings() {
         . 'in their email addressbook.  <a href="!mailmime">Mail MIME</a> also '
         . 'allows <a href="!htmlmail">HTML Mail</a> to handle MIME-formatted '
         . 'messages sent by other modules such as '
-        . '<a href="!contactattach">Contact Attach</a> and ',
-        . '<a href="!print">Send by-email</a>. '
+        . '<a href="!contactattach">Contact Attach</a> and '
+        . '<a href="!print">Send by-email</a>. ',
         array(
           '!mailmime' => 'http://drupal.org/project/mailmime',
           '!contactattach' => 'http://drupal.org/project/contact_attach',
           '!print' => 'http://drupal.org/project/print',
-        ),
+        )
       )
     ) . '</p>',
   );
