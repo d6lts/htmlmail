@@ -62,7 +62,7 @@ The following additional modules, while not required, are highly recommended:
 
     *   [Line break converter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6),
     *   [URL Filter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6),
-    *   [Emogrifier](http://drupal.org/project/emogrifier,
+    *   [Emogrifier](http://drupal.org/project/emogrifier),
     *   [Token support](http://drupal.org/project/token)
 
 *   Full MIME handling, including automatic generation of a plaintext

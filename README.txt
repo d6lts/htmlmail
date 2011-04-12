@@ -64,23 +64,23 @@
        used for post-template filtering.
           + [17]Line break converter,
           + [18]URL Filter,
-          + [Emogrifier](http://drupal.org/project/emogrifier,
-          + [19]Token support
+          + [19]Emogrifier,
+          + [20]Token support
      * Full MIME handling, including automatic generation of a plaintext
        alternative part and conversion of images references to inline
-       image attachments, is available simply by enabling the [20]Mail
+       image attachments, is available simply by enabling the [21]Mail
        MIME module.
 
-[21]Configuration
+[22]Configuration
 
-   Visit the [22]Mail System settings page at admin/settings/mailsystem to
-   select which parts of Drupal will use [23]HTML Mail instead of the
-   [24]default [25]mail system.
+   Visit the [23]Mail System settings page at admin/settings/mailsystem to
+   select which parts of Drupal will use [24]HTML Mail instead of the
+   [25]default [26]mail system.
 
-   Visit the [26]HTML Mail settings page at admin/settings/htmlmail to
+   Visit the [27]HTML Mail settings page at admin/settings/htmlmail to
    select a theme and post-filter for your messages.
 
-[27]Theming
+[28]Theming
 
    The email message text goes through three transformations before
    sending:
@@ -93,27 +93,27 @@
        complete documentation on its usage.
     2. Theming
        You may choose a theme that will hold your templates from Step 1
-       above. If the [28]Echo module is installed, this theme will also be
+       above. If the [29]Echo module is installed, this theme will also be
        used to wrap your templated text in a webpage. You use any one of
-       [29]over 800 themes to style your messages, or [30]create your own
+       [30]over 800 themes to style your messages, or [31]create your own
        for even more power and flexibility.
     3. Post-filtering
        You may choose a text format to be used for filtering email
        messages after theming. This allows you to use any combination of
-       [31]over 200 filter modules to make final changes to your message
+       [32]over 200 filter modules to make final changes to your message
        before sending.
        Here is a recommended configuration:
-          + [32]Emogrifier Converts stylesheets to inline style rules for
+          + [33]Emogrifier Converts stylesheets to inline style rules for
             consistent display on mobile devices and webmail.
-          + [33]Transliteration Converts non-ASCII text to US-ASCII
+          + [34]Transliteration Converts non-ASCII text to US-ASCII
             equivalents. This helps prevent Microsoft "smart-quotes" from
             appearing as question-marks in Mozilla Thunderbird.
-          + [34]Pathologic Converts relative URLS to absolute URLS so that
+          + [35]Pathologic Converts relative URLS to absolute URLS so that
             clickable links in your message will work as intended.
 
 Troubleshooting
 
-   Visit the [35]issue queue for support and feature requests.
+   Visit the [36]issue queue for support and feature requests.
 
 Related Modules
 
@@ -163,11 +163,11 @@ Documentation
 
 Original Author
 
-     * [36]Chris Herberte
+     * [37]Chris Herberte
 
 Current Maintainer
 
-     * [37]Bob Vincent
+     * [38]Bob Vincent
 
 References
 
@@ -189,22 +189,23 @@ References
   16. http://drupal.org/node/213156
   17. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6
   18. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6
-  19. http://drupal.org/project/token
-  20. http://drupal.org/project/mailmime
-  21. http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png
-  22. http://drupal.org/project/mailsystem
-  23. http://drupal.org/project/htmlmail
-  24. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
-  25. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
-  26. http://drupal.org/project/htmlmail
-  27. http://drupal.org/documentation/theme
-  28. http://drupal.org/project/echo
-  29. http://drupal.org/project/themes
-  30. http://drupal.org/documentation/theme
-  31. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
-  32. http://drupal.org/project/emogrifier
-  33. http://drupal.org/project/filter_transliteration
-  34. http://drupal.org/project/pathologic
-  35. http://drupal.org/project/issues/htmlmail
-  36. http://drupal.org/user/1171
-  37. http://drupal.org/user/36148
+  19. http://drupal.org/project/emogrifier
+  20. http://drupal.org/project/token
+  21. http://drupal.org/project/mailmime
+  22. http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png
+  23. http://drupal.org/project/mailsystem
+  24. http://drupal.org/project/htmlmail
+  25. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
+  26. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
+  27. http://drupal.org/project/htmlmail
+  28. http://drupal.org/documentation/theme
+  29. http://drupal.org/project/echo
+  30. http://drupal.org/project/themes
+  31. http://drupal.org/documentation/theme
+  32. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
+  33. http://drupal.org/project/emogrifier
+  34. http://drupal.org/project/filter_transliteration
+  35. http://drupal.org/project/pathologic
+  36. http://drupal.org/project/issues/htmlmail
+  37. http://drupal.org/user/1171
+  38. http://drupal.org/user/36148
