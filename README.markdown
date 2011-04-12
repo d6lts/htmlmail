@@ -66,7 +66,7 @@ The email message text goes through three transformations before sending:
 2.  <h3>Theming</h3>
 
     You may choose a theme that will hold your templates from Step 1 above. If
-    the [Echo](http://drupal.org/project/echo) module.) is installed, this theme
+    the [Echo](http://drupal.org/project/echo) module is installed, this theme
     will also be used to wrap your templated text in a webpage.  You use any one
     of [over 800](http://drupal.org/project/themes) themes to style your
     messages, or [create your own](http://drupal.org/documentation/theme) for

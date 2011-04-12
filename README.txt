@@ -68,10 +68,10 @@
        complete documentation on its usage.
     2. Theming
        You may choose a theme that will hold your templates from Step 1
-       above. If the [18]Echo module.) is installed, this theme will also
-       be used to wrap your templated text in a webpage. You use any one
-       of [19]over 800 themes to style your messages, or [20]create your
-       own for even more power and flexibility.
+       above. If the [18]Echo module is installed, this theme will also be
+       used to wrap your templated text in a webpage. You use any one of
+       [19]over 800 themes to style your messages, or [20]create your own
+       for even more power and flexibility.
     3. Post-filtering
        You may choose a text format to be used for filtering email
        messages after theming. This allows you to use any combination of
