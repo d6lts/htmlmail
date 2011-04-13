@@ -131,15 +131,17 @@ The email message text goes through three transformations before sending:
 
 ## Troubleshooting
 
-*   Double-check
-    <u>admin/settings/mailsystem</u>
-    and make sure you selected <u><code>HTMLMailSystem</code> for your
+*   Double-check the [Mail System](http://drupal.org/project/mailsystem)
+    module settings and and make sure you selected
+    <u><code>HTMLMailSystem</code></u> for your
     <u>Site-wide default *(default-system)*</u> mail system.
 
-*   Visit the module settings page at
-    <u>admin/settings/htmlmail</u>
-    and check the <code>[ ] *(Optional)* Debug</code> checkbox,
-    then re-send your message.
+*   Try selecting the <u><code>[ ]</code> *(Optional)* Debug</u> checkbox
+    at the [HTML Mail](http://drupal.org/project/htmlmail) module 
+    settings page and re-sending your message.
+
+*   Clear your cache after changing any <u><code>.tpl.php</code></u>
+    files.
 
 *   Visit the [issue queue](http://drupal.org/project/issues/htmlmail)
     for support and feature requests.

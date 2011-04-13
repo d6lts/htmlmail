@@ -113,12 +113,13 @@
 
 Troubleshooting
 
-     * Double-check admin/settings/mailsystem and make sure you selected
-       HTMLMailSystem for your Site-wide default (default-system) mail
-       system.
-     * Visit the module settings page at admin/settings/htmlmail and check
-       the [ ] (Optional) Debug checkbox, then re-send your message.
-     * Visit the [37]issue queue for support and feature requests.
+     * Double-check the [37]Mail System module settings and and make sure
+       you selected HTMLMailSystem for your Site-wide default
+       (default-system) mail system.
+     * Try selecting the [ ] (Optional) Debug checkbox at the [38]HTML
+       Mail module settings page and re-sending your message.
+     * Clear your cache after changing any .tpl.php files.
+     * Visit the [39]issue queue for support and feature requests.
 
 Related Modules
 
@@ -168,11 +169,11 @@ Documentation
 
 Original Author
 
-     * [38]Chris Herberte
+     * [40]Chris Herberte
 
 Current Maintainer
 
-     * [39]Bob Vincent
+     * [41]Bob Vincent
 
 References
 
@@ -212,6 +213,8 @@ References
   34. http://drupal.org/project/emogrifier
   35. http://drupal.org/project/filter_transliteration
   36. http://drupal.org/project/pathologic
-  37. http://drupal.org/project/issues/htmlmail
-  38. http://drupal.org/user/1171
-  39. http://drupal.org/user/36148
+  37. http://drupal.org/project/mailsystem
+  38. http://drupal.org/project/htmlmail
+  39. http://drupal.org/project/issues/htmlmail
+  40. http://drupal.org/user/1171
+  41. http://drupal.org/user/36148
