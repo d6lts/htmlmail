@@ -41,7 +41,7 @@
  *  - $theme_path: The relative path to the Email theme directory.
  *  - $theme_url: The absolute url to the Email theme directory.
  */
-  $directory = dirname(__FILE__);
+  $directory = preg_replace('#^' . realpath(NULL) . '/#', '', realpath(dirname(__FILE__)));
   $template_url = url($directory, array('absolute' => TRUE));
 ?>
 <div class="htmlmail-user-password-reset-body htmlmail-user-body htmlmail-body">
@@ -63,7 +63,9 @@
     to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
   </p></li><li><?php endif;
 if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
-    Edit your <u><code><?php echo "$directory/$this_file"; ?></code></u> file.
+  Edit your<br />
+  <u><code><?php echo "$directory/$this_file"; ?></code></u>
+  <br />file.
   </p></li><li><?php
 else: ?>
     Copy<br />
