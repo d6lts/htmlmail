@@ -52,6 +52,33 @@
  *        The email message id, which should be equal to
  *        "{$module}_{$key}".
  *
+ * $headers
+ *        An array of email (name => value) pairs.
+ *
+ * $from
+ *        The configured sender address.
+ *
+ * $to
+ *        The recipient email address.
+ *
+ * $subject
+ *        The message subject line.
+ *
+ * $body
+ *        The formatted message body.
+ *
+ * $language
+ *        The language object for this message.
+ *
+ * $params
+ *        Any module-specific parameters.
+ *
+ * $template_path
+ *        The relative path to the template directory.
+ *
+ * $template_url
+ *        The absolute URL to the template directory.
+ *
  * $theme
  *        The name of the Email theme used to hold template files. If the
  *        [8]Echo module is enabled this theme will also be used to
@@ -63,22 +90,12 @@
  * $theme_url
  *        The absolute URL to the selected Email theme directory.
  *
- * $template_path
- *        The relative path to the template directory.
- *
- * $template_url
- *        The absolute URL to the template directory.
- *
  * $debug
  *        TRUE to add some useful debugging info to the bottom of the
  *        message.
  *
- * The module calling [9]drupal_mail() may set other variables. For
- * instance, the [10]Webform module sets a $node variable which may be
- * very useful.
- *
  * Other modules may also add or modify theme variables by implementing a
- * MODULENAME_preprocess_htmlmail(&$variables) [11]hook function.
+ * MODULENAME_preprocess_htmlmail(&$variables) [9]hook function.
  *
  * References
  *
@@ -90,9 +107,7 @@
  * 6. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
  * 7. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
  * 8. http://drupal.org/project/echo
- * 9. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
- * 10. http://drupal.org/project/webform
- * 11. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
+ * 9. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  * =========================================================== End instructions.
  */

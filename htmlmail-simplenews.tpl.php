@@ -9,13 +9,16 @@
  *  - $message_id: The email message id, or "simplenews_$key"
  *  - $module: The sending module, which is 'simplenews'.
  *  - $key: The simplenews action, which may be any of the following:
- *    - subscribe: New subscriber confirmation message.
- *    - unsubscribe: Unsubscribe confirmation message.
- *    - test: Send a test newsletter to the test address.
  *    - node: Send a newsletter to its subscribers.
- *  - $to: The recipient subscriber email address.
+ *    - subscribe: New subscriber confirmation message.
+ *    - test: Send a test newsletter to the test address.
+ *    - unsubscribe: Unsubscribe confirmation message.
+ *  - $headers: An array of email (name => value) pairs.
  *  - $from: The configured sender address.
- *  - $language: The language code for this message.
+ *  - $to: The recipient subscriber email address.
+ *  - $subject: The message subject line.
+ *  - $body: The formatted message body.
+ *  - $language: The language object for this message.
  *  - $params: An array containing the following keys:
  *    - context:  An array containing the following keys:
  *      - account: The recipient subscriber account object, which contains
@@ -41,13 +44,11 @@
  *        - nid: The node ID of the newsletter node.
  *        - name: The short name of the newsletter.
  *        - description: The long name or description of the newsletter.
- *  - $subject: The message subject line.
- *  - $body: The formatted message body.
- *  - $headers: An array of email (name => value) pairs.
- *  - $theme: The name of the selected Email theme.
- *  - $theme_path: The relative path to the Email theme directory.
  *  - $template_path: The relative path to the template directory.
  *  - $template_url: The absolute url to the template directory.
+ *  - $theme: The name of the selected Email theme.
+ *  - $theme_path: The relative path to the Email theme directory.
+ *  - $theme_url: The absolute url to the Email theme directory.
  */
 ?>
 <?php if ($key == 'node' || $key == 'test'): ?>

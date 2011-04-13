@@ -9,9 +9,12 @@
  *  - $message_id: The email message id, which is 'user_password_reset'
  *  - $module: The sending module, which is 'user'.
  *  - $key: The user email action, which is 'password_reset'.
- *  - $to: The recipient subscriber email address.
+ *  - $headers: An array of email (name => value) pairs.
  *  - $from: The configured sender address.
- *  - $language: The language code for this message.
+ *  - $to: The recipient email address.
+ *  - $subject: The message subject line.
+ *  - $body: The formatted message body.
+ *  - $language: The language object for this message.
  *  - $params: An array containing the following keys:
  *    - account: The user object whose password is being requested, which
  *      contains the following useful properties:
@@ -32,13 +35,11 @@
  *      - data: User profile data, as a serialized string.
  *      - roles: Array of roles assigned to this user, as (rid => role_name)
  *        pairs.
- *  - $subject: The message subject line.
- *  - $body: The formatted message body.
- *  - $headers: An array of email (name => value) pairs.
- *  - $theme: The name of the selected Email theme.
- *  - $theme_path: The relative path to the Email theme directory.
  *  - $template_path: The relative path to the template directory.
  *  - $template_url: The absolute url to the template directory.
+ *  - $theme: The name of the selected Email theme.
+ *  - $theme_path: The relative path to the Email theme directory.
+ *  - $theme_url: The absolute url to the Email theme directory.
  */
 ?>
 <div class="htmlmail-user-password-reset-body htmlmail-user-body htmlmail-body">

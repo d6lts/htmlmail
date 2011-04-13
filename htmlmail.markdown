@@ -53,6 +53,33 @@ The following variables available in this template:
 **`$message_id`**
 :   The email message id, which should be equal to `"{$module}_{$key}"`.
 
+**`$headers`**
+:   An array of email `(name => value)` pairs.
+
+**`$from`**
+:   The configured sender address.
+
+**`$to`**
+:   The recipient email address.
+
+**`$subject`**
+:   The message subject line.
+
+**`$body`**
+:   The formatted message body.
+
+**`$language`**
+:   The language object for this message.
+
+**`$params`**
+:   Any module-specific parameters.
+
+**`$template_path`**
+:   The relative path to the template directory.
+
+**`$template_url`**
+:   The absolute URL to the template directory.
+
 **`$theme`**
 :   The name of the *Email theme* used to hold template files. If the
     [Echo](http://drupal.org/project/echo) module is enabled this theme will
@@ -64,20 +91,8 @@ The following variables available in this template:
 **`$theme_url`**
 :   The absolute URL to the selected *Email theme* directory.
 
-**`$template_path`**
-:   The relative path to the template directory.
-
-**`$template_url`**
-:   The absolute URL to the template directory.
-
 **`$debug`**
 :   `TRUE` to add some useful debugging info to the bottom of the message.
-
-The module calling
-[`drupal_mail()`](http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6)
-may set other variables.  For instance, the
-[Webform module](http://drupal.org/project/webform)
-sets a `$node` variable which may be very useful.
 
 Other modules may also add or modify theme variables by implementing a
 `MODULENAME_preprocess_htmlmail(&$variables)`

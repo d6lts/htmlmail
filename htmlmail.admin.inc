@@ -76,6 +76,42 @@ function htmlmail_admin_settings() {
   <dd>
     <p>The email message id, which should be equal to <code>"{$module}_{$key}"</code>.</p>
   </dd>
+  <dt><strong><code>$headers</code></strong></dt>
+  <dd>
+    <p>An array of email <code>(name =&gt; value)</code> pairs.</p>
+  </dd>
+  <dt><strong><code>$from</code></strong></dt>
+  <dd>
+    <p>The configured sender address.</p>
+  </dd>
+  <dt><strong><code>$to</code></strong></dt>
+  <dd>
+    <p>The recipient email address.</p>
+  </dd>
+  <dt><strong><code>$subject</code></strong></dt>
+  <dd>
+    <p>The message subject line.</p>
+  </dd>
+  <dt><strong><code>$body</code></strong></dt>
+  <dd>
+    <p>The formatted message body.</p>
+  </dd>
+  <dt><strong><code>$language</code></strong></dt>
+  <dd>
+    <p>The language object for this message.</p>
+  </dd>
+  <dt><strong><code>$params</code></strong></dt>
+  <dd>
+    <p>Any module-specific parameters.</p>
+  </dd>
+  <dt><strong><code>$template_path</code></strong></dt>
+  <dd>
+    <p>The relative path to the template directory.</p>
+  </dd>
+  <dt><strong><code>$template_url</code></strong></dt>
+  <dd>
+    <p>The absolute URL to the template directory.</p>
+  </dd>
   <dt><strong><code>$theme</code></strong></dt>
   <dd>
     <p>The name of the <em>Email theme</em> used to hold template files. If the <a href="http://drupal.org/project/echo">Echo</a> module is enabled this theme will also be used to transform the message body into a fully-themed webpage.</p>
@@ -88,20 +124,11 @@ function htmlmail_admin_settings() {
   <dd>
     <p>The absolute URL to the selected <em>Email theme</em> directory.</p>
   </dd>
-  <dt><strong><code>$template_path</code></strong></dt>
-  <dd>
-    <p>The relative path to the template directory.</p>
-  </dd>
-  <dt><strong><code>$template_url</code></strong></dt>
-  <dd>
-    <p>The absolute URL to the template directory.</p>
-  </dd>
   <dt><strong><code>$debug</code></strong></dt>
   <dd>
     <p><code>TRUE</code> to add some useful debugging info to the bottom of the message.</p>
   </dd>
 </dl>
-<p>The module calling <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6"><code>drupal_mail()</code></a> may set other variables. For instance, the <a href="http://drupal.org/project/webform">Webform module</a> sets a <code>$node</code> variable which may be very useful.</p>
 <p>Other modules may also add or modify theme variables by implementing a <code>MODULENAME_preprocess_htmlmail(&amp;$variables)</code> <a href="http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7">hook function</a>.</p>'
       // End instructions.
     ),
