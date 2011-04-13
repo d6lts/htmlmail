@@ -110,7 +110,6 @@ function htmlmail_theme() {
 function template_preprocess_htmlmail(array &$variables) {
   $message = $variables['message'];
   $variables += $message;
-  error_log('variables = ' . var_export($variables,1));
   $variables['debug'] = variable_get('htmlmail_debug', '0');
   $variables['theme'] = htmlmail_get_selected_theme($message);
   $variables['theme_path'] = drupal_get_path('theme', $variables['theme']);

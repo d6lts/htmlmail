@@ -108,12 +108,13 @@
   <dl><dt><p>
     To customize this message:
   </p></dt><dd><ol><li><p><?php if (empty($theme)): ?>
-    Visit <u>admin/settings/htmlmail</u> and select a theme to hold your
-    custom email template files.
-  </p></dt><dd><ol><li><p><?php elseif (empty($theme_path)): ?>
-    Visit <u>admin/build/themes</u> to enable your selected
+    Visit <u>admin/settings/htmlmail</u>
+    and select a theme to hold your custom email template files.
+  </p></li><li><p><?php elseif (empty($theme_path)): ?>
+    Visit <u>admin/build/themes</u>
+    to enable your selected
     <u><?php echo ucfirst($theme); ?></u> theme.
-  </p></dt><dd><ol><li><p><?php endif; ?>
+  </p></li><li><p><?php endif; ?>
     Copy the
     <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
     file to your <u><?php echo ucfirst($theme) ?></u> theme directory
@@ -132,6 +133,11 @@
     If you think your customizations would be of use to others,
     please contribute your file as a feature request in the
     <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
-  </p></li></ol></dd></dl>
+  </p></li></ol></dd><?php if (!empty($params)): ?><dt><p>
+    The <?php echo $module; ?> module sets the <u><code>$params</code></u>
+    variable.  For this message,
+  </p></dt><dd><p><code><pre>
+$params = <?php var_export($params); ?>
+  </p></li></ol></dd><?php endif; ?></dl>
 </div>
 <?php endif;
