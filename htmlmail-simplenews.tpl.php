@@ -99,7 +99,7 @@
   </p></dd></dl></li></ul></li><li><p>
     Edit the renamed copy.
   </p></li></ul></dd><dt><p>
-    Simplenews sets the <u><code>$params</code></u> variable.
+    The simplenews module sets the <u><code>$params</code></u> variable.
     For this message,
   </p></dt><dd><p><code><pre>
 $params = <?php var_export($params); ?>
