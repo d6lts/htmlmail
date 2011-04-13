@@ -50,8 +50,9 @@
  *  - $theme_path: The relative path to the Email theme directory.
  *  - $theme_url: The absolute url to the Email theme directory.
  */
-  $directory = preg_replace('#^' . realpath(NULL) . '/#', '', realpath(dirname(__FILE__)));
-  $template_url = url($directory, array('absolute' => TRUE));
+  $template_name = basename(__FILE__);
+  $template_path = preg_replace('#^' . realpath(NULL) . '/#', '', realpath(dirname(__FILE__)));
+  $template_url = url($template_path, array('absolute' => TRUE));
 ?>
 <?php if ($key == 'node' || $key == 'test'): ?>
 <div class="htmlmail-simplenews-link">
@@ -67,7 +68,6 @@
 <?php if ($debug):
   $module_template = 'htmlmail-simplenews.tpl.php';
   $message_template = "htmlmail-simplenews-$key.tpl.php";
-  $this_file = basename(__FILE__);
 ?>
 <hr />
 <div class="htmlmail-simplenews-debug htmlmail-debug">
@@ -80,21 +80,29 @@
     Visit <u>admin/build/themes</u>
     to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
   </p></li><li><?php endif;
-if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
+if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
     Edit your<br />
-    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <u><code><?php echo "$template_path/$template_name"; ?></code></u>
     <br />file.
   </p></li><li><?php
 else:
-  if ("$directory/$this_file" != "$theme_path/$module_template"): ?><p>
+  if (!file_exists("$theme_path/htmlmail.tpl.php")): ?><p>
+    Copy<br />
+    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <br />to<br />
+    <u><code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code></u>
+  </p></li><li><?php
+  endif;
+  if (!file_exists("$theme_path/$module_template")): ?><p>
     For general Simplenews message customization, copy<br />
-    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
     <br />to<br />
     <code><?php echo "$theme_path/$module_template"; ?></code>
-  </p><?php
-  endif; ?><p>
+  </p></li><li><?php
+  endif;
+  if (!file_exists("$theme_path/$message_template")) ?><p>
     For message-specific customization, copy<br />
-    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
     <br />to one of the following:
   </p><ul><li><dl><dt><p>
     <u><code>htmlmail-simplenews-node.tpl.php</code></u>
@@ -112,7 +120,8 @@ else:
     <u><code>htmlmail-simplenews-unsubscribe.tpl.php</code></u>
   </p></dt><dd><p>
     Unsubscribe confirmation message.
-  </p></dd></dl></li></ul></li><li><p>
+  </p></dd></dl></li></ul></li><li><?php
+  endif; ?><p>
     Edit the copied file.
   </p></li><li><?php
 endif; ?><p>

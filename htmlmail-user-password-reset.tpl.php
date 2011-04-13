@@ -41,15 +41,15 @@
  *  - $theme_path: The relative path to the Email theme directory.
  *  - $theme_url: The absolute url to the Email theme directory.
  */
-  $directory = preg_replace('#^' . realpath(NULL) . '/#', '', realpath(dirname(__FILE__)));
-  $template_url = url($directory, array('absolute' => TRUE));
+  $template_name = basename(__FILE__);
+  $template_path = preg_replace('#^' . realpath(NULL) . '/#', '', realpath(dirname(__FILE__)));
+  $template_url = url($template_path, array('absolute' => TRUE));
 ?>
 <div class="htmlmail-user-password-reset-body htmlmail-user-body htmlmail-body">
 <?php echo $body; ?>
 </div>
 <?php if ($debug):
   $message_template = 'htmlmail-user-password-reset.tpl.php';
-  $this_file = basename(__FILE__);
 ?>
 <hr />
 <div class="htmlmail-user-password-reset-debug htmlmail-user-debug htmlmail-debug">
@@ -62,17 +62,32 @@
     Visit <u>admin/build/themes</u>
     to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
   </p></li><li><?php endif;
-if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
-  Edit your<br />
-  <u><code><?php echo "$directory/$this_file"; ?></code></u>
-  <br />file.
+if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
+    Edit your<br />
+    <u><code><?php echo "$template_path/$template_name"; ?></code></u>
+    <br />file.
   </p></li><li><?php
-else: ?>
+else:
+  if (!file_exists("$theme_path/htmlmail.tpl.php")): ?><p>
     Copy<br />
-    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <br />to<br />
+    <u><code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code></u>
+  </p></li><li><?php
+  endif;
+  if (!file_exists("$theme_path/$module_template")): ?><p>
+    For general user-module message customization, copy<br />
+    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <br />to<br />
+    <code><?php echo "$theme_path/$module_template"; ?></code>
+  </p></li><li><?php
+  endif;
+  if (!file_exists("$theme_path/$message_template")) ?><p>
+    Copy<br />
+    <u><code><?php echo "$template_path/$template_name"; ?></code></u>
     <br />to<br />
     <u><code><?php echo "$theme_path/$message_template"; ?></code></u>.
-  </p></li><li><p>
+  </p></li><li><?php endif; ?><p>
     Edit the copied file.
   </p></li><li><?php
 endif; ?><p>
