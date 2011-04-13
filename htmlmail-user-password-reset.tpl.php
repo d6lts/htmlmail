@@ -56,13 +56,14 @@
   </p></li><li><p><?php elseif (empty($theme_path)): ?>
     Visit <u>admin/build/themes</u>
     to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
-  </p></li><li><p><?php endif; ?>
+  </p></li><li><p><?php elseif ($theme_path == $directory): ?>
+    Edit your <?php echo "$directory/" . __FILE__; ?> file.<?php else: ?>
     Copy the
     <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail-user-password-reset.tpl.php"><code>htmlmail-user-password-reset.tpl.php</code></a>
     file to your <u><?php echo ucfirst($theme); ?></u> theme directory
     <u><code><?php echo $theme_path; ?></code></u>.
   </p></li><li><p>
-    Edit the copied file.
+    Edit the copied file.<?php endif; ?>
   </p></li></ol></dd><dt><p>
     The user module sets the <u><code>$params</code></u> variable.
     For this message,

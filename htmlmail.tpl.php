@@ -108,8 +108,10 @@
 <?php echo $body; ?>
 </div>
 <?php if ($debug):
-  $module_template = 'htmlmail-' . str_replace('_', '-', $module);
-  $message_template = 'htmlmail-' . str_replace('_', '-', $message_id); ?>
+  $module_template = str_replace('_', '-', "htmlmail-$module.tpl.php");
+  $message_template = str_replace('_', '-', "htmlmail-$message_id.tpl.php");
+  $this_file = basename(__FILE__);
+?>
 <hr />
 <div class="htmlmail-debug">
   <dl><dt><p>
@@ -121,20 +123,24 @@
     Visit <u>admin/build/themes</u>
     to enable your selected
     <u><?php echo ucfirst($theme); ?></u> theme.
-  </p></li><li><p><?php endif; ?>
-    Copy the
-    <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
-    file to your <u><?php echo ucfirst($theme) ?></u> theme directory
-    <u><code><?php echo $theme_path; ?></code></u>.
+  </p></li><li><?php endif;
+if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
+    Edit your <u><code><?php echo "$directory/$this_file"; ?></code></u> file.
+  </p></li><li><?php
+else:
+  if ("$directory/$this_file" != "$theme_path/$module_template"): ?><p>
+    For module-specific customization, copy
+    <u><code><?php echo "$directory/$this_file"; ?></code></u> to
+    <code><?php echo "$theme_path/$module_template"; ?></code>
+  </p><?php
+  endif; ?><p>
+    For message-specific customization, copy
+    <u><code><?php echo "$directory/$this_file"; ?></code></u> to
+    <code><?php echo "$theme_path/$message_template"; ?></code>
   </p></li><li><p>
-    For module-specific customization, rename your copy to
-    <code><?php echo $module_template; ?>.tpl.php</code>
-  </p><p>
-    For message-specific customization, rename your copy to
-    <code><?php echo $message_template; ?>.tpl.php</code>
-  </p></li><li><p>
-    Edit the renamed copy.
-  </p></li><li><p>
+    Edit the copied file.
+  </p></li><li><?php
+endif; ?><p>
     Send a test message to make sure your customizations worked.
   </p></li><li><p>
     If you think your customizations would be of use to others,

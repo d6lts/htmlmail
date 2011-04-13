@@ -62,7 +62,11 @@
 <div class="htmlmail-simplenews-body htmlmail-body">
 <?php echo $body; ?>
 </div>
-<?php if ($debug): ?>
+<?php if ($debug):
+  $module_template = 'htmlmail-simplenews.tpl.php';
+  $message_template = "htmlmail-simplenews-$key.tpl.php";
+  $this_file = basename(__FILE__);
+?>
 <hr />
 <div class="htmlmail-simplenews-debug htmlmail-debug">
   <dl><dt><p>
@@ -73,13 +77,20 @@
   </p></li><li><p><?php elseif (empty($theme_path)): ?>
     Visit <u>admin/build/themes</u>
     to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
-  </p></li><li><p><?php endif; ?>
-    Copy the
-    <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail-simplenews.tpl.php"><code>htmlmail-simplenews.tpl.php</code></a>
-    file to your <u><?php echo ucfirst($theme); ?></u> theme directory
-    <u><code><?php echo $theme_path; ?></code></u>.
-  </p></li><li><p>
-    Rename your copied file to one of the following:
+  </p></li><li><?php endif;
+if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
+    Edit your <u><code><?php echo "$directory/$this_file"; ?></code></u> file.
+  </p></li><li><?php
+else:
+  if ("$directory/$this_file" != "$theme_path/$module_template"): ?><p>
+    For general Simplenews message customization, copy
+    <u><code><?php echo "$directory/$this_file"; ?></code></u> to
+    <code><?php echo "$theme_path/$module_template"; ?></code>
+  </p><?php
+  endif; ?><p>
+    For message-specific customization, copy
+    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    to one of the following:
   </p><ul><li><dl><dt><p>
     <u><code>htmlmail-simplenews-node.tpl.php</code></u>
   </p></dt><dd><p>
@@ -97,7 +108,14 @@
   </p></dt><dd><p>
     Unsubscribe confirmation message.
   </p></dd></dl></li></ul></li><li><p>
-    Edit the renamed copy.
+    Edit the copied file.
+  </p></li><li><?php
+endif; ?><p>
+    Send a test message to make sure your customizations worked.
+  </p></li><li><p>
+    If you think your customizations would be of use to others,
+    please contribute your file as a feature request in the
+    <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
   </p></li></ol></dd><dt><p>
     The simplenews module sets the <u><code>$params</code></u> variable.
     For this message,
