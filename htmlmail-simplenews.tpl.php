@@ -83,14 +83,15 @@ if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
   </p></li><li><?php
 else:
   if ("$directory/$this_file" != "$theme_path/$module_template"): ?><p>
-    For general Simplenews message customization, copy
-    <u><code><?php echo "$directory/$this_file"; ?></code></u> to
+    For general Simplenews message customization, copy<br />
+    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <br />to<br />
     <code><?php echo "$theme_path/$module_template"; ?></code>
   </p><?php
   endif; ?><p>
-    For message-specific customization, copy
+    For message-specific customization, copy<br />
     <u><code><?php echo "$directory/$this_file"; ?></code></u>
-    to one of the following:
+    <br />to one of the following:
   </p><ul><li><dl><dt><p>
     <u><code>htmlmail-simplenews-node.tpl.php</code></u>
   </p></dt><dd><p>

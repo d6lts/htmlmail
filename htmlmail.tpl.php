@@ -129,13 +129,15 @@ if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
   </p></li><li><?php
 else:
   if ("$directory/$this_file" != "$theme_path/$module_template"): ?><p>
-    For module-specific customization, copy
-    <u><code><?php echo "$directory/$this_file"; ?></code></u> to
+    For module-specific customization, copy<br />
+    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <br />to<br />
     <code><?php echo "$theme_path/$module_template"; ?></code>
   </p><?php
   endif; ?><p>
-    For message-specific customization, copy
-    <u><code><?php echo "$directory/$this_file"; ?></code></u> to
+    For message-specific customization, copy<br />
+    <u><code><?php echo "$directory/$this_file"; ?></code></u>
+    <br />to<br />
     <code><?php echo "$theme_path/$message_template"; ?></code>
   </p></li><li><p>
     Edit the copied file.
