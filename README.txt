@@ -113,7 +113,12 @@
 
 Troubleshooting
 
-   Visit the [37]issue queue for support and feature requests.
+     * Double-check admin/settings/mailsystem and make sure you selected
+       HTMLMailSystem for your Site-wide default (default-system) mail
+       system.
+     * Visit the module settings page at admin/settings/htmlmail and check
+       the [ ] (Optional) Debug checkbox, then re-send your message.
+     * Visit the [37]issue queue for support and feature requests.
 
 Related Modules
 
