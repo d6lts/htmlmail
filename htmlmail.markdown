@@ -21,16 +21,6 @@ the possible template file names would be:
 2.  `htmlmail-example-module.tpl.php`
 3.  `htmlmail.tpl.php`
 
-For another example, to customize the
-[password reset](http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6)
-messages sent by the
-[user module](http://api.drupal.org/api/drupal/modules--user--user.module/6),
-copy
-[`htmlmail.tpl.php`](http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php)
-to a file called
-`htmlmail-user-password-reset.tpl.php`
-in your *Email theme* directory, and edit the copy.
-
 Template files are cached, so remember to clear the cache by visiting
 <u>admin/settings/performance</u>
 after changing any `.tpl.php` files.

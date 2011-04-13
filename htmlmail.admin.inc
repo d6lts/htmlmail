@@ -56,7 +56,6 @@ function htmlmail_admin_settings() {
   <li><code>htmlmail-example-module.tpl.php</code></li>
   <li><code>htmlmail.tpl.php</code></li>
 </ol>
-<p>For another example, to customize the <a href="http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6">password reset</a> messages sent by the <a href="http://api.drupal.org/api/drupal/modules--user--user.module/6">user module</a>, copy <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>htmlmail.tpl.php</code></a> to a file called <code>htmlmail-user-password-reset.tpl.php</code> in your <em>Email theme</em> directory, and edit the copy.</p>
 <p>Template files are cached, so remember to clear the cache by visiting <u>admin/settings/performance</u> after changing any <code>.tpl.php</code> files.</p>
 <p>The following variables available in this template:</p>
 <dl>

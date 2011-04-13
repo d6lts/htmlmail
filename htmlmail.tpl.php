@@ -27,11 +27,6 @@
  *  2. htmlmail-example-module.tpl.php
  *  3. htmlmail.tpl.php
  *
- * For another example, to customize the [3]password reset messages sent
- * by the [4]user module, copy [5]htmlmail.tpl.php to a file called
- * htmlmail-user-password-reset.tpl.php in your Email theme directory, and
- * edit the copy.
- *
  * Template files are cached, so remember to clear the cache by visiting
  * admin/settings/performance after changing any .tpl.php files.
  *
@@ -41,11 +36,11 @@
  *        The message body text.
  *
  * $module
- *        The first argument to [6]drupal_mail(), which is, by convention,
+ *        The first argument to [3]drupal_mail(), which is, by convention,
  *        the machine-readable name of the sending module.
  *
  * $key
- *        The second argument to [7]drupal_mail(), which should give some
+ *        The second argument to [4]drupal_mail(), which should give some
  *        indication of why this email is being sent.
  *
  * $message_id
@@ -81,7 +76,7 @@
  *
  * $theme
  *        The name of the Email theme used to hold template files. If the
- *        [8]Echo module is enabled this theme will also be used to
+ *        [5]Echo module is enabled this theme will also be used to
  *        transform the message body into a fully-themed webpage.
  *
  * $theme_path
@@ -95,19 +90,16 @@
  *        message.
  *
  * Other modules may also add or modify theme variables by implementing a
- * MODULENAME_preprocess_htmlmail(&$variables) [9]hook function.
+ * MODULENAME_preprocess_htmlmail(&$variables) [6]hook function.
  *
  * References
  *
  * 1. http://drupal.org/project/htmlmail
  * 2. http://drupal.org/project/htmlmail
- * 3. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6
- * 4. http://api.drupal.org/api/drupal/modules--user--user.module/6
- * 5. http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php
- * 6. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
- * 7. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
- * 8. http://drupal.org/project/echo
- * 9. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
+ * 3. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
+ * 4. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
+ * 5. http://drupal.org/project/echo
+ * 6. http://api.drupal.org/api/drupal/modules--system--theme.api.php/function/hook_preprocess_HOOK/7
  *
  * =========================================================== End instructions.
  */
