@@ -45,7 +45,10 @@
 <div class="htmlmail-user-password-reset-body htmlmail-user-body htmlmail-body">
 <?php echo $body; ?>
 </div>
-<?php if ($debug): ?>
+<?php if ($debug):
+  $message_template = 'htmlmail-user-password-reset.tpl.php';
+  $this_file = basename(__FILE__);
+?>
 <hr />
 <div class="htmlmail-user-password-reset-debug htmlmail-user-debug htmlmail-debug">
   <dl><dt><p>
@@ -56,14 +59,24 @@
   </p></li><li><p><?php elseif (empty($theme_path)): ?>
     Visit <u>admin/build/themes</u>
     to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
-  </p></li><li><p><?php elseif ($theme_path == $directory): ?>
-    Edit your <?php echo "$directory/" . __FILE__; ?> file.<?php else: ?>
-    Copy the
-    <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail-user-password-reset.tpl.php"><code>htmlmail-user-password-reset.tpl.php</code></a>
-    file to your <u><?php echo ucfirst($theme); ?></u> theme directory
-    <u><code><?php echo $theme_path; ?></code></u>.
+  </p></li><li><?php endif;
+if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
+    Edit your <u><code><?php echo "$directory/$this_file"; ?></code></u> file.
+  </p></li><li><?php
+else: ?>
+    Copy
+    <u><code><?php echo "$directory/$this_file"; ?></code><u>
+    to
+    <u><code><?php echo "$theme_path/$message_template"; ?></code></u>.
   </p></li><li><p>
-    Edit the copied file.<?php endif; ?>
+    Edit the copied file.
+  </p></li><li><?php
+endif; ?><p>
+    Send a test message to make sure your customizations worked.
+  </p></li><li><p>
+    If you think your customizations would be of use to others,
+    please contribute your file as a feature request in the
+    <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
   </p></li></ol></dd><dt><p>
     The user module sets the <u><code>$params</code></u> variable.
     For this message,
