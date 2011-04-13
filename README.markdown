@@ -60,13 +60,13 @@ The following additional modules, while not required, are highly recommended:
     [text format](http://drupal.org/node/779050)
     for post-template filtering.
 
-    *   [Line break converter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6),
-    *   [URL Filter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6),
-    *   [Emogrifier](http://drupal.org/project/emogrifier),
+    *   [Line break converter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6)
+    *   [URL Filter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6)
+    *   [Emogrifier](http://drupal.org/project/emogrifier)
     *   [Token support](http://drupal.org/project/token)
 
 *   Full MIME handling, including automatic generation of a plaintext
-    alternative part and conversion of images references to inline image
+    alternative part and conversion of image references to inline image
     attachments, is available simply by enabling the
     [Mail MIME](http://drupal.org/project/mailmime) module.
 

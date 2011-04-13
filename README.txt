@@ -62,14 +62,14 @@
        page. In their place, any combination of [15]over 200 filter
        modules may be used to create an email-specific [16]text format for
        post-template filtering.
-          + [17]Line break converter,
-          + [18]URL Filter,
-          + [19]Emogrifier,
+          + [17]Line break converter
+          + [18]URL Filter
+          + [19]Emogrifier
           + [20]Token support
      * Full MIME handling, including automatic generation of a plaintext
-       alternative part and conversion of images references to inline
-       image attachments, is available simply by enabling the [21]Mail
-       MIME module.
+       alternative part and conversion of image references to inline image
+       attachments, is available simply by enabling the [21]Mail MIME
+       module.
 
 [22]Configuration
 
