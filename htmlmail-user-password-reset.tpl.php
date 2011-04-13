@@ -82,7 +82,7 @@ else:
     <code><?php echo "$theme_path/$module_template"; ?></code>
   </p></li><li><?php
   endif;
-  if (!file_exists("$theme_path/$message_template")) ?><p>
+  if (!file_exists("$theme_path/$message_template")): ?><p>
     Copy<br />
     <u><code><?php echo "$template_path/$template_name"; ?></code></u>
     <br />to<br />
