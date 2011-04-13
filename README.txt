@@ -98,22 +98,22 @@
        [30]over 800 themes to style your messages, or [31]create your own
        for even more power and flexibility.
     3. Post-filtering
-       You may choose a text format to be used for filtering email
+       You may choose a [32]text format to be used for filtering email
        messages after theming. This allows you to use any combination of
-       [32]over 200 filter modules to make final changes to your message
+       [33]over 200 filter modules to make final changes to your message
        before sending.
        Here is a recommended configuration:
-          + [33]Emogrifier Converts stylesheets to inline style rules for
+          + [34]Emogrifier Converts stylesheets to inline style rules for
             consistent display on mobile devices and webmail.
-          + [34]Transliteration Converts non-ASCII text to US-ASCII
+          + [35]Transliteration Converts non-ASCII text to US-ASCII
             equivalents. This helps prevent Microsoft "smart-quotes" from
             appearing as question-marks in Mozilla Thunderbird.
-          + [35]Pathologic Converts relative URLS to absolute URLS so that
+          + [36]Pathologic Converts relative URLS to absolute URLS so that
             clickable links in your message will work as intended.
 
 Troubleshooting
 
-   Visit the [36]issue queue for support and feature requests.
+   Visit the [37]issue queue for support and feature requests.
 
 Related Modules
 
@@ -163,11 +163,11 @@ Documentation
 
 Original Author
 
-     * [37]Chris Herberte
+     * [38]Chris Herberte
 
 Current Maintainer
 
-     * [38]Bob Vincent
+     * [39]Bob Vincent
 
 References
 
@@ -202,10 +202,11 @@ References
   29. http://drupal.org/project/echo
   30. http://drupal.org/project/themes
   31. http://drupal.org/documentation/theme
-  32. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
-  33. http://drupal.org/project/emogrifier
-  34. http://drupal.org/project/filter_transliteration
-  35. http://drupal.org/project/pathologic
-  36. http://drupal.org/project/issues/htmlmail
-  37. http://drupal.org/user/1171
-  38. http://drupal.org/user/36148
+  32. http://drupal.org/node/779050
+  33. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
+  34. http://drupal.org/project/emogrifier
+  35. http://drupal.org/project/filter_transliteration
+  36. http://drupal.org/project/pathologic
+  37. http://drupal.org/project/issues/htmlmail
+  38. http://drupal.org/user/1171
+  39. http://drupal.org/user/36148

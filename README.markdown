@@ -107,8 +107,10 @@ The email message text goes through three transformations before sending:
 
 3.  <h3>Post-filtering</h3>
 
-    You may choose a <cite>text format</cite> to be used for filtering email
-    messages *after* theming. This allows you to use any combination of
+    You may choose a
+    [text format](http://drupal.org/node/779050)
+    to be used for filtering email messages *after* theming.
+    This allows you to use any combination of
     [over 200 filter modules](http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1)
     to make final changes to your message before sending.
 
