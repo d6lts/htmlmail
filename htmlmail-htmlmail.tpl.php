@@ -7,7 +7,7 @@
 ?>
 <h1><a href="http://drupal.org/project/htmlmail">HTML Mail</a> test message</h1>
 <div class="htmlmail-body">
-<?php print $body; ?>
+<?php echo $body; ?>
 </div>
 <?php if ($debug): ?>
 <hr />

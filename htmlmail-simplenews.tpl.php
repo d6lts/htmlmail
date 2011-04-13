@@ -60,7 +60,7 @@
 </div>
 <?php endif; ?>
 <div class="htmlmail-simplenews-body htmlmail-body">
-<?php print $body; ?>
+<?php echo $body; ?>
 </div>
 <?php if ($debug): ?>
 <hr />
