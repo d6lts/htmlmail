@@ -65,7 +65,7 @@ if ("$directory/$this_file" == "$theme_path/$message_template"): ?><p>
   </p></li><li><?php
 else: ?>
     Copy<br />
-    <u><code><?php echo "$directory/$this_file"; ?></code><u>
+    <u><code><?php echo "$directory/$this_file"; ?></code></u>
     <br />to<br />
     <u><code><?php echo "$theme_path/$message_template"; ?></code></u>.
   </p></li><li><p>
