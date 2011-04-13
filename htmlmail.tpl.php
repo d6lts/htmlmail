@@ -69,7 +69,7 @@
  *        Any module-specific parameters.
  *
  * $template_name
- *        The name of the template file.
+ *        The basename of the active template.
  *
  * $template_path
  *        The relative path to the template directory.

@@ -103,6 +103,10 @@ function htmlmail_admin_settings() {
   <dd>
     <p>Any module-specific parameters.</p>
   </dd>
+  <dt><strong><code>$template_name</code></strong></dt>
+  <dd>
+    <p>The basename of the active template.</p>
+  </dd>
   <dt><strong><code>$template_path</code></strong></dt>
   <dd>
     <p>The relative path to the template directory.</p>
