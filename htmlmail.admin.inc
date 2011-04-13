@@ -208,7 +208,7 @@ function htmlmail_admin_settings() {
     '#default_value' => variable_get('htmlmail_postfilter', ''),
     '#options' => $formats,
     '#suffix' => '<p>' . t(
-      'You may choose a <a href="!formats">input format</a> to be used for '
+      'You may choose an <a href="!formats">input format</a> to be used for '
       . 'filtering email messages <em>after</em> theming.  This allows you to '
       . 'use any combination of <a href="!filters">over 200 filter modules</a> '
       . 'to make final changes to your message before sending.',

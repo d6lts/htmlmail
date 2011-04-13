@@ -61,9 +61,9 @@
     <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail-user-password-reset.tpl.php"><code>htmlmail-user-password-reset.tpl.php</code></a>
     file to your <u><?php echo ucfirst($theme); ?></u> theme directory
     <u><code><?php echo $theme_path; ?></code></u>.
-  </p></dd></dl></li></ul></li><li><p>
+  </p></li><li><p>
     Edit the copied file.
-  </p></li></ul></dd><dt><p>
+  </p></li></ol></dd><dt><p>
     The user module sets the <u><code>$params</code></u> variable.
     For this message,
   </p></dt><dd><p><code><pre>

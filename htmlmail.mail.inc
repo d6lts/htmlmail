@@ -1,11 +1,9 @@
 <?php
 /**
  * @file
- * Parses and formats emails for sending using the MailMIME class.
+ * Formats and sends mail using the MailMIME class.
  *
- * This is a minimal-effort backport of the 7.x-2.x code, which implements
- * MailSystemInterface.
- *
+ * @see http://drupal.org/node/900794
  * @see http://api.drupal.org/api/drupal/includes--mail.inc/interface/MailSystemInterface/7
  * @see http://drupal.org/project/mailmime
  */

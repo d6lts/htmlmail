@@ -145,6 +145,6 @@
     variable.  For this message,
   </p></dt><dd><p><code><pre>
 $params = <?php var_export($params); ?>
-  </p></li></ol></dd><?php endif; ?></dl>
+  <pre></code></p></dd><?php endif; ?></dl>
 </div>
 <?php endif;
