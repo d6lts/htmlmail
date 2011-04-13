@@ -7,7 +7,7 @@
  * The following variables are available in this template:
  *
  *  - $message_id: The email message id, or "simplenews_$key"
- *  - $module: The sending module, or 'simplenews'.
+ *  - $module: The sending module, which is 'simplenews'.
  *  - $key: The simplenews action, which may be any of the following:
  *    - subscribe: New subscriber confirmation message.
  *    - unsubscribe: Unsubscribe confirmation message.
@@ -66,7 +66,10 @@
 <div class="htmlmail-simplenews-debug htmlmail-debug">
   <dl><dt><p>
     To customize your simplenews messages:
-  </p></dt><dd><ol><li><p><?php if (empty($theme_path)): ?>
+  </p></dt><dd><ol><li><p><?php if (empty($theme)): ?>
+    Visit <u>admin/settings/htmlmail</u> and select a theme to hold your
+    custom email template files.
+  </p></dt><dd><ol><li><p><?php elseif (empty($theme_path)): ?>
     Visit <u>admin/build/themes</u> to enable your selected
     <u><?php echo ucfirst($theme); ?></u> theme.
   </p></dt><dd><ol><li><p><?php endif; ?>

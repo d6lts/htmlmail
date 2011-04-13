@@ -107,7 +107,10 @@
 <div class="htmlmail-debug">
   <dl><dt><p>
     To customize this message:
-  </p></dt><dd><ol><li><p><?php if (empty($theme_path)): ?>
+  </p></dt><dd><ol><li><p><?php if (empty($theme)): ?>
+    Visit <u>admin/settings/htmlmail</u> and select a theme to hold your
+    custom email template files.
+  </p></dt><dd><ol><li><p><?php elseif (empty($theme_path)): ?>
     Visit <u>admin/build/themes</u> to enable your selected
     <u><?php echo ucfirst($theme); ?></u> theme.
   </p></dt><dd><ol><li><p><?php endif; ?>
@@ -122,7 +125,7 @@
     For message-specific customization, rename your copy to
     <code><?php echo $message_template; ?>.tpl.php</code>
   </p></li><li><p>
-    Edit the file.
+    Edit the renamed copy.
   </p></li><li><p>
     Send a test message to make sure your customizations worked.
   </p></li><li><p>
@@ -130,6 +133,5 @@
     please contribute your file as a feature request in the
     <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
   </p></li></ol></dd></dl>
-  <pre><code>$template_files = <?php print check_plain(var_export($template_files,1)); ?></code></pre>
 </div>
 <?php endif;
