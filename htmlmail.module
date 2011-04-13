@@ -114,7 +114,7 @@ function template_preprocess_htmlmail(array &$variables) {
   $message = $variables['message'];
   $variables += $message;
   $variables['debug'] = variable_get('htmlmail_debug', '0');
-  $variables['theme'] = htmlmail_get_selected_theme($message);
+  $variables['theme'] = htmlmail_get_selected_theme($variables);
   $variables['theme_path'] = drupal_get_path('theme', $variables['theme']);
   $variables['theme_url'] = url(
     $variables['theme_path'], array('absolute' => TRUE)
