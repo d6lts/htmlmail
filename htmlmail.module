@@ -119,9 +119,6 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['theme_url'] = url(
     $variables['theme_path'], array('absolute' => TRUE)
   );
-  $variables['template_url'] = url(
-    $variables['directory'], array('absolute' => TRUE)
-  );
   $variables['message_id'] = $variables['module'] . '_' . $variables['key'];
   $template = 'htmlmail-' . str_replace('_', '-', $variables['module']);
   $variables['template_files'][] = $template;

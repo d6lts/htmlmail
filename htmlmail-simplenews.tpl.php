@@ -50,6 +50,8 @@
  *  - $theme_path: The relative path to the Email theme directory.
  *  - $theme_url: The absolute url to the Email theme directory.
  */
+  $directory = dirname(__FILE__);
+  $template_url = url($directory, array('absolute' => TRUE));
 ?>
 <?php if ($key == 'node' || $key == 'test'): ?>
 <div class="htmlmail-simplenews-link">

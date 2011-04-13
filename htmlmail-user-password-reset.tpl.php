@@ -41,6 +41,8 @@
  *  - $theme_path: The relative path to the Email theme directory.
  *  - $theme_url: The absolute url to the Email theme directory.
  */
+  $directory = dirname(__FILE__);
+  $template_url = url($directory, array('absolute' => TRUE));
 ?>
 <div class="htmlmail-user-password-reset-body htmlmail-user-body htmlmail-body">
 <?php echo $body; ?>

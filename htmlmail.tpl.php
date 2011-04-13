@@ -103,6 +103,8 @@
  *
  * =========================================================== End instructions.
  */
+  $directory = dirname(__FILE__);
+  $template_url = url($directory, array('absolute' => TRUE));
 ?>
 <div class="htmlmail-body">
 <?php echo $body; ?>
