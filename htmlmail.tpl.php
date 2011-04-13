@@ -86,7 +86,7 @@
  * 2. http://drupal.org/project/htmlmail
  * 3. http://api.drupal.org/api/drupal/modules--user--user.pages.inc/function/user_pass_submit/6
  * 4. http://api.drupal.org/api/drupal/modules--user--user.module/6
- * 5. http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php
+ * 5. http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php
  * 6. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
  * 7. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail/6
  * 8. http://drupal.org/project/echo
@@ -112,7 +112,7 @@
     <u><?php echo ucfirst($theme); ?></u> theme.
   </p></dt><dd><ol><li><p><?php endif; ?>
     Copy the
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
+    <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail.tpl.php"><code>html.tpl.php</code></a>
     file to your <u><?php echo ucfirst($theme) ?></u> theme directory
     <u><code><?php echo $theme_path; ?></code></u>.
   </p></li><li><p>

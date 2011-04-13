@@ -16,7 +16,7 @@
     To customize this test message:
   </p></dt><dd><ol><li><p>
     Copy
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-htmlmail.tpl.php"><code>htmlmail-htmlmail.tpl.php</code></a>
+    <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail-htmlmail.tpl.php"><code>htmlmail-htmlmail.tpl.php</code></a>
     to your <q><?php echo ucfirst($theme) ?> theme</q> directory
     <u><code><?php echo $theme_path; ?></code></u>.
   </p></li></ul></p></li><li><p>

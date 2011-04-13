@@ -71,7 +71,7 @@
     <u><?php echo ucfirst($theme); ?></u> theme.
   </p></dt><dd><ol><li><p><?php endif; ?>
     Copy the
-    <a href="http://drupalcode.org/project/htmlmail.git/blob/refs/heads/6.x-2.x:/htmlmail-simplenews.tpl.php"><code>htmlmail-simplenews.tpl.php</code></a>
+    <a href="http://drupalcode.org/project/htmlmail.git/blob_plain/refs/heads/6.x-2.x:/htmlmail-simplenews.tpl.php"><code>htmlmail-simplenews.tpl.php</code></a>
     file to your <u><?php echo ucfirst($theme); ?></u> theme directory
     <u><code><?php echo $theme_path; ?></code></u>.
   </p></li><li><p>
