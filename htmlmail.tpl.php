@@ -130,5 +130,6 @@
     please contribute your file as a feature request in the
     <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
   </p></li></ol></dd></dl>
+  <pre><code>$template_files = <?php print check_plain(var_export($template_files,1)); ?></code></pre>
 </div>
 <?php endif;

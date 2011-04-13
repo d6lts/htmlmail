@@ -75,23 +75,31 @@ function htmlmail_menu() {
  * Implements hook_theme().
  */
 function htmlmail_theme() {
-  return array(
-    'htmlmail' => array(
-      'render element' => 'elements',
-      'template' => 'htmlmail',
-      'arguments' => array('message' => array()),
-    ),
-    'htmlmail_htmlmail' => array(
-      'render element' => 'elements',
-      'template' => 'htmlmail-htmlmail',
-      'arguments' => array('message' => array()),
-    ),
-    'htmlmail_simplenews' => array(
-      'render element' => 'elements',
-      'template' => 'htmlmail-simplenews',
-      'arguments' => array('message' => array()),
-    ),
+  $items = array();
+  $files = file_scan_directory(
+    drupal_get_path('module', 'htmlmail'), '/^htmlmail.*\.tpl\.php$/',
+    array('key' => 'name')
   );
+  if ($theme = htmlmail_get_selected_theme()) {
+    $files = array_merge(
+      $files, file_scan_directory(
+        drupal_get_path('theme', $theme), '/^htmlmail.*\.tpl\.php$/',
+        array('key' => 'name')
+      )
+    );
+  }
+  ksort($files);
+  foreach ($files as $file) {
+    $path = dirname($file->uri);
+    $template = substr($file->name, 0, -4);
+    $suggestion = str_replace('-', '_', $template);
+    $items[$suggestion] = array(
+      'render element' => 'elements',
+      'template' => $template,
+      'path' => $path,
+    );
+  }
+  return $items;
 }
 
 /**
