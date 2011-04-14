@@ -16,6 +16,13 @@ function htmlmail_update_6200() {
 }
 
 /**
+ * Increase module weight so dependent modules get loaded first.
+ */
+function htmlmail_update_6201() {
+  db_query("update {system} set weight = 10 where type = 'module' and name = 'htmlmail'");
+}
+
+/**
  * Implements hook_enable().
  */
 function htmlmail_enable() {
@@ -35,6 +42,13 @@ function htmlmail_disable() {
   if (function_exists('mailsystem_clear')) {
     mailsystem_clear(array('htmlmail' => 'HTMLMailSystem'));
   }
+}
+
+/**
+ * Implements hook_install().
+ */
+function htmlmail_install() {
+  htmlmail_update_6201();
 }
 
 /**
