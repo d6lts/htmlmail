@@ -1,7 +1,7 @@
 [1]HTML Mail
 
-   Lets you theme your outgoing messages the same way you theme the rest
-   of your website.
+   Lets you theme your messages the same way you theme the rest of your
+   website.
 
 [2]Requirement
 
@@ -64,23 +64,24 @@
        post-template filtering.
           + [17]Line break converter
           + [18]URL Filter
-          + [19]Emogrifier
-          + [20]Token support
+          + [19]Relative Path to Absolute URLs
+          + [20]Emogrifier
+          + [21]Token support
      * Full MIME handling, including automatic generation of a plaintext
        alternative part and conversion of image references to inline image
-       attachments, is available simply by enabling the [21]Mail MIME
+       attachments, is available simply by enabling the [22]Mail MIME
        module.
 
-[22]Configuration
+[23]Configuration
 
-   Visit the [23]Mail System settings page at admin/settings/mailsystem to
-   select which parts of Drupal will use [24]HTML Mail instead of the
-   [25]default [26]mail system.
+   Visit the [24]Mail System settings page at admin/settings/mailsystem to
+   select which parts of Drupal will use [25]HTML Mail instead of the
+   [26]default [27]mail system.
 
-   Visit the [27]HTML Mail settings page at admin/settings/htmlmail to
+   Visit the [28]HTML Mail settings page at admin/settings/htmlmail to
    select a theme and post-filter for your messages.
 
-[28]Theming
+[29]Theming
 
    The email message text goes through three transformations before
    sending:
@@ -93,32 +94,32 @@
        complete documentation on its usage.
     2. Theming
        You may choose a theme that will hold your templates from Step 1
-       above. If the [29]Echo module is installed, this theme will also be
+       above. If the [30]Echo module is installed, this theme will also be
        used to wrap your templated text in a webpage. You use any one of
-       [30]over 800 themes to style your messages, or [31]create your own
+       [31]over 800 themes to style your messages, or [32]create your own
        for even more power and flexibility.
     3. Post-filtering
-       You may choose a [32]text format to be used for filtering email
+       You may choose a [33]text format to be used for filtering email
        messages after theming. This allows you to use any combination of
-       [33]over 200 filter modules to make final changes to your message
+       [34]over 200 filter modules to make final changes to your message
        before sending.
        Here is a recommended configuration:
-          + [34]Emogrifier Converts stylesheets to inline style rules for
+          + [35]Emogrifier Converts stylesheets to inline style rules for
             consistent display on mobile devices and webmail.
-          + [35]Transliteration Converts non-ASCII text to US-ASCII
+          + [36]Transliteration Converts non-ASCII text to US-ASCII
             equivalents. This helps prevent Microsoft "smart-quotes" from
             appearing as question-marks in Mozilla Thunderbird.
-          + [36]Pathologic Converts relative URLS to absolute URLS so that
+          + [37]Pathologic Converts relative URLS to absolute URLS so that
             clickable links in your message will work as intended.
 
 Troubleshooting
 
-     * Double-check the [37]Mail System module settings and and make sure
+     * Double-check the [38]Mail System module settings and and make sure
        you selected HTMLMailSystem for your Site-wide default mail system.
-     * Try selecting the [ ] (Optional) Debug checkbox at the [38]HTML
+     * Try selecting the [ ] (Optional) Debug checkbox at the [39]HTML
        Mail module settings page and re-sending your message.
      * Clear your cache after changing any .tpl.php files.
-     * Visit the [39]issue queue for support and feature requests.
+     * Visit the [40]issue queue for support and feature requests.
 
 Related Modules
 
@@ -146,24 +147,24 @@ Related Modules
    Transliteration
           http://drupal.org/project/transliteration
 
-[40]Documentation
+[41]Documentation
 
-   [41]filter.module
-          [42]api.drupal.org/api/drupal/modules--filter--filter.module
+   [42]filter.module
+          [43]api.drupal.org/api/drupal/modules--filter--filter.module
 
-   [43]Installing contributed modules
-          [44]drupal.org/documentation/install/modules-themes/modules-5-6
+   [44]Installing contributed modules
+          [45]drupal.org/documentation/install/modules-themes/modules-5-6
 
-   [45]Theming guide
-          [46]drupal.org/documentation/theme
+   [46]Theming guide
+          [47]drupal.org/documentation/theme
 
 Original Author
 
-     * [47]Chris Herberte
+     * [48]Chris Herberte
 
 Current Maintainer
 
-     * [48]Bob Vincent
+     * [49]Bob Vincent
 
 References
 
@@ -185,33 +186,34 @@ References
   16. http://drupal.org/node/779050
   17. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/6
   18. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/6
-  19. http://drupal.org/project/emogrifier
-  20. http://drupal.org/project/token
-  21. http://drupal.org/project/mailmime
-  22. http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png
-  23. http://drupal.org/project/mailsystem
-  24. http://drupal.org/project/htmlmail
-  25. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
-  26. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
-  27. http://drupal.org/project/htmlmail
-  28. http://drupal.org/documentation/theme
-  29. http://drupal.org/project/echo
-  30. http://drupal.org/project/themes
-  31. http://drupal.org/documentation/theme
-  32. http://drupal.org/node/779050
-  33. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
-  34. http://drupal.org/project/emogrifier
-  35. http://drupal.org/project/filter_transliteration
-  36. http://drupal.org/project/pathologic
-  37. http://drupal.org/project/mailsystem
-  38. http://drupal.org/project/htmlmail
-  39. http://drupal.org/project/issues/htmlmail
-  40. http://drupal.org/project/documentation
-  41. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
+  19. http://drupal.org/project/rel_to_abs
+  20. http://www.pelagodesign.com/sidecar/emogrifier/
+  21. http://drupal.org/project/token
+  22. http://drupal.org/project/mailmime
+  23. http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png
+  24. http://drupal.org/project/mailsystem
+  25. http://drupal.org/project/htmlmail
+  26. http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7
+  27. http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7
+  28. http://drupal.org/project/htmlmail
+  29. http://drupal.org/documentation/theme
+  30. http://drupal.org/project/echo
+  31. http://drupal.org/project/themes
+  32. http://drupal.org/documentation/theme
+  33. http://drupal.org/node/779050
+  34. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
+  35. http://drupal.org/project/emogrifier
+  36. http://drupal.org/project/filter_transliteration
+  37. http://drupal.org/project/pathologic
+  38. http://drupal.org/project/mailsystem
+  39. http://drupal.org/project/htmlmail
+  40. http://drupal.org/project/issues/htmlmail
+  41. http://drupal.org/project/documentation
   42. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
-  43. http://drupal.org/documentation/install/modules-themes/modules-5-6
+  43. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
   44. http://drupal.org/documentation/install/modules-themes/modules-5-6
-  45. http://drupal.org/documentation/theme
+  45. http://drupal.org/documentation/install/modules-themes/modules-5-6
   46. http://drupal.org/documentation/theme
-  47. http://drupal.org/user/1171
-  48. http://drupal.org/user/36148
+  47. http://drupal.org/documentation/theme
+  48. http://drupal.org/user/1171
+  49. http://drupal.org/user/36148
