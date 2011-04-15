@@ -57,7 +57,7 @@
      * Any customized filters should be carefully tested, as some of the
        template variables have changed. Full documentation is provided
        both on the module configuration page (Click on the Instructions
-       link) and as comments in the htmlmail.tpl.php file itself.
+       link) and as comments within the htmlmail.tpl.php file itself.
      * The following options have been removed from the module settings
        page. In their place, any combination of [15]over 200 filter
        modules may be used to create an email-specific [16]text format for
@@ -114,8 +114,7 @@
 Troubleshooting
 
      * Double-check the [37]Mail System module settings and and make sure
-       you selected HTMLMailSystem for your Site-wide default
-       (default-system) mail system.
+       you selected HTMLMailSystem for your Site-wide default mail system.
      * Try selecting the [ ] (Optional) Debug checkbox at the [38]HTML
        Mail module settings page and re-sending your message.
      * Clear your cache after changing any .tpl.php files.

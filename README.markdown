@@ -51,7 +51,7 @@ The following additional modules, while not required, are highly recommended:
 *   Any customized filters should be carefully tested, as some of the template
     variables have changed.  Full documentation is provided both on the module
     configuration page (Click on the <u>Instructions</u> link) and as comments
-    in the `htmlmail.tpl.php` file itself.
+    within the `htmlmail.tpl.php` file itself.
 
 *   The following options have been removed from the module settings page.  In
     their place, any combination of
@@ -134,7 +134,7 @@ The email message text goes through three transformations before sending:
 *   Double-check the [Mail System](http://drupal.org/project/mailsystem)
     module settings and and make sure you selected
     <u><code>HTMLMailSystem</code></u> for your
-    <u>Site-wide default *(default-system)*</u> mail system.
+    <u>Site-wide default mail system</u>.
 
 *   Try selecting the <u><code>[ ]</code> *(Optional)* Debug</u> checkbox
     at the [HTML Mail](http://drupal.org/project/htmlmail) module 
