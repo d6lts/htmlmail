@@ -12,8 +12,7 @@ function htmlmail_init() {
   if (!module_exists('mailsystem')) {
     module_disable(array('htmlmail'));
     drupal_set_message(
-      t('Please install the required <a href="!mailsystem">Mail System</a> '
-        . 'module, then re-enable <a href="!htmlmail">HTML Mail</a>',
+      t('Please install the required <a href="!mailsystem">Mail System</a> module, then re-enable <a href="!htmlmail">HTML Mail</a>',
         array(
           '!mailsystem' => url('http://drupal.org/project/mailsystem'),
           '!htmlmail' => url('http://drupal.org/project/htmlmail'),
@@ -37,7 +36,10 @@ function htmlmail_help($path, $arg) {
     case 'admin/settings/htmlmail':
       return '<h2>' . t('Theming') . '</h2><p>' . t('The email message goes through three transformations before sending:') . '</p>';
     case 'admin/help#htmlmail':
-      return '<p>' . t("HTML Mail provides formatting and semantic markup capabilities in email that are not available with plain text.") . '</p>';
+      return '<p>'
+        . t('<a href="!htmlmail">HTML Mail</a> lets you theme your messages the same way you theme the rest of your website.',
+          array('!htmlmail' => 'http://drupal.org/project/htmlmail')
+        ) . '</p>';
     default:
       return '';
   }
@@ -151,7 +153,7 @@ function htmlmail_mail($key, &$message, $params) {
  * Implements hook_user().
  */
 function htmlmail_user($op, &$edit, $account, $category) {
-  switch("$op.$category") {
+  switch ("$op.$category") {
     case 'form.account':
     case 'register.':
       return array(
@@ -163,10 +165,7 @@ function htmlmail_user($op, &$edit, $account, $category) {
             '#type' => 'checkbox',
             '#title' => t('Plaintext-only emails'),
             '#default_value' => !empty($account->htmlmail_plaintext),
-            '#description' => t(
-              'The %htmlmail module can send emails with fonts, styles, and '
-              . 'other HTML formatting.  If you prefer to receive all your '
-              . 'emails in plain text, select this option.',
+            '#description' => t('The %htmlmail module can send emails with fonts, styles, and other HTML formatting.  If you prefer to receive all your emails in unformatted plain text, select this option.',
               array('%htmlmail' => 'HTML Mail')
             ),
           ),

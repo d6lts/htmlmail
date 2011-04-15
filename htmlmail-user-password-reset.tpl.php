@@ -60,7 +60,7 @@
     and select a theme to hold your custom email template files.
   </p></li><li><p><?php elseif (empty($theme_path)): ?>
     Visit <u>admin/build/themes</u>
-    to enable your selected <u><?php echo ucfirst($theme); ?></u> theme.
+    to enable your selected <u><?php echo drupal_ucfirst($theme); ?></u> theme.
   </p></li><li><?php endif;
 if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
     Edit your<br />

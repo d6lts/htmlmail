@@ -1,6 +1,5 @@
 ## [HTML Mail](http://drupal.org/project/htmlmail)
-Lets you theme your outgoing messages the same way you theme the rest of your
-website.
+Lets you theme your messages the same way you theme the rest of your website.
 
 ## [Requirement](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
 
@@ -137,7 +136,7 @@ The email message text goes through three transformations before sending:
     <u>Site-wide default mail system</u>.
 
 *   Try selecting the <u><code>[ ]</code> *(Optional)* Debug</u> checkbox
-    at the [HTML Mail](http://drupal.org/project/htmlmail) module 
+    at the [HTML Mail](http://drupal.org/project/htmlmail) module
     settings page and re-sending your message.
 
 *   Clear your cache after changing any <u><code>.tpl.php</code></u>
