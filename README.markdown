@@ -38,6 +38,12 @@ The following additional modules, while not required, are highly recommended:
 
 ## [Updating from previous versions](http://drupal.org/node/250790)
 
+The [6.x-2.x](http://drupal.org/node/1119548) branch shares 97% of its code
+with the [7.x-2.x](http://drupal.org/node/1106064) branch, but only 2.5% of
+its code with the [6.x-1.x](http://drupal.org/node/329828) branch.
+
+Let your compatibility expectations be adjusted accordingly.
+
 *   Check the module dependencies, as they have changed.  The latest version of
     [HTML Mail](http://drupal.org/project/htmlmail) depends on the
     [Mail System](http://drupal.org/project/mailsystem) module and will not
