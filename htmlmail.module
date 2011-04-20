@@ -152,7 +152,7 @@ function htmlmail_mail($key, &$message, $params) {
 /**
  * Implements hook_user().
  */
-function htmlmail_user($op, &$edit, $account, $category) {
+function htmlmail_user($op, &$edit, $account, $category = NULL) {
   switch ("$op.$category") {
     case 'form.account':
     case 'register.':
