@@ -44,6 +44,8 @@ function htmlmail_requirements($phase) {
 }
 
 /**
+ * Implements hook_update_N().
+ *
  * Removes variables that are no longer used.
  */
 function htmlmail_update_6200() {
@@ -54,6 +56,8 @@ function htmlmail_update_6200() {
 }
 
 /**
+ * Implements hook_update_N().
+ *
  * Increase module weight so dependent modules get loaded first.
  */
 function htmlmail_update_6202() {
