@@ -123,7 +123,9 @@ Troubleshooting
      * Try selecting the [ ] (Optional) Debug checkbox at the [42]HTML
        Mail module settings page and re-sending your message.
      * Clear your cache after changing any .tpl.php files.
-     * Visit the [43]issue queue for support and feature requests.
+     * If you use a post-filter, make sure your filter settings page looks
+       like [43]this.
+     * Visit the [44]issue queue for support and feature requests.
 
 Related Modules
 
@@ -151,24 +153,24 @@ Related Modules
    Transliteration
           http://drupal.org/project/transliteration
 
-[44]Documentation
+[45]Documentation
 
-   [45]filter.module
-          [46]api.drupal.org/api/drupal/modules--filter--filter.module
+   [46]filter.module
+          [47]api.drupal.org/api/drupal/modules--filter--filter.module
 
-   [47]Installing contributed modules
-          [48]drupal.org/documentation/install/modules-themes/modules-5-6
+   [48]Installing contributed modules
+          [49]drupal.org/documentation/install/modules-themes/modules-5-6
 
-   [49]Theming guide
-          [50]drupal.org/documentation/theme
+   [50]Theming guide
+          [51]drupal.org/documentation/theme
 
 Original Author
 
-     * [51]Chris Herberte
+     * [52]Chris Herberte
 
 Current Maintainer
 
-     * [52]Bob Vincent
+     * [53]Bob Vincent
 
 References
 
@@ -214,13 +216,14 @@ References
   40. http://drupal.org/project/pathologic
   41. http://drupal.org/project/mailsystem
   42. http://drupal.org/project/htmlmail
-  43. http://drupal.org/project/issues/htmlmail
-  44. http://drupal.org/project/documentation
-  45. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
+  43. http://drupal.org/node/1130960
+  44. http://drupal.org/project/issues/htmlmail
+  45. http://drupal.org/project/documentation
   46. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
-  47. http://drupal.org/documentation/install/modules-themes/modules-5-6
+  47. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
   48. http://drupal.org/documentation/install/modules-themes/modules-5-6
-  49. http://drupal.org/documentation/theme
+  49. http://drupal.org/documentation/install/modules-themes/modules-5-6
   50. http://drupal.org/documentation/theme
-  51. http://drupal.org/user/1171
-  52. http://drupal.org/user/36148
+  51. http://drupal.org/documentation/theme
+  52. http://drupal.org/user/1171
+  53. http://drupal.org/user/36148
