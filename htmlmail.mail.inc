@@ -51,7 +51,7 @@ class HTMLMailSystem implements MailSystemInterface {
       // Store the fully-themed HTML body.
       if (isset($message['MailMIME'])) {
         $message['MailMIME']->setHTMLBody($body);
-        list($message['headers'], $message['body']) = $mime->toEmail($message['headers'];
+        list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
       else {
         $message['headers']['Content-Type'] = 'text/html';
