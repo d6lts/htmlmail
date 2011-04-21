@@ -52,7 +52,7 @@ class HTMLMailSystem implements MailSystemInterface {
       if (isset($message['MailMIME'])) {
         $mime = &$message['MailMIME'];
         $mime->setHTMLBody($body);
-        list($message['headers'], $message['body']) = $mime->toEmail($message['headers'];
+        list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
       else {
         $message['headers']['Content-Type'] = 'text/html';
