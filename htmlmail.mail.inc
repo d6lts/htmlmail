@@ -50,6 +50,7 @@ class HTMLMailSystem implements MailSystemInterface {
       }
       // Store the fully-themed HTML body.
       if (isset($message['MailMIME'])) {
+        $mime = &$message['MailMIME'];
         $message['MailMIME']->setHTMLBody($body);
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
@@ -60,8 +61,9 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     else {
       if (isset($message['MailMIME'])) {
-        $message['MailMIME']->setHTMLBody('');
-        $message['MailMIME']->setContentType('text/plain');
+        $mime = &$message['MailMIME'];
+        $mime->setHTMLBody('');
+        $mime->setContentType('text/plain');
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
       else {
