@@ -6,24 +6,6 @@
  */
 
 /**
- * Implements hook_init().
- */
-function htmlmail_init() {
-  if (!module_exists('mailsystem')) {
-    module_disable(array('htmlmail'));
-    drupal_set_message(
-      t('Please install the required <a href="!mailsystem">Mail System</a> module, then re-enable <a href="!htmlmail">HTML Mail</a>',
-        array(
-          '!mailsystem' => url('http://drupal.org/project/mailsystem'),
-          '!htmlmail' => url('http://drupal.org/project/htmlmail'),
-        )
-      )
-    );
-    drupal_goto('admin/modules');
-  }
-}
-
-/**
  * Implements hook_help().
  */
 function htmlmail_help($path, $arg) {
