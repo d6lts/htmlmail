@@ -42,10 +42,7 @@ function htmlmail_update_7202() {
  * Implements hook_enable().
  */
 function htmlmail_enable() {
-  // Load mailsystem if necessary.
-  if (!function_exists('mailsystem_set')) {
-    module_load_include('module', 'mailsystem');
-  }
+  module_load_include('module', 'mailsystem');
   mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
 }
 
