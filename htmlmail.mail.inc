@@ -50,7 +50,9 @@ class HTMLMailSystem implements MailSystemInterface {
       }
       // Store the fully-themed HTML body.
       if (isset($message['MailMIME'])) {
-        $message['MailMIME']->setHTMLBody($body);
+        $mime = &$message['MailMIME'];
+        $mime->setHTMLBody($body);
+        list($message['headers'], $message['body']) = $mime->toEmail($message['headers'];
       }
       else {
         $message['headers']['Content-Type'] = 'text/html';
@@ -59,8 +61,10 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     else {
       if (isset($message['MailMIME'])) {
-        $message['MailMIME']->setHTMLBody('');
-        $message['MailMIME']->setContentType('text/plain');
+        $mime = &$message['MailMIME'];
+        $mime->setHTMLBody('');
+        $mime->setContentType('text/plain');
+        list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
       else {
         $message['body'] = $plain;
@@ -130,19 +134,18 @@ class HTMLMailSystem implements MailSystemInterface {
       }
       $message['to'] = $message['headers']['To'];
     }
-    if (isset($message['MailMIME'])) {
-      $mime = &$message['MailMIME'];
+    if (class_exists('MailMIME')) {
+      $mime = new MailMIME();
       $to = $mime->encodeHeader('to', $message['to']);
       $subject = $mime->encodeHeader('subject', $message['subject']);
-      list($headers, $body) = $mime->toEmail($message['headers']);
-      $headers = $mime->txtHeaders($headers);
+      $headers = $mime->txtHeaders($message['headers']);
     }
     else {
       $to = mime_header_encode($message['to']);
       $subject = mime_header_encode($message['subject']);
-      $body = preg_replace('#\r?\n#', $eol, $message['body']);
       $headers = $this->txtHeaders($message['headers']);
     }
+    $body = preg_replace('#(\r\n|\r|\n)#s', $eol, $message['body']);
     // Check for empty body.
     if (empty($body)) {
       watchdog(
