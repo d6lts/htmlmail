@@ -114,8 +114,8 @@
 <?php echo $body; ?>
 </div>
 <?php if ($debug):
-  $module_template = "htmlmail--$module";
-  $message_template = "$module_template--$key";
+  $module_template = "htmlmail--$module.tpl.php";
+  $message_template = "htmlmail--$module--$key.tpl.php";
 ?>
 <hr />
 <div class="htmlmail-debug">
@@ -131,27 +131,27 @@
   </p></li><li><?php endif;
 if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
     Edit your<br />
-    <u><code><?php echo "$template_path/$template_name"; ?></code></u>
+    <code><?php echo "$template_path/$template_name"; ?></code>
     <br />file.
   </p></li><li><?php
 else:
   if (!file_exists("$theme_path/htmlmail.tpl.php")): ?><p>
     Copy<br />
-    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
     <br />to<br />
-    <u><code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code>
   </p></li><li><?php
   endif;
   if (!file_exists("$theme_path/$module_template")): ?><p>
     For module-specific customization, copy<br />
-    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
     <br />to<br />
     <code><?php echo "$theme_path/$module_template"; ?></code>
   </p></li><li><?php
   endif;
   if (!file_exists("$theme_path/$message_template")): ?><p>
     For message-specific customization, copy<br />
-    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
     <br />to<br />
     <code><?php echo "$theme_path/$message_template"; ?></code>
   </p></li><li><?php endif; ?><p>

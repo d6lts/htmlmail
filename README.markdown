@@ -150,8 +150,7 @@ The email message text goes through three transformations before sending:
 *   Clear your cache after changing any <u><code>.tpl.php</code></u>
     files.
 
-*   If you use [Pathologic](http://drupal.org/project/pathologic) in your
-    output filter, make sure your filter settings page looks like
+*   If you use a post-filter, make sure your filter settings page looks like
     [this](http://drupal.org/node/1130960).
 
 *   Visit the [issue queue](http://drupal.org/project/issues/htmlmail)
