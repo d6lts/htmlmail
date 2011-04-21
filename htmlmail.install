@@ -6,6 +6,44 @@
  */
 
 /**
+ * Implements hook_requirements().
+ *
+ * Ensures that the newly-required autoload module is available, or else
+ * disables the htmlmail module and returns an informative error message.
+ */
+function htmlmail_requirements($phase) {
+  if ($phase === 'install' || module_exists('autoload')) {
+    return array();
+  }
+  $args = array(
+    '!autoload' => url('http://drupal.org/project/autoload'),
+    '%autoload' => 'Autoload',
+    '!htmlmail' => url('http://drupal.org/project/htmlmail'),
+    '%htmlmail' => 'HTML Mail',
+  );
+  if ( module_enable(array('autoload'))
+    && module_load_include('module', 'autoload')
+  ) {
+    autoload_boot();
+    autoload_registry_rebuild();
+    drupal_set_message(
+      t('The %autoload module has been enabled because the %htmlmail module now requires it.', $args)
+    );
+    return array();
+  }
+  return array(
+    'htmlmail_autoload' => array(
+      'title' => t('%autoload module', $args),
+      'value' => t('Not installed'),
+      'description' => t(
+        'The <a href="!htmlmail">%htmlmail</a> module dependencies have changed.  Please download and install the required <a hrevf="!autoload">%autload</a> module, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+      ),
+      'severity' => REQUIREMENT_ERROR,
+    ),
+  );
+}
+
+/**
  * Removes variables that are no longer used.
  */
 function htmlmail_update_6200() {
@@ -23,13 +61,27 @@ function htmlmail_update_6202() {
 }
 
 /**
+ * Implements hook_update_N().
+ *
+ * @see htmlmail_requirements()
+ */
+function htmlmail_update_6203() {
+  if ($requirements = htmlmail_requirements('runtime')) {
+    return array(
+      '#abort' => array(
+        'success' => FALSE,
+        'query' => $requirements['htmlmail_autoload']['description'],
+      )
+    );
+  }
+}
+
+/**
  * Implements hook_enable().
  */
 function htmlmail_enable() {
   // Load mailsystem if necessary.
-  if (!function_exists('mailsystem_set')) {
-    module_load_include('module', 'mailsystem');
-  }
+  module_load_include('module', 'mailsystem');
   mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
 }
 

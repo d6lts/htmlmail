@@ -21,11 +21,6 @@ function htmlmail_init() {
     );
     drupal_goto('admin/build/modules');
   }
-  // Drupal 6 doesn't have class autoload.
-  if (module_exists('mailmime')) {
-    module_load_include('inc', 'mailmime');
-  }
-  module_load_include('inc', 'htmlmail', 'htmlmail.mail');
 }
 
 /**
