@@ -205,7 +205,8 @@ function htmlmail_admin_settings() {
       array('!transliteration' => url('http;//drupal.org/project/filter_transliteration'))
     )
     . '</dt><dd>'
-    . t('Converts non-ASCII text to US-ASCII equivalents. This helps prevent Microsoft <q>smart-quotes</q> from appearing as question-marks in Mozilla Thunderbird.')
+    . t('Converts non-ASCII text to US-ASCII equivalents. This helps prevent Microsoft <q>smart-quotes</q> from appearing as question-marks in Mozilla Thunderbird.'
+    )
     . '</dd></dl></li><li><dl><dt>'
     . t('<a href="!pathologic">Pathologic</a>',
       array('!pathologic' => url('http://drupal.org/project/pathologic'))
