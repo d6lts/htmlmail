@@ -131,27 +131,27 @@
   </p></li><li><?php endif;
 if ("$template_path/$template_name" == "$theme_path/$message_template"): ?><p>
     Edit your<br />
-    <u><code><?php echo "$template_path/$template_name"; ?></code></u>
+    <code><?php echo "$template_path/$template_name"; ?></code>
     <br />file.
   </p></li><li><?php
 else:
   if (!file_exists("$theme_path/htmlmail.tpl.php")): ?><p>
     Copy<br />
-    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
     <br />to<br />
-    <u><code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$theme_path/htmlmail.tpl.php"; ?></code>
   </p></li><li><?php
   endif;
   if (!file_exists("$theme_path/$module_template")): ?><p>
     For module-specific customization, copy<br />
-    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
     <br />to<br />
     <code><?php echo "$theme_path/$module_template"; ?></code>
   </p></li><li><?php
   endif;
   if (!file_exists("$theme_path/$message_template")): ?><p>
     For message-specific customization, copy<br />
-    <u><code><?php echo "$module_path/htmlmail.tpl.php"; ?></code></u>
+    <code><?php echo "$module_path/htmlmail.tpl.php"; ?></code>
     <br />to<br />
     <code><?php echo "$theme_path/$message_template"; ?></code>
   </p></li><li><?php endif; ?><p>
@@ -164,7 +164,7 @@ endif; ?><p>
     please contribute your file as a feature request in the
     <a href="http://drupal.org/node/add/project-issue/htmlmail">issue queue</a>.
   </p></li></ol></dd><?php if (!empty($params)): ?><dt><p>
-    The <?php echo $module; ?> module sets the <u><code>$params</code></u>
+    The <?php echo $module; ?> module sets the <code>$params</code>
     variable.  For this message,
   </p></dt><dd><p><code><pre>
 $params = <?php var_export($params); ?>

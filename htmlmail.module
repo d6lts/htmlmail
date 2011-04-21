@@ -119,7 +119,13 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['debug'] = variable_get('htmlmail_debug', '0');
   $variables['theme'] = htmlmail_get_selected_theme($variables);
   $variables['module_path'] = drupal_get_path('module', 'htmlmail');
-  $variables['theme_path'] = drupal_get_path('theme', $variables['theme']);
+  if (empty($variables['theme'])) {
+    $variables['theme'] = 'no theme';
+    $variables['theme_path'] = $variables['module_path'];
+  }
+  else {
+    $variables['theme_path'] = drupal_get_path('theme', $variables['theme']);
+  }
   $variables['theme_url'] = url(
     $variables['theme_path'], array('absolute' => TRUE)
   );

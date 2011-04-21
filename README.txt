@@ -49,7 +49,7 @@
 [11]Updating from previous versions
 
    The [12]6.x-2.x branch shares 97% of its code with the [13]7.x-2.x
-   branch, but only 2.5% of its code with the [14]6.x-1.x branch.
+   branch, but only 8% of its code with the [14]6.x-1.x branch.
 
    Let your compatibility expectations be adjusted accordingly.
      * Check the module dependencies, as they have changed. The latest
