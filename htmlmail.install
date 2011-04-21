@@ -6,6 +6,8 @@
  */
 
 /**
+ * Implements hook_update_N().
+ *
  * Removes variables that are no longer used.
  */
 function htmlmail_update_7200() {
@@ -15,6 +17,8 @@ function htmlmail_update_7200() {
 }
 
 /**
+ * Implements hook_update_N().
+ *
  * Rename HTMLMailMailSystem to HTMLMailSystem.
  */
 function htmlmail_update_7201() {
@@ -26,6 +30,8 @@ function htmlmail_update_7201() {
 }
 
 /**
+ * Implements hook_update_N().
+ *
  * Increase module weight so dependent modules get loaded first.
  */
 function htmlmail_update_7202() {
