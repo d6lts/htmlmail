@@ -5,7 +5,7 @@
 
 [2]Requirements
 
-     * (New) [3]Autoload
+     * [3]Autoload (New for 6.x-2.28)
      * [4]Mail System
 
 [5]Installation
