@@ -84,7 +84,8 @@ function htmlmail_update_6203() {
  * Implements hook_enable().
  */
 function htmlmail_enable() {
-  // Load mailsystem if necessary.
+  // Load autoload and mailsystem if necessary.
+  module_load_include('module', 'autoload');
   module_load_include('module', 'mailsystem');
   mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
 }
