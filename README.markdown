@@ -1,7 +1,9 @@
 ## [HTML Mail](http://drupal.org/project/htmlmail)
 Lets you theme your messages the same way you theme the rest of your website.
 
-## [Requirement](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
+## [Requirements](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
+
+*   *(New)* [Autoload](http://drupal.org/project/autoload)
 
 *   [Mail System](http://drupal.org/project/mailsystem)
 
