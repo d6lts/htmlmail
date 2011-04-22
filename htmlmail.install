@@ -12,7 +12,10 @@
  * disables the htmlmail module and returns an informative error message.
  */
 function htmlmail_requirements($phase) {
-  if ($phase === 'install' || module_exists('autoload')) {
+  if ( $phase === 'install'
+    || ( module_exists('autoload')
+      && function_exists('mailsystem_create_class') )
+  ){
     return array();
   }
   $args = array(
@@ -20,27 +23,43 @@ function htmlmail_requirements($phase) {
     '%autoload' => 'Autoload',
     '!htmlmail' => url('http://drupal.org/project/htmlmail'),
     '%htmlmail' => 'HTML Mail',
+    '!mailsystem' => url('http://drupal.org/project/mailsystem'),
+    '%mailsystem' => 'Mail System',
   );
-  if ( module_enable(array('autoload'))
-    && module_load_include('module', 'autoload')
-  ) {
-    autoload_boot();
-    autoload_registry_rebuild();
-    drupal_set_message(
-      t('The %autoload module has been enabled because the %htmlmail module now requires it.', $args)
-    );
-    return array();
-  }
-  return array(
-    'htmlmail_autoload' => array(
-      'title' => t('%autoload module', $args),
-      'value' => t('Not installed'),
-      'description' => t(
-        'The <a href="!htmlmail">%htmlmail</a> module dependencies have changed.  Please download and install the required <a href="!autoload">%autoload</a> module, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+  if (!module_exists('autoload')) {
+    if ( module_enable(array('autoload'))
+      && module_load_include('module', 'autoload')
+    ) {
+      autoload_boot();
+      autoload_registry_rebuild();
+      drupal_set_message(
+        t('The %autoload module has been enabled because the %htmlmail module now requires it.', $args)
+      );
+      return array();
+    }
+    return array(
+      'htmlmail_autoload' => array(
+        'title' => t('%autoload module', $args),
+        'value' => t('Not installed'),
+        'description' => t(
+          'The <a href="!htmlmail">%htmlmail</a> module dependencies have changed.  Please download and install the required <a href="!autoload">%autoload</a> module, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+        ),
+        'severity' => REQUIREMENT_ERROR,
       ),
-      'severity' => REQUIREMENT_ERROR,
-    ),
-  );
+    );
+  }
+  if (!function_exists('mailsystem_create_class')) {
+    return array(
+      'htmlmail_mailsystem' => array(
+        'title' => t('%mailsystem module', $args),
+        'value' => t('6.x-1.x'),
+        'description' => t(
+          '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 6.x-2.2 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+        ),
+        'severity' => REQUIREMENT ERROR,
+      ),
+    );
+  }
 }
 
 /**
@@ -69,12 +88,13 @@ function htmlmail_update_6202() {
  *
  * @see htmlmail_requirements()
  */
-function htmlmail_update_6203() {
+function htmlmail_update_6204() {
   if ($requirements = htmlmail_requirements('runtime')) {
+    $requirement = array_shift($requirements);
     return array(
       '#abort' => array(
         'success' => FALSE,
-        'query' => $requirements['htmlmail_autoload']['description'],
+        'query' => $requirement['description'],
       )
     );
   }
