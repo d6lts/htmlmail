@@ -36,7 +36,7 @@ function htmlmail_requirements($phase) {
       'title' => t('%autoload module', $args),
       'value' => t('Not installed'),
       'description' => t(
-        'The <a href="!htmlmail">%htmlmail</a> module dependencies have changed.  Please download and install the required <a hrevf="!autoload">%autoload</a> module, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+        'The <a href="!htmlmail">%htmlmail</a> module dependencies have changed.  Please download and install the required <a href="!autoload">%autoload</a> module, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
       ),
       'severity' => REQUIREMENT_ERROR,
     ),
