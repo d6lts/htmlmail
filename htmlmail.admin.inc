@@ -232,11 +232,7 @@ function htmlmail_test_form($form_values = NULL) {
       ),
     )
   );
-
-  // Set the input format to be the same as the selected prefilter format.
-  $defaults['body']['format'] =
-    variable_get('htmlmail_prefilter', filter_fallback_format());
-
+  $defaults['body']['format'] = filter_fallback_format());
   $form['to'] = array(
     '#type' => 'textfield',
     '#title' => t('To'),
@@ -278,8 +274,6 @@ function htmlmail_test_form_submit($form, &$form_state) {
   );
   // Set the defaults for reuse.
   variable_set('htmlmail_test', $defaults);
-  // @todo Get user feedback on this UI change?
-  variable_set('htmlmail_prefilter', $defaults['body']['format']);
   // Send the email.
   $params = array(
     'subject' => $form_state['values']['subject'],

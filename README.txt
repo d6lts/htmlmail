@@ -48,14 +48,15 @@
 
 [11]Updating from previous versions
 
-   The [12]7.x-2.x branch shares 97% of its code with the [13]6.x-2.x
+   The [12]7.x-2.x branch shares 94% of its code with the [13]6.x-2.x
    branch, but only 15% of its code with the [14]7.x-1.x branch, and a
    tiny 8% of its code with the [15]6.x-1.x branch.
 
    Let your compatibility expectations be adjusted accordingly.
+     * Run update.php immediately after uploading new code.
      * Check the module dependencies, as they have changed. The latest
-       version of [16]HTML Mail depends on the [17]Mail System module and
-       will not work without it.
+       version of [16]HTML Mail depends on the [17]Mail System module
+       (7.x-2.2 or later) and will not work without it.
      * The user-interface for adding email header and footer text has been
        removed. Headers and footers may be added by template files and/or
        by enabling the [18]Echo module.

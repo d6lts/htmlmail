@@ -5,6 +5,31 @@
  * Installation for HTML Mail module.
  */
 
+
+/**
+ * Implements hook_requirements().
+ *
+ * Ensures that the newly-required autoload module is available, or else
+ * disables the htmlmail module and returns an informative error message.
+ */
+function htmlmail_requirements($phase) {
+  if ( $phase === 'install'
+    || function_exists('mailsystem_create_class')
+  ) {
+    return array();
+  }
+  return array(
+    'htmlmail_mailsystem' => array(
+      'title' => t('%mailsystem module', $args),
+      'value' => t('7.x-1.x'),
+      'description' => t(
+        '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 7.x-2.2 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+      ),
+      'severity' => REQUIREMENT ERROR,
+    ),
+  );
+}
+
 /**
  * Implements hook_update_N().
  *
@@ -36,6 +61,13 @@ function htmlmail_update_7201() {
  */
 function htmlmail_update_7202() {
   db_query("UPDATE {system} SET weight = 10 WHERE type = 'module' AND name = 'htmlmail'");
+}
+
+function htmlmail_update_7203() {
+  if ($requirements = htmlmail_requirements('runtime')) {
+    $requirement = array_shift($requirements);
+    throw new DrupalUpdateException($requirement['description']);
+  }
 }
 
 /**
