@@ -49,7 +49,7 @@
 
 [12]Updating from previous versions
 
-   The [13]6.x-2.x branch shares 97% of its code with the [14]7.x-2.x
+   The [13]6.x-2.x branch shares 94% of its code with the [14]7.x-2.x
    branch, but only 8% of its code with the [15]6.x-1.x branch.
 
    Let your compatibility expectations be adjusted accordingly.

@@ -40,7 +40,7 @@ The following additional modules, while not required, are highly recommended:
 
 ## [Updating from previous versions](http://drupal.org/node/250790)
 
-The [6.x-2.x](http://drupal.org/node/1119548) branch shares 97% of its code
+The [6.x-2.x](http://drupal.org/node/1119548) branch shares 94% of its code
 with the [7.x-2.x](http://drupal.org/node/1106064) branch, but only 8% of
 its code with the [6.x-1.x](http://drupal.org/node/329828) branch.
 
