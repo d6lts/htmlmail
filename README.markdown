@@ -46,10 +46,13 @@ its code with the [6.x-1.x](http://drupal.org/node/329828) branch.
 
 Let your compatibility expectations be adjusted accordingly.
 
-*   Check the module dependencies, as they have changed.  The latest version of
-    [HTML Mail](http://drupal.org/project/htmlmail) depends on the
-    [Mail System](http://drupal.org/project/mailsystem) module and will not
-    work without it.
+*   Run `update.php` *immediately* after uploading new code.
+
+*   Check the module dependencies, as they have changed.  This version of
+    [HTML Mail](http://drupal.org/project/htmlmail) depends on:
+
+    *   [Autoload](http://drupal.org/project/autoload)
+    *   [Mail System](http://drupal.org/project/mailsystem) (6.x-2.2 or later)
 
 *   The user-interface for adding email header and footer text has been removed.
     Headers and footers may be added by template files and/or by enabling the
