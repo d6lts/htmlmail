@@ -36,7 +36,13 @@ class HTMLMailSystem implements MailSystemInterface {
     else {
       $message['body'] = implode("\n", $message['body']);
       $body = theme('htmlmail', $message);
-      $plain = drupal_html_to_text($body);
+      // @todo Remove this when issue #299138 gets resolved.
+      if (function_exists('mailsystem_html_to_text')) {
+        $plain = mailsystem_html_to_text($body);
+      }
+      else {
+        $plain = drupal_html_to_text($body);
+      }
     }
     // Check to see whether recipient allows non-plaintext.
     if (htmlmail_is_allowed($message['to'])) {
@@ -103,7 +109,13 @@ class HTMLMailSystem implements MailSystemInterface {
     // Theme with htmlmail.tpl.php.
     $body = theme('htmlmail', $email);
     $mime->setHTMLBody($body);
-    $mime->setTXTBody(drupal_html_to_text($body));
+    // @todo Remove this when issue #299138 gets resolved.
+    if (function_exists('mailsystem_html_to_text')) {
+      $mime->setTXTBody(mailsystem_html_to_text($body));
+    }
+    else {
+      $mime->setTXTBody(drupal_html_to_text($body));
+    }
     $message['MailMIME'] = &$mime;
     return $body;
   }
