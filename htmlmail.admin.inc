@@ -232,10 +232,7 @@ function htmlmail_test_form($form_values = NULL) {
       ),
     )
   );
-
-  // Set the input format to be the same as the selected prefilter format.
-  $defaults['body']['format'] =
-    variable_get('htmlmail_prefilter', FILTER_FORMAT_DEFAULT);
+  $defaults['body']['format'] = FILTER_FORMAT_DEFAUL);
 
   $form['to'] = array(
     '#type' => 'textfield',

@@ -28,13 +28,16 @@ class HTMLMailSystem implements MailSystemInterface {
    *   The formatted $message, ready for sending.
    */
   public function format(array $message) {
+    $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     // Collapse the message body array.
     if (module_exists('mailmime')) {
       $body = $this->formatMailMIME($message);
       $plain = $message['MailMIME']->getTXTBody();
     }
     else {
-      $message['body'] = implode("\n", $message['body']);
+      if (is_array($message['body'])) {
+        $message['body'] = implode("$eol$eol", $message['body']);
+      }
       $body = theme('htmlmail', $message);
       // @todo Remove this when issue #299138 gets resolved.
       if (function_exists('mailsystem_html_to_text')) {
