@@ -232,7 +232,7 @@ function htmlmail_test_form($form_values = NULL) {
       ),
     )
   );
-  $defaults['body']['format'] = filter_fallback_format());
+  $defaults['body']['format'] = filter_fallback_format();
   $form['to'] = array(
     '#type' => 'textfield',
     '#title' => t('To'),

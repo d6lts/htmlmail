@@ -150,7 +150,7 @@ class HTMLMailSystem implements MailSystemInterface {
       $mime = new MailMIME();
       $to = $mime->encodeHeader('to', $message['to']);
       $subject = $mime->encodeHeader('subject', $message['subject']);
-      $headers = $mime->txtHeaders($headers);
+      $headers = $mime->txtHeaders($message['headers']);
     }
     else {
       $to = mime_header_encode($message['to']);
