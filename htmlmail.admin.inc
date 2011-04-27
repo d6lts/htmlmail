@@ -232,7 +232,7 @@ function htmlmail_test_form($form_values = NULL) {
       ),
     )
   );
-  $defaults['body']['format'] = FILTER_FORMAT_DEFAUL);
+  $defaults['body']['format'] = FILTER_FORMAT_DEFAULT;
 
   $form['to'] = array(
     '#type' => 'textfield',

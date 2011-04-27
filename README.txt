@@ -5,7 +5,7 @@
 
 [2]Requirements
 
-     * [3]Autoload (New for 6.x-2.28)
+     * [3]Autoload 6.x-2.1 (New for 6.x-2.28)
      * [4]Mail System
 
 [5]Installation
@@ -179,7 +179,7 @@ References
 
    1. http://drupal.org/project/htmlmail
    2. http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement
-   3. http://drupal.org/project/autoload
+   3. http://drupal.org/node/1135590
    4. http://drupal.org/project/mailsystem
    5. http://drupal.org/documentation/install/modules-themes/modules-5-6
    6. http://drupal.org/project/echo

@@ -3,7 +3,7 @@ Lets you theme your messages the same way you theme the rest of your website.
 
 ## [Requirements](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
 
-*   [Autoload](http://drupal.org/project/autoload) *(New for 6.x-2.28)* 
+*   [Autoload 6.x-2.1](http://drupal.org/node/1135590) *(New for 6.x-2.28)* 
 
 *   [Mail System](http://drupal.org/project/mailsystem)
 
