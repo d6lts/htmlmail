@@ -3,7 +3,7 @@ Lets you theme your messages the same way you theme the rest of your website.
 
 ## [Requirement](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
 
-*   [Mail System](http://drupal.org/project/mailsystem)
+*   [Mail System 7.x-2.x](http://drupal.org/project/mailsystem)
 
 ## [Installation](http://drupal.org/documentation/install/modules-themes/modules-7)
 

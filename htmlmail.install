@@ -18,6 +18,12 @@ function htmlmail_requirements($phase) {
   ) {
     return array();
   }
+  $args = array(
+    '%htmlmail' => 'HTML Mail',
+    '!htmlmail' => 'http://drupal.org/project/htmlmail',
+    '%mailsystem' => 'Mail System',
+    '!mailsystem' => url('http://drupal.org/project/mailsystem'),
+  );
   return array(
     'htmlmail_mailsystem' => array(
       'title' => t('%mailsystem module', $args),

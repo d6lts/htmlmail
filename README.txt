@@ -5,7 +5,7 @@
 
 [2]Requirement
 
-     * [3]Mail System
+     * [3]Mail System 7.x-2.x
 
 [4]Installation
 

@@ -6,6 +6,15 @@
  */
 
 /**
+ * Implements hook_init().
+ */
+function htmlmail_init() {
+  if (!function_exists('mailsystem_html_to_text')) {
+    module_load_include('inc','htmlmail','html_to_text');
+  }
+}
+
+/**
  * Implements hook_help().
  */
 function htmlmail_help($path, $arg) {
