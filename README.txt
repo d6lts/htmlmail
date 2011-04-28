@@ -6,7 +6,7 @@
 [2]Requirements
 
      * [3]Autoload 6.x-2.1 (New for 6.x-2.28)
-     * [4]Mail System
+     * [4]Mail System 6.x-2.x
 
 [5]Installation
 

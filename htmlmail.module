@@ -6,12 +6,12 @@
  */
 
 /**
- * Implements hook_init().
+ * Implements hook_perm().
+ *
+ * Defines a permission for setting the per-user plaintext option.
  */
-function htmlmail_init() {
-  if (!function_exists('mailsystem_html_to_text')) {
-    module_load_include('inc','htmlmail','html_to_text');
-  }
+function htmlmail_perm() {
+  return array('choose htmlmail_plaintext');
 }
 
 /**
@@ -145,6 +145,9 @@ function htmlmail_mail($key, &$message, $params) {
  * Implements hook_user().
  */
 function htmlmail_user($op, &$edit, $account, $category = NULL) {
+  if (!(user_access('choose htmlmail_plaintext') || user_access('administer users'))) {
+    return;
+  }
   switch ("$op.$category") {
     case 'form.account':
     case 'register.':

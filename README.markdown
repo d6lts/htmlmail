@@ -5,7 +5,7 @@ Lets you theme your messages the same way you theme the rest of your website.
 
 *   [Autoload 6.x-2.1](http://drupal.org/node/1135590) *(New for 6.x-2.28)* 
 
-*   [Mail System](http://drupal.org/project/mailsystem)
+*   [Mail System 6.x-2.x](http://drupal.org/project/mailsystem)
 
 ## [Installation](http://drupal.org/documentation/install/modules-themes/modules-5-6)
 
