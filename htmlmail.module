@@ -6,12 +6,24 @@
  */
 
 /**
- * Implements hook_init().
+ * Implements hook_permission().
+ *
+ * Defines a permission for setting the per-user plaintext option.
  */
-function htmlmail_init() {
-  if (!function_exists('mailsystem_html_to_text')) {
-    module_load_include('inc','htmlmail','html_to_text');
-  }
+function htmlmail_permission() {
+  $args = array(
+    '!htmlmail' => url('http://drupal.org/project/htmlmail'),
+    '%htmlmail' => 'HTML Mail',
+  )
+
+  return array(
+    'choose htmlmail_plaintext' => array(
+      'title' => t('Choose to receive plaintext emails via %htmlmail', $args),
+      'description' => t(
+        'Granting this permission allows users to choose whether to receive all their emails in plaintext, rather than the default format provided by the <a href="!htmlmail">%htmlmail</a> module.', $args
+      ),
+    ),
+  );
 }
 
 /**
@@ -140,6 +152,9 @@ function htmlmail_form_user_profile_form_alter(&$form, &$form_state) {
   if ($form['#user_category'] != 'account') {
     return;
   }
+  if (!(user_access('choose htmlmail_plaintext') || user_access('administer users'))) {
+    return;
+  }
   $account = $form['#user'];
   $mail = $form['account']['mail'];
   $form['account']['mail'] = array(
@@ -159,8 +174,10 @@ function htmlmail_form_user_profile_form_alter(&$form, &$form_state) {
  * Implements hook_user_presave().
  */
 function htmlmail_user_presave(&$edit, $account, $category) {
-  $edit['data']['htmlmail_plaintext'] = empty($edit['htmlmail_plaintext']) ? 0 : 1;
-  unset($edit['htmlmail_plaintext']);
+  if (user_access('choose htmlmail_plaintext') || user_access('administer users')) {
+    $edit['data']['htmlmail_plaintext'] = empty($edit['htmlmail_plaintext']) ? 0 : 1;
+    unset($edit['htmlmail_plaintext']);
+  }
 }
 
 /**

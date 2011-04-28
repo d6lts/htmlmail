@@ -59,7 +59,7 @@ class HTMLMailSystem implements MailSystemInterface {
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
       else {
-        $message['headers']['Content-Type'] = 'text/html';
+        $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
         $message['body'] = $body;
       }
     }
@@ -67,12 +67,12 @@ class HTMLMailSystem implements MailSystemInterface {
       if (isset($message['MailMIME'])) {
         $mime = &$message['MailMIME'];
         $mime->setHTMLBody('');
-        $mime->setContentType('text/plain');
+        $mime->setContentType('text/plain', array('charset' => 'utf-8'));
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
       }
       else {
         $message['body'] = $plain;
-        $message['headers']['Content-Type'] = 'text/plain';
+        $message['headers']['Content-Type'] = 'text/plain; charset=utf-8';
       }
     }
     return $message;
