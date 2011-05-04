@@ -113,8 +113,10 @@ class HTMLMailSystem implements MailSystemInterface {
       $email['body'] = '';
     }
     else {
-      // Wrap plaintext in <pre> tags.
-      if ($email['body'] === strip_tags($email['body'])) {
+      // Wrap formatted plaintext in <pre> tags.
+      if ( $email['body'] === strip_tags($email['body']) // No html tags.
+        && preg_match('/.' . $eol. './') // At least one embedded newline.
+      ) {
         $email['body'] = '<pre>' . $email['body'] . '</pre>';
       }
     }
