@@ -29,6 +29,14 @@ class HTMLMailSystem implements MailSystemInterface {
    */
   public function format(array $message) {
     $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
+    // @todo Remove this when issue #209672 gets resolved.
+    if ( $message['headers']['From'] == variable_get('site_mail', ini_get('sendmail_from'))
+      && valid_email_address($message['headers']['From'])
+    ) {
+      $message['headers']['From'] = '"'
+        . str_replace('"', '', variable_get('site_name', 'Drupal'))
+        . '" <' . $message['headers']['From'] . '>';
+    }
     // Collapse the message body array.
     if (module_exists('mailmime')) {
       $body = $this->formatMailMIME($message);
