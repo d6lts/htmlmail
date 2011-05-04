@@ -112,6 +112,12 @@ class HTMLMailSystem implements MailSystemInterface {
     ) {
       $email['body'] = '';
     }
+    else {
+      // Wrap plaintext in <pre> tags.
+      if ($email['body'] === strip_tags($email['body'])) {
+        $email['body'] = '<pre>' . $email['body'] . '</pre>';
+      }
+    }
     // Theme with htmlmail.tpl.php.
     $body = theme('htmlmail', $email);
     $mime->setHTMLBody($body);
