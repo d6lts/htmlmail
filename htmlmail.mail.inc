@@ -50,7 +50,7 @@ class HTMLMailSystem implements MailSystemInterface {
       }
       // Optionally apply the selected output filter.
       if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
-        $body = check_markup($body, $filter);
+        $body = check_markup($body, $filter, FALSE);
       }
       // Store the fully-themed HTML body.
       if (isset($message['MailMIME'])) {

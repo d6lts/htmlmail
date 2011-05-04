@@ -289,7 +289,8 @@ function htmlmail_test_form_submit($form, &$form_state) {
     'subject' => $form_state['values']['subject'],
     'body' => check_markup(
       $form_state['values']['body']['value'],
-      $form_state['values']['body']['format']
+      $form_state['values']['body']['format'],
+      FALSE
     ),
   );
   if (
