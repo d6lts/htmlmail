@@ -97,9 +97,10 @@ function htmlmail_theme() {
     $template = substr($file->name, 0, -4);
     $suggestion = str_replace('--', '__', $template);
     $items[$suggestion] = array(
-      'arguments' => array('message' => array()),
+      'variables' => array('message' => array()),
       'template' => $template,
       'path' => $path,
+      'theme path' => $theme_path,
     );
   }
   return $items;
