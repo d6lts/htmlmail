@@ -54,7 +54,14 @@ class HTMLMailSystem implements MailSystemInterface {
     if (htmlmail_is_allowed($message['to'])) {
       // Optionally apply the selected web theme.
       if (module_exists('echo') && $theme = htmlmail_get_selected_theme($message)) {
+        // Turn off maintenance mode to use echo.
+        if ($maintenance_mode = variable_get('maintenance_mode', 0)) {
+          variable_set('maintenance_mode', 0);
+        }
         $body = echo_themed_page($message['subject'], $body, $theme);
+        if ($maintenance_mode) {
+          variable_set('maintenance_mode', $maintenance_mode);
+        }
       }
       // Optionally apply the selected output filter.
       if ($filter = variable_get('htmlmail_postfilter')) {
@@ -92,6 +99,7 @@ class HTMLMailSystem implements MailSystemInterface {
    * @see http://drupal.org/project/mailmime
    */
   public function formatMailMIME(array &$message) {
+    $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     $message['body'] = MailMIME::concat($message['body']);
     // Build a full email message string.
     $email = MailMIME::encodeEmail($message['headers'], $message['body']);
@@ -115,7 +123,7 @@ class HTMLMailSystem implements MailSystemInterface {
     else {
       // Wrap formatted plaintext in <pre> tags.
       if ( $email['body'] === strip_tags($email['body']) // No html tags.
-        && preg_match('/.' . $eol. './') // At least one embedded newline.
+        && preg_match('/.' . $eol. './', $email['body']) // At least one embedded newline.
       ) {
         $email['body'] = '<pre>' . $email['body'] . '</pre>';
       }
