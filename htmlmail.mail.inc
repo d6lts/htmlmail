@@ -54,7 +54,14 @@ class HTMLMailSystem implements MailSystemInterface {
     if (htmlmail_is_allowed($message['to'])) {
       // Optionally apply the selected web theme.
       if (module_exists('echo') && $theme = htmlmail_get_selected_theme($message)) {
+        // Turn off maintenance mode to use echo.
+        if ($maintenance_mode = variable_get('maintenance_mode', 0)) {
+          variable_set('maintenance_mode', 0);
+        }
         $body = echo_themed_page($message['subject'], $body, $theme);
+        if ($maintenance_mode) {
+          variable_set('maintenance_mode', $maintenance_mode);
+        }
       }
       // Optionally apply the selected output filter.
       if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
