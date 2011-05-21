@@ -185,13 +185,26 @@ class HTMLMailSystem implements MailSystemInterface {
       );
       return FALSE;
     }
-    $extra = (
-      isset($headers['Return-Path'])
-      && !ini_get('safe_mode')
-      && !strpos(ini_get('sendmail_path'), ' -f')
-    ) ? '-f ' . $headers['Return-Path']
-      : '';
-    return mail($to, $subject, $body, $headers, $extra);
+    $extra = NULL;
+    if (isset($headers['Return-Path']) && !ini_get('safe_mode')) {
+      if (isset($_SERVER['WINDIR']) || strpos($_SERVER['SERVER_SOFTWARE'], 'Win32') !== FALSE) {
+        // On Windows, PHP will use the value of sendmail_from for the
+        // Return-Path header.
+        $old_from = ini_get('sendmail_from');
+        ini_set('sendmail_from', $message['Return-Path']);
+      }
+      else {
+        // On most non-Windows systems, the "-f" option to the sendmail command
+        // is used to set the Return-Path.
+        $extra = '-f' . $headers['Return-Path'];
+      }
+    }
+    $result = @mail($to, $subject, $body, $headers, $extra);
+    if (isset($old_from)) {
+      // Set sendmail_from back to its previous value.
+      ini_set('sendmail_from', $old_from);
+    }
+    return $result;
   }
 
   /**
