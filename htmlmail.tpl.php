@@ -172,7 +172,7 @@ endif; ?><p>
     The <?php echo $module; ?> module sets the <u><code>$params</code></u>
     variable.  For this message,
   </p></dt><dd><p><code><pre>
-$params = <?php var_export($params); ?>
+    $params = <?php echo check_plain(print_r($params, 1)); ?>
   </pre></code></p></dd><?php endif; ?></dl>
 </div>
 <?php endif;
