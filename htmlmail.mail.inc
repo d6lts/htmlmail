@@ -99,6 +99,7 @@ class HTMLMailSystem implements MailSystemInterface {
    * @see http://drupal.org/project/mailmime
    */
   public function formatMailMIME(array &$message) {
+    $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     $message['body'] = MailMIME::concat($message['body']);
     // Build a full email message string.
     $email = MailMIME::encodeEmail($message['headers'], $message['body']);
