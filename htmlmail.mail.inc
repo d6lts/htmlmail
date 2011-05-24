@@ -191,7 +191,7 @@ class HTMLMailSystem implements MailSystemInterface {
         // On Windows, PHP will use the value of sendmail_from for the
         // Return-Path header.
         $old_from = ini_get('sendmail_from');
-        ini_set('sendmail_from', $message['Return-Path']);
+        ini_set('sendmail_from', $headers['Return-Path']);
       }
       else {
         // On most non-Windows systems, the "-f" option to the sendmail command
