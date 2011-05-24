@@ -31,7 +31,7 @@ function htmlmail_permission() {
  */
 function htmlmail_help($path, $arg) {
   switch ($path) {
-    case 'admin/settings/htmlmail':
+    case 'admin/config/system/htmlmail':
       return '<h2>' . t('Theming') . '</h2><p>' . t('The email message goes through three transformations before sending:') . '</p>';
     case 'admin/help#htmlmail':
       return '<p>'

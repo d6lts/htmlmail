@@ -5,18 +5,23 @@
  * Installation for HTML Mail module.
  */
 
-
 /**
  * Implements hook_requirements().
  *
- * Ensures that the newly-required autoload module is available, or else
- * disables the htmlmail module and returns an informative error message.
+ * Ensures that the Mail System module is available, and
+ * that HTML Mail uses its own MailSystemInterface class.
  */
 function htmlmail_requirements($phase) {
-  if ( $phase === 'install'
-    || function_exists('mailsystem_create_class')
-  ) {
-    return array();
+  $result = array();
+  if ($phase === 'install') {
+    return $result;
+  }
+  if (function_exists('mailsystem_create_class')) {
+    // Ensure that the HTMLMailSystem class is used by
+    // (at least) the htmlmail module, so that it always
+    // shows up on the admin/config/system/mailsystem page.
+    mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
+    return $result;
   }
   $args = array(
     '%htmlmail' => 'HTML Mail',
@@ -24,16 +29,15 @@ function htmlmail_requirements($phase) {
     '%mailsystem' => 'Mail System',
     '!mailsystem' => url('http://drupal.org/project/mailsystem'),
   );
-  return array(
-    'htmlmail_mailsystem' => array(
-      'title' => t('%mailsystem module', $args),
-      'value' => t('7.x-1.x'),
-      'description' => t(
-        '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 7.x-2.2 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
-      ),
-      'severity' => REQUIREMENT_ERROR,
+  $result['htmlmail_mailsystem'] = array(
+    'title' => t('%mailsystem module', $args),
+    'value' => t('7.x-1.x'),
+    'description' => t(
+      '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 7.x-2.2 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
     ),
+    'severity' => REQUIREMENT_ERROR,
   );
+  return $result;
 }
 
 /**
