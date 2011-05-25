@@ -167,12 +167,12 @@ class HTMLMailSystem implements MailSystemInterface {
       $mime = new MailMIME();
       $to = $mime->encodeHeader('to', $message['to']);
       $subject = $mime->encodeHeader('subject', $message['subject']);
-      $headers = $mime->txtHeaders($message['headers']);
+      $txt_headers = $mime->txtHeaders($message['headers']);
     }
     else {
       $to = mime_header_encode($message['to']);
       $subject = mime_header_encode($message['subject']);
-      $headers = $this->txtHeaders($message['headers']);
+      $txt_headers = $this->txtHeaders($message['headers']);
     }
     $body = preg_replace('#(\r\n|\r|\n)#s', $eol, $message['body']);
     // Check for empty body.
@@ -199,7 +199,7 @@ class HTMLMailSystem implements MailSystemInterface {
         $extra = '-f' . $message['headers']['Return-Path'];
       }
     }
-    $result = @mail($to, $subject, $body, $headers, $extra);
+    $result = @mail($to, $subject, $body, $txt_headers, $extra);
     if (isset($old_from)) {
       // Set sendmail_from back to its previous value.
       ini_set('sendmail_from', $old_from);
