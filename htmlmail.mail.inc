@@ -199,7 +199,12 @@ class HTMLMailSystem implements MailSystemInterface {
         $extra = '-f' . $message['headers']['Return-Path'];
       }
     }
-    $result = @mail($to, $subject, $body, $txt_headers, $extra);
+    if (isnull($extra)) {
+      $result = @mail($to, $subject, $body, $txt_headers);
+    }
+    else {
+      $result = @mail($to, $subject, $body, $txt_headers, $extra);
+    }
     if (isset($old_from)) {
       // Set sendmail_from back to its previous value.
       ini_set('sendmail_from', $old_from);
