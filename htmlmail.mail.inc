@@ -199,7 +199,7 @@ class HTMLMailSystem implements MailSystemInterface {
         $extra = '-f' . $message['headers']['Return-Path'];
       }
     }
-    if (isnull($extra)) {
+    if (is_null($extra)) {
       $result = @mail($to, $subject, $body, $txt_headers);
     }
     else {
