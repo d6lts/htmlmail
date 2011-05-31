@@ -83,7 +83,9 @@ function htmlmail_update_6200() {
  * Increase module weight so dependent modules get loaded first.
  */
 function htmlmail_update_6202() {
-  return update_sql("UPDATE {system} SET weight = 10 WHERE type = 'module' AND name = 'htmlmail'");
+  return array(
+    update_sql("UPDATE {system} SET weight = 10 WHERE type = 'module' AND name = 'htmlmail'")
+  );
 }
 
 /**
