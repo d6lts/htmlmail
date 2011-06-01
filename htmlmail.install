@@ -58,7 +58,7 @@ function htmlmail_requirements($phase) {
       'title' => t('%mailsystem module', $args),
       'value' => t('6.x-1.x'),
       'description' => t(
-        '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 6.x-2.6 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+        '<a href="!htmlmail">%htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 6.x-2.6 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
       ),
       'severity' => REQUIREMENT_ERROR,
     );
