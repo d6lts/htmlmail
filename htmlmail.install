@@ -27,7 +27,7 @@ function htmlmail_requirements($phase) {
     '%htmlmail' => 'HTML Mail',
     '!htmlmail' => 'http://drupal.org/project/htmlmail',
     '%mailsystem' => 'Mail System',
-    '!mailsystem' => url('http://drupal.org/project/mailsystem'),
+    '!mailsystem' => 'http://drupal.org/project/mailsystem',
   );
   $result['htmlmail_mailsystem'] = array(
     'title' => t('%mailsystem module', $args),
