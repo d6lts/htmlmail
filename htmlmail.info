@@ -1,6 +1,6 @@
 package = Mail
 name = HTML Mail
-description = "Enables HTML in system emails."
+description = Enables HTML in system emails.
 php = 5.0
 files[] = htmlmail.mail.inc
 dependencies[] = mailsystem
