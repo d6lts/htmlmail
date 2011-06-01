@@ -53,7 +53,7 @@ function htmlmail_requirements($phase) {
       'severity' => REQUIREMENT_ERROR,
     );
   }
-  if (!function_exists('mailsystem_create_class')) {
+  if (!function_exists('mailsystem_html_to_text')) {
     $result['htmlmail_mailsystem'] = array(
       'title' => t('%mailsystem module', $args),
       'value' => t('6.x-1.x'),
