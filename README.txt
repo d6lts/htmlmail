@@ -53,11 +53,11 @@
    branch, but only 8% of its code with the [15]6.x-1.x branch.
 
    Let your compatibility expectations be adjusted accordingly.
-     * Run update.php immediately after uploading new code.
-     * Check the module dependencies, as they have changed. This version
-       of [16]HTML Mail depends on:
+     * Check the module dependencies, as they have changed. The latest
+       version of [16]HTML Mail depends on:
           + [17]Autoload
           + [18]Mail System (6.x-2.2 or later)
+     * Run update.php immediately after uploading new code.
      * The user-interface for adding email header and footer text has been
        removed. Headers and footers may be added by template files and/or
        by enabling the [19]Echo module.
