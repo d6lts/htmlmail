@@ -282,8 +282,6 @@ function htmlmail_test_form_submit($form, &$form_state) {
   );
   // Set the defaults for reuse.
   variable_set('htmlmail_test', $defaults);
-  // @todo Get user feedback on this UI change?
-  variable_set('htmlmail_prefilter', $defaults['body']['format']);
   // Send the email.
   $params = array(
     'subject' => $form_state['values']['subject'],
