@@ -8,16 +8,17 @@
 /**
  * Implements hook_requirements().
  *
- * Ensures that the newly-required autoload module is available, or else
- * disables the htmlmail module and returns an informative error message.
+ * Ensures that the autoload and mailsystem modules are available, and
+ * that HTML Mail uses its own MailSystemInterface class.
  */
 function htmlmail_requirements($phase) {
   $result = array();
   if ($phase === 'install') {
     return $result;
   }
-  if ( module_exists('autoload')
-    && function_exists('mailsystem_create_class') ) {
+  if ( function_exists('mailsystem_html_to_text')
+    && module_exists('autoload')
+  ) {
     // Ensure that the HTMLMailSystem class is used by
     // (at least) the htmlmail module, so that it always
     // shows up on the admin/settings/mailsystem page.
@@ -25,12 +26,12 @@ function htmlmail_requirements($phase) {
     return $result;
   }
   $args = array(
-    '!autoload' => url('http://drupal.org/project/autoload'),
     '%autoload' => 'Autoload',
-    '!htmlmail' => url('http://drupal.org/project/htmlmail'),
+    '!autoload' => url('http://drupal.org/project/autoload'),
     '%htmlmail' => 'HTML Mail',
-    '!mailsystem' => url('http://drupal.org/project/mailsystem'),
+    '!htmlmail' => url('http://drupal.org/project/htmlmail'),
     '%mailsystem' => 'Mail System',
+    '!mailsystem' => url('http://drupal.org/project/mailsystem'),
   );
   if (!module_exists('autoload')) {
     if ( module_enable(array('autoload'))
@@ -57,7 +58,7 @@ function htmlmail_requirements($phase) {
       'title' => t('%mailsystem module', $args),
       'value' => t('6.x-1.x'),
       'description' => t(
-        '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 6.x-2.2 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
+        '<a href="!htmlmail">&htmlmail</a> new requires <a href="!mailsystem">%mailsystem</a> 6.x-2.6 or later.  Please download and install a recent version of <a href+"!mailsystem">%mailsystem</a>, then re-enable the <a href="!htmlmail">%htmlmail</a> module.', $args
       ),
       'severity' => REQUIREMENT_ERROR,
     );
