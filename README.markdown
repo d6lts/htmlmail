@@ -68,7 +68,7 @@ Let your compatibility expectations be adjusted accordingly.
     [text format](http://drupal.org/node/778976)
     for post-template filtering.
 
-    *   [Line break converter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop)
+    *   [Line break converter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/7)
     *   [URL Filter](http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/7)
     *   [Relative Path to Absolute URLs](http://drupal.org/project/rel_to_abs)
     *   [Emogrifier](http://www.pelagodesign.com/sidecar/emogrifier/)
