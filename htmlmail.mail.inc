@@ -32,7 +32,7 @@ class HTMLMailSystem implements MailSystemInterface {
     // @todo Remove this when issue #209672 gets resolved.
     $default_from = variable_get('site_mail', ini_get('sendmail_from'));
     if ( !empty($message['headers']['From'])
-      && $message['headers']['From'] == $default_from)
+      && $message['headers']['From'] == $default_from
       && valid_email_address($default_from)
     ) {
       $message['headers']['From'] = '"'
