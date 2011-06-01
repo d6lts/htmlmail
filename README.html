@@ -48,10 +48,10 @@
 <p>Let your compatibility expectations be adjusted accordingly.</p>
 <ul>
   <li>
-    <p>Run <code>update.php</code> <em>immediately</em> after uploading new code.</p>
+    <p>Check the module dependencies, as they have changed. The latest version of <a href="http://drupal.org/project/htmlmail">HTML Mail</a> depends on the <a href="http://drupal.org/project/mailsystem">Mail System</a> module (7.x-2.2 or later) and will not work without it.</p>
   </li>
   <li>
-    <p>Check the module dependencies, as they have changed. The latest version of <a href="http://drupal.org/project/htmlmail">HTML Mail</a> depends on the <a href="http://drupal.org/project/mailsystem">Mail System</a> module (7.x-2.2 or later) and will not work without it.</p>
+    <p>Run <code>update.php</code> <em>immediately</em> after uploading new code.</p>
   </li>
   <li>
     <p>The user-interface for adding email header and footer text has been removed. Headers and footers may be added by template files and/or by enabling the <a href="http://drupal.org/project/echo">Echo</a> module.</p>
@@ -62,7 +62,7 @@
   <li>
     <p>The following options have been removed from the module settings page. In their place, any combination of <a href="http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1">over 200 filter modules</a> may be used to create an email-specific <a href="http://drupal.org/node/778976">text format</a> for post-template filtering.</p>
     <ul>
-      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop">Line break converter</a></li>
+      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/7">Line break converter</a></li>
       <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/7">URL Filter</a></li>
       <li><a href="http://drupal.org/project/rel_to_abs">Relative Path to Absolute URLs</a></li>
       <li><a href="http://www.pelagodesign.com/sidecar/emogrifier/">Emogrifier</a></li>

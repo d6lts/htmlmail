@@ -53,10 +53,10 @@
    tiny 8% of its code with the [15]6.x-1.x branch.
 
    Let your compatibility expectations be adjusted accordingly.
-     * Run update.php immediately after uploading new code.
      * Check the module dependencies, as they have changed. The latest
        version of [16]HTML Mail depends on the [17]Mail System module
        (7.x-2.2 or later) and will not work without it.
+     * Run update.php immediately after uploading new code.
      * The user-interface for adding email header and footer text has been
        removed. Headers and footers may be added by template files and/or
        by enabling the [18]Echo module.
@@ -198,7 +198,7 @@ References
   18. http://drupal.org/project/echo
   19. http://drupal.org/project/modules/?filters=type%3Aproject_project%20tid%3A63%20hash%3A1hbejm%20-bs_project_sandbox%3A1%20bs_project_has_releases%3A1
   20. http://drupal.org/node/778976
-  21. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop
+  21. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_autop/7
   22. http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_url/7
   23. http://drupal.org/project/rel_to_abs
   24. http://www.pelagodesign.com/sidecar/emogrifier/
