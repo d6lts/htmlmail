@@ -27,11 +27,11 @@ function htmlmail_requirements($phase) {
   }
   $args = array(
     '%autoload' => 'Autoload',
-    '!autoload' => url('http://drupal.org/project/autoload'),
+    '!autoload' => 'http://drupal.org/project/autoload',
     '%htmlmail' => 'HTML Mail',
-    '!htmlmail' => url('http://drupal.org/project/htmlmail'),
+    '!htmlmail' => 'http://drupal.org/project/htmlmail',
     '%mailsystem' => 'Mail System',
-    '!mailsystem' => url('http://drupal.org/project/mailsystem'),
+    '!mailsystem' => 'http://drupal.org/project/mailsystem',
   );
   if (!module_exists('autoload')) {
     if ( module_enable(array('autoload'))
