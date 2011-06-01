@@ -54,6 +54,7 @@
 <?php echo $body; ?>
 </div>
 <?php if ($debug):
+  $module_template = "htmlmail--user.tpl.php";
   $message_template = 'htmlmail--user--password_reset.tpl.php';
 ?>
 <hr />
