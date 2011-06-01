@@ -30,7 +30,7 @@ class HTMLMailSystem implements MailSystemInterface {
   public function format(array $message) {
     $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     // @todo Remove this when issue #209672 gets resolved.
-    $default_from = variable_get('site_mail', ini_get('sendmail_from');
+    $default_from = variable_get('site_mail', ini_get('sendmail_from'));
     if ( !empty($message['headers']['From'])
       && $message['headers']['From'] == $default_from)
       && valid_email_address($default_from)
