@@ -3,12 +3,12 @@
    Lets you theme your messages the same way you theme the rest of your
    website.
 
-[2]Requirements
+  [2]Requirements
 
      * [3]Autoload 6.x-2.1 (New for 6.x-2.28)
      * [4]Mail System 6.x-2.x
 
-[5]Installation
+  [5]Installation
 
    The following additional modules, while not required, are highly
    recommended:
@@ -47,7 +47,7 @@
 
                 Also available as a [11]patch.
 
-[12]Updating from previous versions
+  [12]Updating from previous versions
 
    The [13]6.x-2.x branch shares 94% of its code with the [14]7.x-2.x
    branch, but only 8% of its code with the [15]6.x-1.x branch.
@@ -79,7 +79,7 @@
        attachments, is available simply by enabling the [27]Mail MIME
        module.
 
-[28]Configuration
+  [28]Configuration
 
    Visit the [29]Mail System settings page at admin/settings/mailsystem to
    select which parts of Drupal will use [30]HTML Mail instead of the
@@ -88,7 +88,7 @@
    Visit the [33]HTML Mail settings page at admin/settings/htmlmail to
    select a theme and post-filter for your messages.
 
-[34]Theming
+  [34]Theming
 
    The email message text goes through three transformations before
    sending:
@@ -119,7 +119,7 @@
           + [42]Pathologic Converts relative URLS to absolute URLS so that
             clickable links in your message will work as intended.
 
-Troubleshooting
+  Troubleshooting
 
      * Double-check the [43]Mail System module settings and and make sure
        you selected HTMLMailSystem for your Site-wide default mail system.
@@ -130,7 +130,7 @@ Troubleshooting
        like [45]this.
      * Visit the [46]issue queue for support and feature requests.
 
-Related Modules
+  Related Modules
 
    Echo
           http://drupal.org/project/echo
@@ -156,7 +156,7 @@ Related Modules
    Transliteration
           http://drupal.org/project/transliteration
 
-[47]Documentation
+  [47]Documentation
 
    [48]filter.module
           [49]api.drupal.org/api/drupal/modules--filter--filter.module
@@ -167,11 +167,11 @@ Related Modules
    [52]Theming guide
           [53]drupal.org/documentation/theme
 
-Original Author
+  Original Author
 
      * [54]Chris Herberte
 
-Current Maintainer
+  Current Maintainer
 
      * [55]Bob Vincent
 

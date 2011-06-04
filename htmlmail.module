@@ -120,11 +120,6 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['template_files'][] = $template;
   $template = 'htmlmail-' . str_replace('_', '-', $variables['message_id']);
   $variables['template_files'][] = $template;
-  // Backport of drupal 7 hook_preprocess_HOOK().
-  foreach (module_implements('preprocess_htmlmail') as $module) {
-    $function = $module . '_preprocess_htmlmail';
-    $function($variables);
-  }
 }
 
 /**

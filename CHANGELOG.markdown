@@ -1,4 +1,4 @@
-## Change Log Summary
+### Change Log Summary
 
 -- *(Note: See the [git repository](http://drupalcode.org/project/htmlmail.git/log/refs/heads/7.x-2.x) for full version)*
 
