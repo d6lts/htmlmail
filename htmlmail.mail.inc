@@ -111,7 +111,7 @@ class HTMLMailSystem implements MailSystemInterface {
         'HTMLMailSystem',
         'Could not parse email message.',
         array(),
-        WATCHDOG_ERROR
+        LOG_ERROR
       );
       return $message;
     }
@@ -159,7 +159,7 @@ class HTMLMailSystem implements MailSystemInterface {
           'HTMLMailSystem',
           'Cannot send email about %subject without a recipient.',
           array('subject' => $message['subject']),
-          WATCHDOG_ERROR
+          LOG_ERROR
         );
         return FALSE;
       }
@@ -183,7 +183,7 @@ class HTMLMailSystem implements MailSystemInterface {
         'HTMLMailSystem',
         'Refusing to send a blank email to %recipient about %subject.',
         array('%recipient' => $message['to'], '%subject' => $message['subject']),
-        WATCHDOG_WARNING
+        LOG_WARNING
       );
       return FALSE;
     }

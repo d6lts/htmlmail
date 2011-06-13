@@ -1,4 +1,4 @@
-Change Log Summary
+  Change Log Summary
 
    -- (Note: See the [1]git repository for full version)
 

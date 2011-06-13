@@ -1,11 +1,11 @@
 ## [HTML Mail](http://drupal.org/project/htmlmail)
 Lets you theme your messages the same way you theme the rest of your website.
 
-## [Requirement](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
+### [Requirement](http://www.dict.org/bin/Dict?Form=Dict2&Database=*&Query=requirement)
 
 *   [Mail System 7.x-2.x](http://drupal.org/project/mailsystem)
 
-## [Installation](http://drupal.org/documentation/install/modules-themes/modules-7)
+### [Installation](http://drupal.org/documentation/install/modules-themes/modules-7)
 
 The following additional modules, while not required, are highly recommended:
 
@@ -36,7 +36,7 @@ The following additional modules, while not required, are highly recommended:
 
     :   *Also available as a [patch](http://drupal.org/node/1095278#comment-4219530).*
 
-## [Updating from previous versions](http://drupal.org/node/250790)
+### [Updating from previous versions](http://drupal.org/node/250790)
 
 The [7.x-2.x](http://drupal.org/node/1106064) branch shares 94% of its code
 with the [6.x-2.x](http://drupal.org/node/1119548) branch, but only 15% of
@@ -79,7 +79,7 @@ Let your compatibility expectations be adjusted accordingly.
     attachments, is available simply by enabling the
     [Mail MIME](http://drupal.org/project/mailmime) module.
 
-## [Configuration](http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png)
+### [Configuration](http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png)
 
 Visit the [Mail System](http://drupal.org/project/mailsystem) settings page at
 <u>admin/config/system/mailsystem</u>
@@ -93,7 +93,7 @@ Visit the [HTML Mail](http://drupal.org/project/htmlmail) settings page at
 <u>admin/config/system/htmlmail</u>
 to select a theme and post-filter for your messages.
 
-## [Theming](http://drupal.org/documentation/theme)
+### [Theming](http://drupal.org/documentation/theme)
 
 The email message text goes through three transformations before sending:
 
@@ -138,7 +138,7 @@ The email message text goes through three transformations before sending:
         Converts relative URLS to absolute URLS so that clickable links in
         your message will work as intended.
 
-## Troubleshooting
+### Troubleshooting
 
 *   Double-check the [Mail System](http://drupal.org/project/mailsystem)
     module settings and and make sure you selected
@@ -158,7 +158,7 @@ The email message text goes through three transformations before sending:
 *   Visit the [issue queue](http://drupal.org/project/issues/htmlmail)
     for support and feature requests.
 
-## Related Modules
+### Related Modules
 
 **Echo**
 :   http://drupal.org/project/echo
@@ -184,7 +184,7 @@ The email message text goes through three transformations before sending:
 **Transliteration**
 :   http://drupal.org/project/transliteration
 
-## [Documentation](http://drupal.org/project/documentation)
+### [Documentation](http://drupal.org/project/documentation)
 
 **[filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/6)**
 :   [api.drupal.org/api/drupal/modules--filter--filter.module](http://api.drupal.org/api/drupal/modules--filter--filter.module/7)
@@ -196,10 +196,10 @@ The email message text goes through three transformations before sending:
 **[Theming guide](http://drupal.org/documentation/theme)**
 :   [drupal.org/documentation/theme](http://drupal.org/documentation/theme)
 
-## Original Author
+### Original Author
 
 *   [Chris Herberte](http://drupal.org/user/1171)
 
-## Current Maintainer
+### Current Maintainer
 
 *   [Bob Vincent](http://drupal.org/user/36148)

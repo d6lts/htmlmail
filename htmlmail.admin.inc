@@ -9,16 +9,16 @@
  * Implements hook_admin_settings().
  */
 function htmlmail_admin_settings() {
-  $formats = array('0' => 'Unfiltered');
+  $formats = array('0' => t('Unfiltered'));
   foreach (filter_formats() as $id => $filter) {
     $formats[$id] = $filter->name;
   }
-  $form['Step 1'] = array(
+  $form['template'] = array(
     '#type' => 'fieldset',
     '#title' => '<h3>' . t('Step 1') . '</h3>',
     '#collapsible' => FALSE,
   );
-  $form['Step 1']['htmlmail_template'] = array(
+  $form['template']['htmlmail_template'] = array(
     '#type' => 'fieldset',
     '#prefix' => '<strong>' . t('Template file') . ':</strong><br />'
     . t('A template file is applied to your message header, subject, and body text.  You may copy the <a href="!uri">!template</a> file to your default theme directory and use it to customize your messages.',
@@ -31,7 +31,7 @@ function htmlmail_admin_settings() {
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
   );
-  $form['Step 1']['htmlmail_template']['instructions'] = array(
+  $form['template']['htmlmail_template']['instructions'] = array(
     '#type' => 'item',
     '#suffix' => t('!Instructions
 <p>When formatting an email message with a given <code>$module</code> and <code>$key</code>, <a href="http://drupal.org/project/htmlmail">HTML Mail</a> will use the first template file it finds from the following list:</p>
@@ -132,19 +132,19 @@ function htmlmail_admin_settings() {
       array('!Instructions' => '')
     ),
   );
-  $form['Step 1']['htmlmail_debug'] = array(
+  $form['template']['htmlmail_debug'] = array(
     '#type' => 'checkbox',
     '#prefix' => '<br />',
     '#title' => '<em>' . t('(Optional)') . '</em> ' . t('Debug'),
     '#default_value' => variable_get('htmlmail_debug', '0'),
     '#description' => t('Add debugging info (Set <code>$debug</code> to <code>TRUE</code>).'),
   );
-  $form['Step 2'] = array(
+  $form['theme'] = array(
     '#type' => 'fieldset',
     '#title' => '<h3>' . t('Step 2') . '</h3>',
     '#collapsible' => FALSE,
   );
-  $form['Step 2']['htmlmail_theme'] = array(
+  $form['theme']['htmlmail_theme'] = array(
     '#type' => 'select',
     '#title' => t('Email theme'),
     '#default_value' => variable_get('htmlmail_theme', ''),
@@ -175,12 +175,12 @@ function htmlmail_admin_settings() {
     )
     . '</p>',
   );
-  $form['Step 3'] = array(
+  $form['theme'] = array(
     '#type' => 'fieldset',
     '#title' => '<h3>' . t('Step 3') . '</h3>',
     '#collapsible' => FALSE,
   );
-  $form['Step 3']['htmlmail_postfilter'] = array(
+  $form['theme']['htmlmail_postfilter'] = array(
     '#type' => 'select',
     '#title' => t('Post-filtering'),
     '#default_value' => variable_get('htmlmail_postfilter', ''),
