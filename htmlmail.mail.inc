@@ -158,7 +158,7 @@ class HTMLMailSystem implements MailSystemInterface {
         watchdog(
           'HTMLMailSystem',
           'Cannot send email about %subject without a recipient.',
-          array('subject' => $message['subject']),
+          array('%subject' => $message['subject']),
           LOG_ERROR
         );
         return FALSE;
