@@ -90,17 +90,17 @@ class HTMLMailSystem implements MailSystemInterface {
       // Optionally apply the selected output filter.
       if ($filter = variable_get('htmlmail_postfilter', FILTER_FORMAT_DEFAULT)) {
         $filtered_body = check_markup($body, $filter, FALSE);
-      }
-      if ($filtered_body) {
-        $body = $filtered_body;
-      }
-      else {
-        watchdog(
-          'htmlmail',
-          'The %check function did not return any text. Please check your %filter output filter for errors.',
-          array('%check' => 'check_markup()', '%filter' => $filter),
-          WATCHDOG_WARNING
-        );
+        if ($filtered_body) {
+          $body = $filtered_body;
+        }
+        else {
+          watchdog(
+            'htmlmail',
+            'The %check function did not return any text. Please check your %filter output filter for errors.',
+            array('%check' => 'check_markup()', '%filter' => $filter),
+            WATCHDOG_WARNING
+          );
+        }
       }
       // Store the fully-themed HTML body.
       if (isset($message['MailMIME'])) {
