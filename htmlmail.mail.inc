@@ -49,31 +49,73 @@ class HTMLMailSystem implements MailSystemInterface {
         $message['body'] = implode("$eol$eol", $message['body']);
       }
       $body = theme('htmlmail', $message);
+      if ($message['body'] && !$body) {
+        watchdog(
+          'htmlmail',
+          'The %theme function did not return any text.  Please check your template file for errors.',
+          array('%theme' => "theme('htmlmail', \$message)"),
+          WATCHDOG_WARNING
+        );
+        $body = $message['body'];
+      }
       // @todo Change to drupal_html_to_text when issue #299138 gets resolved.
       $plain = mailsystem_html_to_text($body);
+      if ($body && !$plain) {
+        watchdog(
+          'htmlmail',
+          'The %convert function did not return any text. Please report this error to the %mailsystem issue queue.',
+          array('%convert' => 'mailsystem_html_to_text()', '%mailsystem' => 'Mail system'),
+          WATCHDOG_WARNING,
+          'http://drupal.org/node/add/project-issue/mailsystem'
+        );
+      }
     }
     // Check to see whether recipient allows non-plaintext.
-    if (htmlmail_is_allowed($message['to'])) {
+    if ($body && htmlmail_is_allowed($message['to'])) {
       // Optionally apply the selected web theme.
       if (module_exists('echo') && $theme = htmlmail_get_selected_theme($message)) {
-        // Turn off maintenance mode to use echo.
-        if ($maintenance_mode = variable_get('maintenance_mode', 0)) {
-          variable_set('maintenance_mode', 0);
+        $themed_body = echo_themed_page($message['subject'], $body, $theme);
+        if ($themed_body) {
+          $body = $themed_body;
         }
-        $body = echo_themed_page($message['subject'], $body, $theme);
-        if ($maintenance_mode) {
-          variable_set('maintenance_mode', $maintenance_mode);
+        else {
+          watchdog(
+            'htmlmail',
+            'The %echo function did not return any text. Please check the page template of your %theme theme for errors.',
+            array('%echo' => 'echo_themed_page()', '%theme' => $theme),
+            WATCHDOG_WARNING
+          );
         }
       }
       // Optionally apply the selected output filter.
       if ($filter = variable_get('htmlmail_postfilter')) {
-        $body = check_markup($body, $filter);
+        $filtered_body = check_markup($body, $filter);
+        if ($filtered_body) {
+          $body = $filtered_body;
+        }
+        else {
+          watchdog(
+            'htmlmail',
+            'The %check function did not return any text. Please check your %filter output filter for errors.',
+            array('%check' => 'check_markup()', '%filter' => $filter),
+            WATCHDOG_WARNING
+          );
+        }
       }
       // Store the fully-themed HTML body.
       if (isset($message['MailMIME'])) {
         $mime = &$message['MailMIME'];
         $mime->setHTMLBody($body);
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
+        if (!$message['body']) {
+          watchdog(
+            'htmlmail',
+            'The %toemail function did not return any text. Please report this errot to the %mailmime issue queue.',
+            array('%toemail' => 'MailMIME::toEmail()', '%mailmime' => 'Mail MIME'),
+            WATCHDOG_WARNING,
+            'http://drupal.org/node/add/project-issue/mailmime'
+          );
+        }
       }
       else {
         $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
@@ -86,6 +128,15 @@ class HTMLMailSystem implements MailSystemInterface {
         $mime->setHTMLBody('');
         $mime->setContentType('text/plain', array('charset' => 'utf-8'));
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
+        if (!$message['body']) {
+          watchdog(
+            'htmlmail',
+            'The %toemail function did not return any text. Please report this errot to the %mailmime issue queue.',
+            array('%toemail' => 'MailMIME::toEmail()', '%mailmime' => 'Mail MIME'),
+            WATCHDOG_WARNING,
+            'http://drupal.org/node/add/project-issue/mailmime'
+          );
+        }
       }
       else {
         $message['body'] = $plain;
