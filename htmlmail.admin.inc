@@ -175,12 +175,12 @@ function htmlmail_admin_settings() {
     )
     . '</p>',
   );
-  $form['theme'] = array(
+  $form['filter'] = array(
     '#type' => 'fieldset',
     '#title' => '<h3>' . t('Step 3') . '</h3>',
     '#collapsible' => FALSE,
   );
-  $form['theme']['htmlmail_postfilter'] = array(
+  $form['filter']['htmlmail_postfilter'] = array(
     '#type' => 'select',
     '#title' => t('Post-filtering'),
     '#default_value' => variable_get('htmlmail_postfilter', ''),
