@@ -238,29 +238,51 @@ class HTMLMailSystem implements MailSystemInterface {
       );
       return FALSE;
     }
-    $extra = NULL;
-    if (isset($message['headers']['Return-Path']) && !ini_get('safe_mode')) {
+    if (variable_get('htmlmail_debug', 0)) {
+      $params = array($to, $subject, $body, $txt_headers);
+    }
+    if (isset($message['headers']['Return-Path'])) {
+      // A return-path was set.
       if (isset($_SERVER['WINDIR']) || strpos($_SERVER['SERVER_SOFTWARE'], 'Win32') !== FALSE) {
         // On Windows, PHP will use the value of sendmail_from for the
         // Return-Path header.
         $old_from = ini_get('sendmail_from');
         ini_set('sendmail_from', $message['headers']['Return-Path']);
+        $result = @mail($to, $subject, $body, $txt_headers);
+        ini_set('sendmail_from', $old_from);
+      }
+      elseif (ini_get('safe_mode')) {
+        // If safe mode is in effect, passing the fifth parameter to @mail
+        // will cause it to return FALSE and generate a PHP warning, even
+        // if the parameter is NULL.
+        $result = @mail($to, $subject, $body, $txt_headers);
       }
       else {
         // On most non-Windows systems, the "-f" option to the sendmail command
         // is used to set the Return-Path.
         $extra = '-f' . $message['headers']['Return-Path'];
+        $result = @mail($to, $subject, $body, $txt_headers, $extra);
+        if (variable_get('htmlmail_debug', 0)) {
+          $params[] = $extra;
+        }
       }
     }
-    if (is_null($extra)) {
+    else {
+      // No return-path was set.
       $result = @mail($to, $subject, $body, $txt_headers);
     }
-    else {
-      $result = @mail($to, $subject, $body, $txt_headers, $extra);
-    }
-    if (isset($old_from)) {
-      // Set sendmail_from back to its previous value.
-      ini_set('sendmail_from', $old_from);
+    if (!$result && variable_get('htmlmail_debug', 0)) {
+      $params[] = print_r(debug_backtrace(0), 1);
+      foreach ($params as $i => $value) {
+        $params[$i] = str_replace(
+          array("\n", "'"),
+          array('\n', '"'),
+          var_export($value, 1)
+        );
+      }
+      $trace = array_pop($params);
+      $call = '@mail(' . implode(', ', $params) . ')';
+      watchdog('htmlmail', 'Mail sending failed because:<br /><pre>@call</pre><br />returned FALSE.<br /><pre>@trace</pre>', array('@call' => $call, '@trace' => $trace));
     }
     return $result;
   }
