@@ -239,7 +239,12 @@ class HTMLMailSystem implements MailSystemInterface {
       return FALSE;
     }
     if (variable_get('htmlmail_debug', 0)) {
-      $params = array($to, $subject, $body, $txt_headers);
+      $params = array(
+        $to,
+        $subject,
+        drupal_substr($body, 0, min(80, strpos("\n", $body))) . '...',
+        $txt_headers
+      );
     }
     if (isset($message['headers']['Return-Path'])) {
       // A return-path was set.
@@ -272,16 +277,20 @@ class HTMLMailSystem implements MailSystemInterface {
       $result = @mail($to, $subject, $body, $txt_headers);
     }
     if (!$result && variable_get('htmlmail_debug', 0)) {
-      $params[] = print_r(debug_backtrace(0), 1);
-      foreach ($params as $i => $value) {
-        $params[$i] = str_replace(
-          array("\n", "'"),
-          array('\n', '"'),
-          var_export($value, 1)
-        );
-      }
-      $trace = array_pop($params);
       $call = '@mail(' . implode(', ', $params) . ')';
+      foreach ($params as $i => $value) {
+        $params[$i] = var_export($value, 1)
+      }
+      if (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
+        $trace = print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 1);
+      }
+      else {
+        $trace = debug_backtrace(0);
+        for ($i = count($trace) - 1; $i >= 0; $i--) {
+          unset($trace[$i]['args']);
+        }
+        $trace = print_r($trace);
+      }
       watchdog('htmlmail', 'Mail sending failed because:<br /><pre>@call</pre><br />returned FALSE.<br /><pre>@trace</pre>', array('@call' => $call, '@trace' => $trace));
     }
     return $result;
