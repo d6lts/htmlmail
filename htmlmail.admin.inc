@@ -35,7 +35,7 @@ function htmlmail_admin_settings() {
     '#type' => 'item',
     '#suffix' => t('!Instructions
 <p>When formatting an email message with a given <code>$module</code> and <code>$key</code>, <a href="http://drupal.org/project/htmlmail">HTML Mail</a> will use the first template file it finds from the following list:</p>
-<ol style="list-style-type: decimal;">
+<ol style="list-style-type: decimal">
   <li><code>htmlmail-$module-$key.tpl.php</code></li>
   <li><code>htmlmail-$module.tpl.php</code></li>
   <li><code>htmlmail.tpl.php</code></li>
@@ -47,7 +47,7 @@ function htmlmail_admin_settings() {
 </code>
 </pre>
 <p>the possible template file names would be:</p>
-<ol style="list-style-type: decimal;">
+<ol style="list-style-type: decimal">
   <li><code>htmlmail-example-module-outgoing-message.tpl.php</code></li>
   <li><code>htmlmail-example-module.tpl.php</code></li>
   <li><code>htmlmail.tpl.php</code></li>

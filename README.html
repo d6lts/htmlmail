@@ -1,6 +1,6 @@
-<h2><a href="http://drupal.org/project/htmlmail">HTML Mail</a></h2>
+<h2 id="html-mail"><a href="http://drupal.org/project/htmlmail">HTML Mail</a></h2>
 <p>Lets you theme your messages the same way you theme the rest of your website.</p>
-<h3><a href="http://www.dict.org/bin/Dict?Form=Dict2&amp;Database=*&amp;Query=requirement">Requirements</a></h3>
+<h3 id="requirements"><a href="http://www.dict.org/bin/Dict?Form=Dict2&amp;Database=*&amp;Query=requirement">Requirements</a></h3>
 <ul>
   <li>
     <p><a href="http://drupal.org/node/1135590">Autoload 6.x-2.1</a> <em>(New for 6.x-2.28)</em></p>
@@ -9,7 +9,7 @@
     <p><a href="http://drupal.org/project/mailsystem">Mail System 6.x-2.x</a></p>
   </li>
 </ul>
-<h3><a href="http://drupal.org/documentation/install/modules-themes/modules-5-6">Installation</a></h3>
+<h3 id="installation"><a href="http://drupal.org/documentation/install/modules-themes/modules-5-6">Installation</a></h3>
 <p>The following additional modules, while not required, are highly recommended:</p>
 <ul>
   <li>
@@ -48,7 +48,7 @@
     </dl>
   </li>
 </ul>
-<h3><a href="http://drupal.org/node/250790">Updating from previous versions</a></h3>
+<h3 id="updating-from-previous-versions"><a href="http://drupal.org/node/250790">Updating from previous versions</a></h3>
 <p>The <a href="http://drupal.org/node/1119548">6.x-2.x</a> branch shares 94% of its code with the <a href="http://drupal.org/node/1106064">7.x-2.x</a> branch, but only 8% of its code with the <a href="http://drupal.org/node/329828">6.x-1.x</a> branch.</p>
 <p>Let your compatibility expectations be adjusted accordingly.</p>
 <ul>
@@ -82,12 +82,12 @@
     <p>Full MIME handling, including automatic generation of a plaintext alternative part and conversion of image references to inline image attachments, is available simply by enabling the <a href="http://drupal.org/project/mailmime">Mail MIME</a> module.</p>
   </li>
 </ul>
-<h3><a href="http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png">Configuration</a></h3>
+<h3 id="configuration"><a href="http://drupal.org/files/images/htmlmail_settings_2.thumbnail.png">Configuration</a></h3>
 <p>Visit the <a href="http://drupal.org/project/mailsystem">Mail System</a> settings page at <u>admin/settings/mailsystem</u> to select which parts of Drupal will use <a href="http://drupal.org/project/htmlmail">HTML Mail</a> instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
 <p>Visit the <a href="http://drupal.org/project/htmlmail">HTML Mail</a> settings page at <u>admin/settings/htmlmail</u> to select a theme and post-filter for your messages.</p>
-<h3><a href="http://drupal.org/documentation/theme">Theming</a></h3>
+<h3 id="theming"><a href="http://drupal.org/documentation/theme">Theming</a></h3>
 <p>The email message text goes through three transformations before sending:</p>
-<ol style="list-style-type: decimal;">
+<ol style="list-style-type: decimal">
   <li>
     <h3>Template File</h3>
     <p>A template file is applied to your message header, subject, and body text. The default template is the included <code>htmlmail.tpl.php</code> file. You may copy this file to your <cite>email theme</cite> directory (selected below), and use it to customize the contents and formatting of your messages. The comments within that file contain complete documentation on its usage.</p>
@@ -113,8 +113,17 @@
     </ul>
   </li>
 </ol>
-<h3>Troubleshooting</h3>
+<h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
+  <li>
+    <p>Check the <a href="http://drupal.org/node/1124376">online documentation</a>, especially the <a href="http://drupal.org/node/1124934">screenshots</a>.</p>
+  </li>
+  <li>
+    <p>There is a special documentation page for <a href="http://drupal.org/node/1200142">Using HTML Mail together with SMTP Authentication Support</a>.</p>
+  </li>
+  <li>
+    <p><a href="http://drupal.org/project/simplenews">Simplenews</a> users attempting advanced theming should read <a href="http://drupal.org/node/1260178">this page</a>.</p>
+  </li>
   <li>
     <p>Double-check the <a href="http://drupal.org/project/mailsystem">Mail System</a> module settings and and make sure you selected <u><code>HTMLMailSystem</code></u> for your <u>Site-wide default mail system</u>.</p>
   </li>
@@ -131,7 +140,7 @@
     <p>Visit the <a href="http://drupal.org/project/issues/htmlmail">issue queue</a> for support and feature requests.</p>
   </li>
 </ul>
-<h3>Related Modules</h3>
+<h3 id="related-modules">Related Modules</h3>
 <dl>
   <dt><strong>Echo</strong></dt>
   <dd>
@@ -166,7 +175,8 @@
     <p>http://drupal.org/project/transliteration</p>
   </dd>
 </dl>
-<h3><a href="http://drupal.org/project/documentation">Documentation</a></h3>
+<h3 id="documentation"><a href="http://drupal.org/project/documentation">Documentation</a></h3>
+<p>**<a href="http://drupal.org/node/1124376">HTML Mail</a></p>
 <dl>
   <dt><strong><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/6">filter.module</a></strong></dt>
   <dd>
@@ -181,11 +191,11 @@
     <p><a href="http://drupal.org/documentation/theme">drupal.org/documentation/theme</a></p>
   </dd>
 </dl>
-<h3>Original Author</h3>
+<h3 id="original-author">Original Author</h3>
 <ul>
   <li><a href="http://drupal.org/user/1171">Chris Herberte</a></li>
 </ul>
-<h3>Current Maintainer</h3>
+<h3 id="current-maintainer">Current Maintainer</h3>
 <ul>
   <li><a href="http://drupal.org/user/36148">Bob Vincent</a></li>
 </ul>

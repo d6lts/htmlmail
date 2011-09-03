@@ -121,14 +121,19 @@
 
   Troubleshooting
 
-     * Double-check the [43]Mail System module settings and and make sure
+     * Check the [43]online documentation, especially the [44]screenshots.
+     * There is a special documentation page for [45]Using HTML Mail
+       together with SMTP Authentication Support.
+     * [46]Simplenews users attempting advanced theming should read
+       [47]this page.
+     * Double-check the [48]Mail System module settings and and make sure
        you selected HTMLMailSystem for your Site-wide default mail system.
-     * Try selecting the [ ] (Optional) Debug checkbox at the [44]HTML
+     * Try selecting the [ ] (Optional) Debug checkbox at the [49]HTML
        Mail module settings page and re-sending your message.
      * Clear your cache after changing any .tpl.php files.
      * If you use a post-filter, make sure your filter settings page looks
-       like [45]this.
-     * Visit the [46]issue queue for support and feature requests.
+       like [50]this.
+     * Visit the [51]issue queue for support and feature requests.
 
   Related Modules
 
@@ -156,24 +161,26 @@
    Transliteration
           http://drupal.org/project/transliteration
 
-  [47]Documentation
+  [52]Documentation
 
-   [48]filter.module
-          [49]api.drupal.org/api/drupal/modules--filter--filter.module
+   **[53]HTML Mail
 
-   [50]Installing contributed modules
-          [51]drupal.org/documentation/install/modules-themes/modules-5-6
+   [54]filter.module
+          [55]api.drupal.org/api/drupal/modules--filter--filter.module
 
-   [52]Theming guide
-          [53]drupal.org/documentation/theme
+   [56]Installing contributed modules
+          [57]drupal.org/documentation/install/modules-themes/modules-5-6
+
+   [58]Theming guide
+          [59]drupal.org/documentation/theme
 
   Original Author
 
-     * [54]Chris Herberte
+     * [60]Chris Herberte
 
   Current Maintainer
 
-     * [55]Bob Vincent
+     * [61]Bob Vincent
 
 References
 
@@ -219,16 +226,22 @@ References
   40. http://drupal.org/project/emogrifier
   41. http://drupal.org/project/filter_transliteration
   42. http://drupal.org/project/pathologic
-  43. http://drupal.org/project/mailsystem
-  44. http://drupal.org/project/htmlmail
-  45. http://drupal.org/node/1130960
-  46. http://drupal.org/project/issues/htmlmail
-  47. http://drupal.org/project/documentation
-  48. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
-  49. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
-  50. http://drupal.org/documentation/install/modules-themes/modules-5-6
-  51. http://drupal.org/documentation/install/modules-themes/modules-5-6
-  52. http://drupal.org/documentation/theme
-  53. http://drupal.org/documentation/theme
-  54. http://drupal.org/user/1171
-  55. http://drupal.org/user/36148
+  43. http://drupal.org/node/1124376
+  44. http://drupal.org/node/1124934
+  45. http://drupal.org/node/1200142
+  46. http://drupal.org/project/simplenews
+  47. http://drupal.org/node/1260178
+  48. http://drupal.org/project/mailsystem
+  49. http://drupal.org/project/htmlmail
+  50. http://drupal.org/node/1130960
+  51. http://drupal.org/project/issues/htmlmail
+  52. http://drupal.org/project/documentation
+  53. http://drupal.org/node/1124376
+  54. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
+  55. http://api.drupal.org/api/drupal/modules--filter--filter.module/6
+  56. http://drupal.org/documentation/install/modules-themes/modules-5-6
+  57. http://drupal.org/documentation/install/modules-themes/modules-5-6
+  58. http://drupal.org/documentation/theme
+  59. http://drupal.org/documentation/theme
+  60. http://drupal.org/user/1171
+  61. http://drupal.org/user/36148
