@@ -17,10 +17,6 @@ function htmlmail_requirements($phase) {
     return $result;
   }
   if (module_load_include('inc', 'mailsystem', 'html_to_text') !== FALSE) {
-    // Ensure that the HTMLMailSystem class is used by
-    // (at least) the htmlmail module, so that it always
-    // shows up on the admin/config/system/mailsystem page.
-    mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
     return $result;
   }
   $args = array(

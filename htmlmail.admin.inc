@@ -255,6 +255,18 @@ function htmlmail_test_form($form_values = NULL) {
     '#format' => $defaults['body']['format'],
     '#required' => TRUE,
   );
+  $mailsystem = mailsystem_get();
+  if (empty($mailsystem['htmlmail'])) {
+    $mailsystem['htmlmail'] = 'HTMLMailSystem';
+  }
+  $form['class'] = array(
+    '#type' => 'select',
+    '#title' => t('Test mail sending class'),
+    '#default_value' => $mailsystem['htmlmail'],
+    '#options' => array_combine(mailsystem_get_classes(), mailsystem_get_classes()),
+    '#description' => 'Select the MailSystemInterface implementation to be tested.',
+  );
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Send test message'),
@@ -274,6 +286,8 @@ function htmlmail_test_form_submit($form, &$form_state) {
   );
   // Set the defaults for reuse.
   variable_set('htmlmail_test', $defaults);
+  // Set the mail sending class.
+  mailsystem_set(array('htmlmail' => $form_state['values']['class']));
   // Send the email.
   $params = array(
     'subject' => $form_state['values']['subject'],
