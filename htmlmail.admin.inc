@@ -15,7 +15,7 @@ function htmlmail_admin_settings() {
   }
   $form['template'] = array(
     '#type' => 'fieldset',
-    '#title' => '<h3>' . t('Step 1') . '</h3>',
+    '#title' => t('Step 1'),
     '#collapsible' => FALSE,
   );
   $form['template']['htmlmail_template'] = array(
@@ -141,7 +141,7 @@ function htmlmail_admin_settings() {
   );
   $form['theme'] = array(
     '#type' => 'fieldset',
-    '#title' => '<h3>' . t('Step 2') . '</h3>',
+    '#title' => t('Step 2'),
     '#collapsible' => FALSE,
   );
   $form['theme']['htmlmail_theme'] = array(
@@ -181,7 +181,7 @@ function htmlmail_admin_settings() {
   );
   $form['filter'] = array(
     '#type' => 'fieldset',
-    '#title' => '<h3>' . t('Step 3') . '</h3>',
+    '#title' => t('Step 3'),
     '#collapsible' => FALSE,
   );
   $form['filter']['htmlmail_postfilter'] = array(
