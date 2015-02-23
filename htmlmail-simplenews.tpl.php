@@ -62,7 +62,7 @@
 <?php if ($key == 'node' || $key == 'test'): ?>
 <div class="htmlmail-simplenews-link">
   <a href="<?php echo url('node/' . $params['context']['node']->nid, array('absolute' => TRUE)); ?>">
-    Click here to view this message on the web.
+    <?php echo t('Click here to view this message on the web.'); ?>
   </a>
 </div>
 <?php endif; ?>
