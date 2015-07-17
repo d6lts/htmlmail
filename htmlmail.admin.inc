@@ -237,7 +237,9 @@ function htmlmail_test_form($form, &$form_values) {
       ),
     )
   );
-  $defaults['body']['format'] = filter_fallback_format();
+  if (empty($defaults['body']['format'])) {
+    $defaults['body']['format'] = filter_fallback_format();
+  }
   $form['to'] = array(
     '#type' => 'textfield',
     '#title' => t('To'),
