@@ -2,11 +2,11 @@
 
 /**
  * @file
- * Admin forms for HTML Mail
+ * Admin forms for HTML Mail.
  */
 
 /**
- * Implements hook_admin_settings().
+ * Form constructor for the admin settings form.
  */
 function htmlmail_admin_settings() {
   $formats = array('0' => t('Unfiltered'));
@@ -24,7 +24,7 @@ function htmlmail_admin_settings() {
     . t('A template file is applied to your message header, subject, and body text.  You may copy the <a href="!uri">!template</a> file to your default theme directory and use it to customize your messages.',
       array(
         '!uri' => url('http://cgit.drupalcode.org/htmlmail/plain/htmlmail.tpl.php?id=refs/heads/7.x-2.x'),
-        '!template' => '<code>htmlmail.tpl.php</code>'
+        '!template' => '<code>htmlmail.tpl.php</code>',
       )
     ),
     '#title' => t('Instructions'),
@@ -161,7 +161,7 @@ function htmlmail_admin_settings() {
       ) :
       t('If you install and enable the <a href="!echo">Echo</a> module, the theme you select will also be used to style your messages as if they were pages on your website.',
         array(
-          '!echo' => 'https://www.drupal.org/project/echo'
+          '!echo' => 'https://www.drupal.org/project/echo',
         )
       )
     )
@@ -218,7 +218,7 @@ function htmlmail_admin_settings() {
     )
     . '</dt><dd>'
     . t('Converts relative URLS to absolute URLS so that clickable links in your message will work as intended.')
-    . '</dd></dl></ul>'
+    . '</dd></dl></ul>',
   );
   return system_settings_form($form);
 }
@@ -226,7 +226,7 @@ function htmlmail_admin_settings() {
 /**
  * Builds a form for sending a test message.
  */
-function htmlmail_test_form($form_values = NULL) {
+function htmlmail_test_form($form, &$form_values) {
   $defaults = variable_get(
     'htmlmail_test',
     array(
@@ -313,3 +313,4 @@ function htmlmail_test_form_submit($form, &$form_state) {
     drupal_set_message(t('HTML Mail test message sent.'));
   }
 }
+

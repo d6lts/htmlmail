@@ -15,23 +15,23 @@ class HTMLMailSystem implements MailSystemInterface {
   /**
    * Format emails according to module settings.
    *
-   * Parses the message headers and body into a MailMIME object.  If another module
-   * subsequently modifies the body, then format() should be called again before
-   * sending.  This is safe because the $message['body'] is not modified.
+   * Parses the message headers and body into a MailMIME object.  If another
+   * module subsequently modifies the body, then format() should be called again
+   * before sending.  This is safe because the $message['body'] is not modified.
    *
-   * @param $message
+   * @param array $message
    *   An associative array with at least the following parts:
    *   - headers: An array of (name => value) email headers.
    *   - body: The text/plain or text/html message part.
    *
-   * @return
+   * @return array
    *   The formatted $message, ready for sending.
    */
   public function format(array $message) {
     $eol = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
     // @todo Remove this when issue #209672 gets resolved.
     $default_from = variable_get('site_mail', ini_get('sendmail_from'));
-    if ( !empty($message['headers']['From'])
+    if (!empty($message['headers']['From'])
       && $message['headers']['From'] == $default_from
       && valid_email_address($default_from)
     ) {
@@ -175,7 +175,7 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     else {
       // Wrap formatted plaintext in <pre> tags.
-      if ( $email['body'] === strip_tags($email['body']) // No html tags.
+      if ($email['body'] === strip_tags($email['body']) // No html tags.
         && preg_match('/.' . $eol . './', $email['body']) // At least one embedded newline.
       ) {
         $email['body'] = '<pre>' . $email['body'] . '</pre>';
@@ -193,7 +193,7 @@ class HTMLMailSystem implements MailSystemInterface {
   /**
    * Send an email message.
    *
-   * @param $message
+   * @param array $message
    *   An associative array containing at least:
    *   - headers: An associative array of (name => value) email headers.
    *   - body: The text/plain or text/html message body.
@@ -243,7 +243,7 @@ class HTMLMailSystem implements MailSystemInterface {
         $to,
         $subject,
         drupal_substr($body, 0, min(80, strpos("\n", $body))) . '...',
-        $txt_headers
+        $txt_headers,
       );
     }
     if (isset($message['headers']['Return-Path'])) {
@@ -299,10 +299,10 @@ class HTMLMailSystem implements MailSystemInterface {
   /**
    * Converts an array of email headers to a text string.
    *
-   * @param $headers
+   * @param array $headers
    *   An associative array of ('HeaderName' => 'header value') pairs.
    *
-   * @return
+   * @return string
    *   The concatenated headers as a single string.
    */
   public function txtHeaders(array $headers) {

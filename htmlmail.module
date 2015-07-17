@@ -58,7 +58,7 @@ function htmlmail_menu() {
   $items['admin/config/system/htmlmail/settings'] = array(
     'title' => 'Settings',
     'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => '-2'
+    'weight' => '-2',
   );
   $items['admin/config/system/htmlmail/test'] = array(
     'title' => 'Send Test',
@@ -182,9 +182,13 @@ function htmlmail_user_presave(&$edit, $account, $category) {
 }
 
 /**
- * Returns an associative array of allowed themes.  The keys are the
- * machine-readable names and the values are the .info file names.
+ * Returns an associative array of allowed themes.
+ *
  * Based on code from the og_theme module.
+ *
+ * @return array
+ *   The keys are the machine-readable names and the values are the .info file
+ *   names.
  */
 function &htmlmail_get_allowed_themes() {
   $allowed = &drupal_static(__FUNCTION__);
@@ -204,6 +208,12 @@ function &htmlmail_get_allowed_themes() {
 
 /**
  * Returns the selected theme to use for outgoing emails.
+ *
+ * @param array $message
+ *   (optional) The message to be themed.
+ *
+ * @return string
+ *   The 'theme' key of $message if set and allowed, empty string otherwise.
  */
 function htmlmail_get_selected_theme(&$message = array()) {
   $selected = isset($message['theme'])
@@ -221,13 +231,14 @@ function htmlmail_get_selected_theme(&$message = array()) {
 /**
  * Checks whether a given recipient email prefers plaintext-only messages.
  *
- * @param $email
+ * @param string $email
  *   The recipient email address.
  *
- * @return
+ * @return bool
  *   FALSE if the recipient prefers plaintext-only messages; otherwise TRUE.
  */
 function htmlmail_is_allowed($email) {
   return !($recipient = user_load_by_mail($email))
     || empty($recipient->data['htmlmail_plaintext']);
 }
+
