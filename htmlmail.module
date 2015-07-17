@@ -122,9 +122,8 @@ function template_preprocess_htmlmail(array &$variables) {
   else {
     $variables['theme_path'] = drupal_get_path('theme', $variables['theme']);
   }
-  $variables['theme_url'] = url(
-    $variables['theme_path'], array('absolute' => TRUE)
-  );
+  global $base_url;
+  $variables['theme_url'] = $base_url . base_path() . $variables['theme_path'];
   $variables['message_id'] = $variables['module'] . '_' . $variables['key'];
   $suggestion = 'htmlmail__' . $variables['module'];
   $variables['theme_hook_suggestions'][] = $suggestion;
