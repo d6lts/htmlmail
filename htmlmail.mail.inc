@@ -169,16 +169,19 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     // Work on a copy so that the original $message['body'] remains unchanged.
     $email = $message;
-    if ( !($email['body'] = $mime->getHTMLBody())
+    if (!($email['body'] = $mime->getHTMLBody())
       && !($email['body'] = $mime->getTXTBody())
     ) {
       $email['body'] = '';
     }
     else {
       // Wrap formatted plaintext in <pre> tags.
-      if ($email['body'] === strip_tags($email['body']) // No html tags.
-        && preg_match('/.' . $eol . './', $email['body']) // At least one embedded newline.
+      if ($email['body'] === strip_tags($email['body'])
+        && preg_match('/.' . $eol . './', $email['body'])
       ) {
+        // In condition:
+        // No html tags.
+        // At least one embedded newline.
         $email['body'] = '<pre>' . $email['body'] . '</pre>';
       }
     }
@@ -321,4 +324,5 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     return implode("\n", $output);
   }
+
 }

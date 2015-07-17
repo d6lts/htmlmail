@@ -315,4 +315,3 @@ function htmlmail_test_form_submit($form, &$form_state) {
     drupal_set_message(t('HTML Mail test message sent.'));
   }
 }
-

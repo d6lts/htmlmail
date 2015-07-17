@@ -33,11 +33,13 @@ function htmlmail_help($path, $arg) {
   switch ($path) {
     case 'admin/config/system/htmlmail':
       return '<h2>' . t('Theming') . '</h2><p>' . t('The email message goes through three transformations before sending:') . '</p>';
+
     case 'admin/help#htmlmail':
       return '<p>'
         . t('<a href="!htmlmail">HTML Mail</a> lets you theme your messages the same way you theme the rest of your website.',
           array('!htmlmail' => 'http://drupal.org/project/htmlmail')
         ) . '</p>';
+
     default:
       return '';
   }
@@ -242,4 +244,3 @@ function htmlmail_is_allowed($email) {
   return !($recipient = user_load_by_mail($email))
     || empty($recipient->data['htmlmail_plaintext']);
 }
-

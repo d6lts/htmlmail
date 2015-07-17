@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Sample template for sending user password reset messages with HTML Mail
+ * Sample template for sending user password reset messages with HTML Mail.
  *
  * The following variables are available in this template:
  *
