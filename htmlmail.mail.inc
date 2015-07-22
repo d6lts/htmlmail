@@ -121,6 +121,20 @@ class HTMLMailSystem implements MailSystemInterface {
       else {
         $message['headers']['Content-Type'] = 'text/html; charset=utf-8';
         $message['body'] = $body;
+        if (variable_get('htmlmail_html_with_plain', FALSE)) {
+          $boundary = uniqid('np');
+          $message['headers']['Content-Type'] = "multipart/alternative;boundary=" . $boundary;
+          $html = $message['body'];
+          $raw_message = 'This is a MIME encoded message.';
+          $raw_message .= $eol . $eol . "--" . $boundary . $eol;
+          $raw_message .= "Content-type: text/plain;charset=utf-8" . $eol . $eol;
+          $raw_message .= mailsystem_html_to_text($html);
+          $raw_message .= $eol . $eol . "--" . $boundary . $eol;
+          $raw_message .= "Content-type: text/html;charset=utf-8" . $eol . $eol;
+          $raw_message .= $html;
+          $raw_message .= $eol . $eol . "--" . $boundary . "--";
+          $message['body'] = $raw_message;
+        }
       }
     }
     else {

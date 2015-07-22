@@ -185,6 +185,16 @@ function htmlmail_admin_settings() {
     '#title' => t('Step 3'),
     '#collapsible' => FALSE,
   );
+  if (!module_exists('mailmime')) {
+    $form['filter']['htmlmail_html_with_plain'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Provide simple plain/text alternative of the HTML mail.'),
+      '#default_value' => variable_get('htmlmail_html_with_plain', FALSE),
+      '#description' => t('This may increase the quality of your outgoing emails for the spam filters. If you need image handling and more sophisticated plain text version, check !mailmime.', array(
+        '!mailmime' => l('Mail MIME', 'https://www.drupal.org/project/mailmime', array('attributes' => array('target' => '_blank'))),
+      ))
+    );
+  }
   $form['filter']['htmlmail_postfilter'] = array(
     '#type' => 'select',
     '#title' => t('Post-filtering'),
