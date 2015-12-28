@@ -18,7 +18,7 @@
  *  - $to: The recipient subscriber email address.
  *  - $subject: The message subject line.
  *  - $body: The formatted message body.
- *  - $language: The language object for this message.
+ *  - $language: The language code for this message.
  *  - $params: An array containing the following keys:
  *    - context:  An array containing the following keys:
  *      - account: The recipient subscriber account object, which contains

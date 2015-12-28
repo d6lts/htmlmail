@@ -63,7 +63,7 @@
  *        The formatted message body.
  *
  * $language
- *        The language object for this message.
+ *        The language code for this message.
  *
  * $params
  *        Any module-specific parameters.

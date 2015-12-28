@@ -93,7 +93,7 @@ function htmlmail_admin_settings() {
   </dd>
   <dt><strong><code>$language</code></strong></dt>
   <dd>
-    <p>The language object for this message.</p>
+    <p>The language code for this message.</p>
   </dd>
   <dt><strong><code>$params</code></strong></dt>
   <dd>
