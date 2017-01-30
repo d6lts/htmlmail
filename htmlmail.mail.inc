@@ -107,6 +107,12 @@ class HTMLMailSystem implements MailSystemInterface {
       if (isset($message['MailMIME'])) {
         $mime = &$message['MailMIME'];
         $mime->setHTMLBody($body);
+        if (isset($message['params']['attachments'])) {
+          foreach ($message['params']['attachments'] as $attachment) {
+            $mime->addAttachment(drupal_realpath($attachment['uri']), $attachment['filemime'], $attachment['filename'],
+              TRUE, 'base64', 'attachment', 'UTF-8', '', '');
+          }
+        }
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
         if (!$message['body']) {
           watchdog(
@@ -142,6 +148,12 @@ class HTMLMailSystem implements MailSystemInterface {
         $mime = &$message['MailMIME'];
         $mime->setHTMLBody('');
         $mime->setContentType('text/plain', array('charset' => 'utf-8'));
+        if (isset($message['params']['attachments'])) {
+          foreach ($message['params']['attachments'] as $attachment) {
+            $mime->addAttachment(drupal_realpath($attachment['uri']), $attachment['filemime'], $attachment['filename'],
+              TRUE, 'base64', 'attachment', 'UTF-8', '', '');
+          }
+        }
         list($message['headers'], $message['body']) = $mime->toEmail($message['headers']);
         if (!$message['body']) {
           watchdog(
