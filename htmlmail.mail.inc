@@ -111,7 +111,7 @@ class HTMLMailSystem implements MailSystemInterface {
         if (!$message['body']) {
           watchdog(
             'htmlmail',
-            'The %toemail function did not return any text. Please report this errot to the %mailmime issue queue.',
+            'The %toemail function did not return any text. Please report this error to the %mailmime issue queue.',
             array('%toemail' => 'MailMIME::toEmail()', '%mailmime' => 'Mail MIME'),
             WATCHDOG_WARNING,
             'http://drupal.org/node/add/project-issue/mailmime'
@@ -123,14 +123,14 @@ class HTMLMailSystem implements MailSystemInterface {
         $message['body'] = $body;
         if (variable_get('htmlmail_html_with_plain', FALSE)) {
           $boundary = uniqid('np');
-          $message['headers']['Content-Type'] = "multipart/alternative;boundary=" . $boundary;
+          $message['headers']['Content-Type'] = 'multipart/alternative;boundary="' . $boundary . '"';
           $html = $message['body'];
           $raw_message = 'This is a MIME encoded message.';
           $raw_message .= $eol . $eol . "--" . $boundary . $eol;
-          $raw_message .= "Content-type: text/plain;charset=utf-8" . $eol . $eol;
+          $raw_message .= "Content-Type: text/plain;charset=utf-8" . $eol . $eol;
           $raw_message .= mailsystem_html_to_text($html);
           $raw_message .= $eol . $eol . "--" . $boundary . $eol;
-          $raw_message .= "Content-type: text/html;charset=utf-8" . $eol . $eol;
+          $raw_message .= "Content-Type: text/html;charset=utf-8" . $eol . $eol;
           $raw_message .= $html;
           $raw_message .= $eol . $eol . "--" . $boundary . "--";
           $message['body'] = $raw_message;
@@ -146,7 +146,7 @@ class HTMLMailSystem implements MailSystemInterface {
         if (!$message['body']) {
           watchdog(
             'htmlmail',
-            'The %toemail function did not return any text. Please report this errot to the %mailmime issue queue.',
+            'The %toemail function did not return any text. Please report this error to the %mailmime issue queue.',
             array('%toemail' => 'MailMIME::toEmail()', '%mailmime' => 'Mail MIME'),
             WATCHDOG_WARNING,
             'http://drupal.org/node/add/project-issue/mailmime'
