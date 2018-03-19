@@ -240,7 +240,6 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
    *   An associative array containing at least:
    *   - headers: An associative array of (name => value) email headers.
    *   - body: The text/plain or text/html message body.
-   *   - MailMIME: The message, parsed into a MailMIME object.
    *
    * @return bool
    *   TRUE if the mail was successfully accepted or queued, FALSE otherwise.
@@ -263,17 +262,11 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
       }
       $message['to'] = $message['headers']['To'];
     }
-    if (class_exists('MailMIME')) {
-      $mime = new MailMIME();
-      $to = $mime->encodeHeader('to', $message['to']);
-      $subject = $mime->encodeHeader('subject', $message['subject']);
-      $txt_headers = $mime->txtHeaders($message['headers']);
-    }
-    else {
-      $to = Unicode::mimeHeaderEncode($message['to']);
-      $subject = Unicode::mimeHeaderEncode($message['subject']);
-      $txt_headers = $this->txtHeaders($message['headers']);
-    }
+
+    $to = Unicode::mimeHeaderEncode($message['to']);
+    $subject = Unicode::mimeHeaderEncode($message['subject']);
+    $txt_headers = $this->txtHeaders($message['headers']);
+
     $body = preg_replace('#(\r\n|\r|\n)#s', $eol, $message['body']);
     // Check for empty body.
     if (empty($body)) {
