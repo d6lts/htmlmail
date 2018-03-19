@@ -8,7 +8,6 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\htmlmail\Helper\HtmlMailHelper;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_mail().
@@ -138,7 +137,7 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['message_template_exists'] = file_exists("{$variables['theme_path']}/{$variables['message_template']}");
   $variables['module_template_exists'] = file_exists("{$variables['theme_path']}/{$variables['module_template']}");
 
-  $variables['pre_formatted_params'] = Html::escape(print_r($params, 1));
+  $variables['pre_formatted_params'] = print_r($params, 1);
 }
 
 /**

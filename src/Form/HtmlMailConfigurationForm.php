@@ -210,7 +210,7 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
     $form['theme']['htmlmail_theme'] = [
       '#type' => 'select',
       '#title' => $this->t('Email theme'),
-      '#default_value' => $config->get('htmlmail_theme', ''),
+      '#default_value' => $config->get('htmlmail_theme'),
       '#options' => $this->helperHandler->getAllowedThemes(),
       '#suffix' => '<p>'
       . $this->t('Choose the theme that will hold your customized templates from Step 1 above.')
@@ -236,19 +236,17 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
       '#title' => $this->t('Step 3'),
     ];
 
-    if (!$this->moduleHandler->moduleExists('mailmime')) {
-      $form['filter']['htmlmail_html_with_plain'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Provide simple plain/text alternative of the HTML mail.'),
-        '#default_value' => $config->get('htmlmail_html_with_plain', FALSE),
-        '#description' => $this->t('This may increase the quality of your outgoing emails for the spam filters.'),
-      ];
-    }
+    $form['filter']['htmlmail_html_with_plain'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Provide simple plain/text alternative of the HTML mail.'),
+      '#default_value' => $config->get('htmlmail_html_with_plain'),
+      '#description' => $this->t('This may increase the quality of your outgoing emails for the spam filters.'),
+    ];
 
     $form['filter']['htmlmail_postfilter'] = [
       '#type' => 'select',
       '#title' => $this->t('Post-filtering'),
-      '#default_value' => $config->get('htmlmail_postfilter', ''),
+      '#default_value' => $config->get('htmlmail_postfilter'),
       '#options' => $this->getFilterFormatsList(),
       '#suffix' => '<p>'
       . $this->t('You may choose a <a href=":formats">text format</a> to be used for filtering email messages <em>after</em> theming.  This allows you to use any combination of <a href=":filters">over 200 filter modules</a> to make final changes to your message before sending.',
