@@ -5,6 +5,7 @@
  * Default file for HTML Mail module.
  */
 
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\htmlmail\Helper\HtmlMailHelper;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\Html;
@@ -138,4 +139,18 @@ function template_preprocess_htmlmail(array &$variables) {
   $variables['module_template_exists'] = file_exists("{$variables['theme_path']}/{$variables['module_template']}");
 
   $variables['pre_formatted_params'] = Html::escape(print_r($params, 1));
+}
+
+/**
+ * Implements hook_help().
+ */
+function htmlmail_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.admin_status':
+      $output = '';
+      $output .= '<p>' . t('<a href=":htmlmail">HTML Mail</a> lets you theme your messages the same way you theme the rest of your website.',
+          [':htmlmail' => 'http://drupal.org/project/htmlmail']
+        ) . '</p>';
+      return $output;
+  }
 }
