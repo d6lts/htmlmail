@@ -3,7 +3,7 @@
 namespace Drupal\htmlmail\Plugin\Mail;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\File\MimeType\MimeTypeGuesser;
+use Drupal\Core\ProxyClass\File\MimeType\MimeTypeGuesser;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Mail\MailInterface;
 use Drupal\Core\Mail\MailFormatHelper;
@@ -60,7 +60,7 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
    *   The site settings service.
    * @param \Drupal\Core\Render\Renderer $renderer
    *   The render service.
-   * @param \Drupal\Core\File\MimeType\MimeTypeGuesser $mimeTypeGuesser
+   * @param \Drupal\Core\ProxyClass\File\MimeType\MimeTypeGuesser $mimeTypeGuesser
    *   The mime guesser service.
    */
   public function __construct(

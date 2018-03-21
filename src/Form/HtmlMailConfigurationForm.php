@@ -17,7 +17,6 @@ use Drupal\htmlmail\Helper\HtmlMailHelper;
 class HtmlMailConfigurationForm extends ConfigFormBase {
 
   protected $moduleHandler;
-  protected $helperHandler;
 
   /**
    * Gets the configuration names that will be editable.
@@ -211,7 +210,7 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
       '#type' => 'select',
       '#title' => $this->t('Email theme'),
       '#default_value' => $config->get('htmlmail_theme'),
-      '#options' => $this->helperHandler->getAllowedThemes(),
+      '#options' => HtmlMailHelper::getAllowedThemes(),
       '#suffix' => '<p>'
       . $this->t('Choose the theme that will hold your customized templates from Step 1 above.')
       . '</p><p>'
@@ -309,7 +308,6 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
   public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $moduleHandler) {
     parent::__construct($config_factory);
     $this->moduleHandler = $moduleHandler;
-    $this->helperHandler = new HtmlMailHelper();
   }
 
   /**
