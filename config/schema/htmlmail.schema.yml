@@ -1,0 +1,16 @@
+htmlmail.settings:
+  type: config_object
+  label: 'HTML Mail label settings'
+  mapping:
+    htmlmail_debug:
+      type: boolean
+      label: 'Enable the template debug'
+    hmtlmail_theme:
+      type: string
+      label: 'The theme used to send the email'
+    htmlmail_html_with_plain:
+      type: boolean
+      label: 'Send the email as text plain'
+    htmlmail_postfilter:
+      type: integer
+      label: 'The filter used on email body'
