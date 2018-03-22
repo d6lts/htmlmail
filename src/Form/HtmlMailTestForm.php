@@ -6,7 +6,9 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\htmlmail\Helper\HtmlMailHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Link;
 
 /**
  * Class HtmlMailTestForm.
@@ -17,6 +19,9 @@ class HtmlMailTestForm extends FormBase {
 
   protected $mailManager;
   protected $accountInterface;
+
+  const KEY_NAME = 'test';
+  const DEFAULT_MAIL = 'user@example.com';
 
   /**
    * {@inheritdoc}
@@ -30,6 +35,11 @@ class HtmlMailTestForm extends FormBase {
 
   /**
    * HtmlMailTestForm constructor.
+   *
+   * @param \Drupal\Core\Mail\MailManagerInterface $mailManager
+   *   The mail manager service.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The user account service.
    */
   public function __construct(MailManagerInterface $mailManager, AccountInterface $account) {
     $this->mailManager = $mailManager;
@@ -64,12 +74,12 @@ class HtmlMailTestForm extends FormBase {
     $defaults = $config->get('htmlmail_test');
     if (empty($defaults)) {
       $defaults = [
-        'to' => $config->get('site_mail') ?: 'user@example.com',
-        'subject' => 'test',
+        'to' => $config->get('site_mail') ?: self::DEFAULT_MAIL,
+        'subject' => self::KEY_NAME,
         'body' => [
-          'value' => 'test',
+          'value' => self::KEY_NAME,
         ],
-        'class' => 'htmlmail',
+        'class' => HtmlMailHelper::getModuleName(),
       ];
     }
 
@@ -178,8 +188,14 @@ class HtmlMailTestForm extends FormBase {
       ->set('defaults.formatter', $defaults['class'])
       ->save();
 
-    if ($this->mailManager->mail('htmlmail', 'test', $defaults['to'], $langcode, $params, NULL, TRUE)) {
+    $result = $this->mailManager->mail(HtmlMailHelper::getModuleName(), self::KEY_NAME, $defaults['to'], $langcode, $params, NULL, TRUE);
+    if ($result['result'] === TRUE) {
       drupal_set_message($this->t('HTML Mail test message sent.'));
+    }
+    else {
+      drupal_set_message($this->t('Something went wrong. Please check @logs for details.', [
+        '@logs' => Link::createFromRoute($this->t('logs'), 'dblog.overview')->toString(),
+      ]));
     }
   }
 

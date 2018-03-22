@@ -3,10 +3,10 @@
 namespace Drupal\htmlmail\Utility;
 
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\File\MimeType\MimeTypeGuesser;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Component\Utility\UrlHelper;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
 
 /**
  * @file
@@ -113,14 +113,14 @@ class HTMLMailMime extends \Mail_mime {
    *   The logger service.
    * @param \Drupal\Core\Site\Settings $settings
    *   The site settings service.
-   * @param \Drupal\Core\File\MimeType\MimeTypeGuesser $mimeTypeGuesser
+   * @param \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $mimeTypeGuesser
    *   The mime type service.
    * @param \Drupal\Core\File\FileSystemInterface $fileSystem
    *   The filesystem service.
    * @param array $params
    *   The params.
    */
-  public function __construct(LoggerChannelFactoryInterface $logger, Settings $settings, MimeTypeGuesser $mimeTypeGuesser, FileSystemInterface $fileSystem, array $params = []) {
+  public function __construct(LoggerChannelFactoryInterface $logger, Settings $settings, MimeTypeGuesserInterface $mimeTypeGuesser, FileSystemInterface $fileSystem, array $params = []) {
     parent::__construct($params);
     self::$logger = $logger;
     self::$siteSettings = $settings;
@@ -444,7 +444,7 @@ class HTMLMailMime extends \Mail_mime {
    *
    * @see http://www.apps.ietf.org/rfc/rfc2047.html
    */
-  public function encodeHeader($name, $value, $charset = 'UTF-8', $encoding = 'quoted-printable') {
+  public function mimeEncodeHeader($name, $value, $charset = 'UTF-8', $encoding = 'quoted-printable') {
     return parent::encodeHeader($name, $value, $charset, $encoding);
   }
 
@@ -517,7 +517,7 @@ class HTMLMailMime extends \Mail_mime {
    */
   protected static function parseDecoded(
     HTMLMailMime &$parsed,
-    stdClass &$decoded,
+    &$decoded,
     $parent_subtype = ''
   ) {
     if ($decoded->ctype_primary == 'multipart') {
@@ -545,12 +545,16 @@ class HTMLMailMime extends \Mail_mime {
             return;
           }
         }
+        break;
+
       case 'image':
         if ($parent_subtype == 'related') {
           $cid = isset($decoded->headers['content-id'])
             ? $decoded->headers['content-id'] : NULL;
           return;
         }
+        break;
+
       default:
         $type = $decoded->ctype_primary . '/' . $decoded->ctype_secondary;
         $name = isset($decoded->d_parameters['name'])
@@ -564,6 +568,7 @@ class HTMLMailMime extends \Mail_mime {
           return;
         }
         $parsed->addAttachment($decoded->body, $type, $name, FALSE);
+        break;
     }
   }
 
@@ -669,7 +674,7 @@ class HTMLMailMime extends \Mail_mime {
    * @return string
    *   The headers as a string.
    */
-  public function txtHeaders(array $extra_headers = NULL, $overwrite = FALSE, $skip_content = FALSE) {
+  public function mimeTxtHeaders(array $extra_headers = NULL, $overwrite = FALSE, $skip_content = FALSE) {
     return parent::txtHeaders($extra_headers, $overwrite, $skip_content);
   }
 

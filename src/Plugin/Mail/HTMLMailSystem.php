@@ -3,7 +3,6 @@
 namespace Drupal\htmlmail\Plugin\Mail;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\ProxyClass\File\MimeType\MimeTypeGuesser;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Mail\MailInterface;
 use Drupal\Core\Mail\MailFormatHelper;
@@ -17,6 +16,7 @@ use Drupal\htmlmail\Helper\HtmlMailHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Egulias\EmailValidator\EmailValidator;
 use Drupal\htmlmail\Utility\HTMLMailMime;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
 
 /**
  * Modify the Drupal mail system to use HTMLMail when sending emails.
@@ -60,7 +60,7 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
    *   The site settings service.
    * @param \Drupal\Core\Render\Renderer $renderer
    *   The render service.
-   * @param \Drupal\Core\ProxyClass\File\MimeType\MimeTypeGuesser $mimeTypeGuesser
+   * @param \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $mimeTypeGuesser
    *   The mime guesser service.
    */
   public function __construct(
@@ -73,7 +73,7 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
     LoggerChannelFactoryInterface $logger,
     Settings $settings,
     Renderer $renderer,
-    MimeTypeGuesser $mimeTypeGuesser
+    MimeTypeGuesserInterface $mimeTypeGuesser
   ) {
     $this->emailValidator = $emailValidator;
     $this->moduleHandler = $moduleHandler;
@@ -334,9 +334,9 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
 
     if (class_exists('MailMIME')) {
       $mime = new HTMLMailMime($this->logger, $this->siteSettings, $this->mimeType, $this->fileSystem);
-      $to = $mime->encodeHeader('to', $message['to']);
-      $subject = $mime->encodeHeader('subject', $message['subject']);
-      $txt_headers = $mime->txtHeaders($message['headers']);
+      $to = $mime->mimeEncodeHeader('to', $message['to']);
+      $subject = $mime->mimeEncodeHeader('subject', $message['subject']);
+      $txt_headers = $mime->mimeTxtHeaders($message['headers']);
     }
     else {
       $to = Unicode::mimeHeaderEncode($message['to']);
