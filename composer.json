@@ -26,11 +26,6 @@
             "role": "Maintainer"
         }
     ],
-    "require": {
-        "pear/mail_mime": ">=1.10.2",
-        "pear/mail_mime-decode": ">=1.5.5.2",
-        "pear/pear-core-minimal": ">=1.10.3"
-    },
     "support": {
         "irc": "irc://irc.freenode.org/drupal-contribute",
         "source": "https://cgit.drupalcode.org/htmlmail"

@@ -17,6 +17,11 @@ function htmlmail_mail($key, &$message, $params) {
   $message['key'] = $key;
   $message['subject'] = $params['subject'];
   $message['body'][] = $params['body'];
+
+  if (isset($params['headers'])) {
+    $message['headers'] = array_merge($message['headers'], $params['headers']);
+  }
+
   return $message;
 }
 
@@ -27,7 +32,7 @@ function htmlmail_theme($existing, $type, $theme, $path) {
   $items = [];
   $module_path = \Drupal::service('module_handler')->getModule(HtmlMailHelper::HTMLMAIL_MODULE_NAME)->getPath();
   $pattern = '/^htmlmail.*\.html\.twig$/';
-  $files = file_scan_directory($module_path, $pattern, ['key' => 'name']);
+  $files = file_scan_directory('modules', $pattern, ['key' => 'name']);
   if ($theme = HtmlMailHelper::getSelectedTheme()) {
     $theme_path = \Drupal::service('theme_handler')->getTheme($theme)->getPath();
     $files = array_merge($files,
@@ -35,7 +40,7 @@ function htmlmail_theme($existing, $type, $theme, $path) {
     );
   }
   else {
-    $theme_path = $module_path;
+    $theme_path = $module_path . '/templates';
   }
   ksort($files);
   foreach ($files as $file) {
@@ -98,7 +103,7 @@ function htmlmail_user_form_submit(array $form, FormStateInterface $form_state) 
 /**
  * Process variables to format email messages.
  *
- * @see htmlmail.tpl.php
+ * @see htmlmail.html.twig
  */
 function template_preprocess_htmlmail(array &$variables) {
   $html_settings = \Drupal::config('htmlmail.settings');
@@ -107,13 +112,13 @@ function template_preprocess_htmlmail(array &$variables) {
 
   $variables['debug'] = $html_settings->get('htmlmail_debug') ?: 0;
   $variables['theme'] = HtmlMailHelper::getSelectedTheme($variables);
-  $variables['module_path'] = $module_handler->getModule('htmlmail')->getPath();
+  $variables['module_path'] = $module_handler->getModule('htmlmail')->getPath() . '/templates';
   if (empty($variables['theme'])) {
     $variables['theme'] = 'no theme';
     $variables['theme_path'] = $variables['module_path'];
   }
   else {
-    $variables['theme_path'] = $theme_handler->getTheme($variables['theme'])->getPath();
+    $variables['theme_path'] = $theme_handler->getTheme($variables['theme'])->getPath() . '/templates';
   }
   global $base_url;
 
@@ -126,18 +131,28 @@ function template_preprocess_htmlmail(array &$variables) {
 
   $variables['theme_url'] = $base_url . base_path() . $variables['theme_path'];
   $variables['message_id'] = $module . '_' . $key;
-  $suggestion = 'htmlmail__' . $module;
-  $variables['theme_hook_suggestions'][] = $suggestion;
-  $suggestion .= '__' . $key;
-  $variables['theme_hook_suggestions'][] = $suggestion;
-  $variables['module_template'] = "htmlmail--$module.tpl.php";
-  $variables['message_template'] = "htmlmail--$module--$key.tpl.php";
 
-  $variables['theme_html_exists'] = file_exists($variables['theme_path'] . '/htmlmail.tpl.php');
+  $variables['module_template'] = "htmlmail--$module.html.twig";
+  $variables['message_template'] = "htmlmail--$module--$key.html.twig";
+
+  $variables['theme_html_exists'] = file_exists($variables['theme_path'] . '/htmlmail.html.twig');
   $variables['message_template_exists'] = file_exists("{$variables['theme_path']}/{$variables['message_template']}");
   $variables['module_template_exists'] = file_exists("{$variables['theme_path']}/{$variables['module_template']}");
 
   $variables['pre_formatted_params'] = print_r($params, 1);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function htmlmail_theme_suggestions_htmlmail_alter(array &$suggestions, array $variables) {
+  $module = $variables['message']['module'];
+  $key = $variables['message']['key'];
+
+  $suggestion = 'htmlmail__' . $module;
+  $suggestions[] = $suggestion;
+  $suggestion .= '__' . $key;
+  $suggestions[] = $suggestion;
 }
 
 /**

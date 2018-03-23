@@ -111,4 +111,24 @@ class HtmlMailHelper {
       $user->hasPermission('administer users'));
   }
 
+  /**
+   * Retrieves the theme names based on module and key.
+   *
+   * @param array $message
+   *   The message array with module name and key.
+   *
+   * @return array
+   *   An array with themes name.
+   */
+  public static function getThemeNames(array $message) {
+    $formatted_module = str_replace('_', '-', $message['module']);
+    $formatted_key = str_replace('_', '-', $message['key']);
+
+    return [
+      'htmlmail__' . $formatted_module,
+      'htmlmail__' . $formatted_module . '__' . $formatted_key,
+      'htmlmail',
+    ];
+  }
+
 }

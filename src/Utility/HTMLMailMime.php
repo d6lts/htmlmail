@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
  * Provides the MailMIME class for creating MIME-formatted email messages.
  */
 
+
 /**
  * The MailMIME class is used to create MIME email messages.
  *
@@ -29,7 +30,7 @@ use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
  *
  * @see http://pear.php.net/package/Mail_mime
  */
-class HTMLMailMime extends \Mail_mime {
+class HTMLMailMime extends Mail_mime {
   /**
    * Holds attached content-ids to to avoid attaching the same file twice.
    *
@@ -460,7 +461,7 @@ class HTMLMailMime extends \Mail_mime {
    */
   public static function &parse($message) {
 
-    $decoder = new \Mail_mimeDecode($message);
+    $decoder = new Mail_mimeDecode($message);
     $decoded = $decoder->decode(
       [
         'decode_headers' => TRUE,
@@ -568,7 +569,6 @@ class HTMLMailMime extends \Mail_mime {
           return;
         }
         $parsed->addAttachment($decoded->body, $type, $name, FALSE);
-        break;
     }
   }
 

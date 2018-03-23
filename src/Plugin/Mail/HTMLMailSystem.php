@@ -170,12 +170,11 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
     }
 
     // Collapse the message body array.
-    if (class_exists('HTMLMailMime')) {
+    if (class_exists('Mail_mime')) {
       $body = $this->formatMailMime($message);
       $plain = $message['MailMIME']->getTXTBody();
     }
     else {
-
       // Collapse the message body array.
       if (is_array($message['body'])) {
         // Join the body array into one string.
@@ -187,9 +186,10 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
       }
 
       $theme = [
-        '#theme' => 'htmlmail',
+        '#theme' => HtmlMailHelper::getThemeNames($message),
         '#message' => $message,
       ];
+
       $body = $this->renderer->render($theme);
       if ($message['body'] && !$body) {
         $this->getLogger()->warning('The %theme function did not return any text.  Please check your template file for errors.', [
@@ -332,7 +332,7 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
       $message['to'] = $message['headers']['To'];
     }
 
-    if (class_exists('MailMIME')) {
+    if (class_exists('HTMLMailMime')) {
       $mime = new HTMLMailMime($this->logger, $this->siteSettings, $this->mimeType, $this->fileSystem);
       $to = $mime->mimeEncodeHeader('to', $message['to']);
       $subject = $mime->mimeEncodeHeader('subject', $message['subject']);
@@ -451,7 +451,7 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
     }
     // Theme with htmlmail.html.twig.
     $theme = [
-      '#theme' => 'htmlmail',
+      '#theme' => HtmlMailHelper::getThemeNames($message),
       '#message' => $email,
     ];
     $body = $this->renderer->render($theme);

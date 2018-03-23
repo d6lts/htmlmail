@@ -195,7 +195,7 @@ class HtmlMailTestForm extends FormBase {
     else {
       drupal_set_message($this->t('Something went wrong. Please check @logs for details.', [
         '@logs' => Link::createFromRoute($this->t('logs'), 'dblog.overview')->toString(),
-      ]));
+      ]), 'error');
     }
   }
 
