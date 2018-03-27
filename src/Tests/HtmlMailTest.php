@@ -2,15 +2,12 @@
 
 namespace Drupal\htmlmail\Tests;
 
-/**
- * @file
- * Tests for the HTML Mail module.
- */
-
 use Drupal\simpletest\WebTestBase;
 
 /**
- * Test case for the HTML Mail module.
+ * Tests basic installability of the HTML Mail module.
+ *
+ * @group htmlmail
  */
 class HTMLMailTest extends WebTestBase {
 
