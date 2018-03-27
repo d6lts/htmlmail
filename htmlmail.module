@@ -31,7 +31,8 @@ function htmlmail_mail($key, &$message, $params) {
 function htmlmail_theme($existing, $type, $theme, $path) {
   $items = [];
   $module_path = \Drupal::service('module_handler')->getModule(HtmlMailHelper::HTMLMAIL_MODULE_NAME)->getPath();
-  $pattern = '/^htmlmail.*\.html\.twig$/';
+  $pattern = '/^,
+  .*\.html\.twig$/';
   $files = file_scan_directory('modules', $pattern, ['key' => 'name']);
   if ($theme = HtmlMailHelper::getSelectedTheme()) {
     $theme_path = \Drupal::service('theme_handler')->getTheme($theme)->getPath();
@@ -160,11 +161,31 @@ function htmlmail_theme_suggestions_htmlmail_alter(array &$suggestions, array $v
  */
 function htmlmail_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    case 'help.page.admin_status':
+    case 'help.page.htmlmail':
       $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('<a href=":htmlmail">HTML Mail</a> lets you theme your messages the same way you theme the rest of your website.',
           [':htmlmail' => 'http://drupal.org/project/htmlmail']
         ) . '</p>';
+
+      $output .= '<h3>' . t('Requirements') . '</h3>';
+      $output .= '<p>' . t('If you want to use the <strong>MIME Mail class</strong>, the following files, available from <a href="@pear_link">PEAR</a>, must be installed and available somewhere on the <a href="@include_path_link">include_path</a>.',
+          [
+            '@pear_link' => 'http://pear.php.net/',
+            '@include_path_link' => 'http://php.net/manual/ini.core.php#ini.include-path',
+          ]) . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('Mail/mime.php') . '</li>';
+      $output .= '<li>' . t('Mail/mimeDecode.php') . '</li>';
+      $output .= '<li>' . t('Mail/mimePart.php') . '</li>';
+      $output .= '<li>' . t('PEAR.php') . '</li>';
+      $output .= '<li>' . t('PEAR5.php') . '</li>';
+      $output .= '</ul>';
+
+      $output .= '<p>' . t('To satisfy the requirements, run the following commands from shell prompt:') . '</p>';
+      $output .= '<p><code>' . t('pear install -a Mail_Mime') . '</code></p>';
+      $output .= '<p><code>' . t('pear install Mail_mimeDecode') . '</code></p>';
+      $output .= '<p>' . t('The -a parameter ensures that dependencies, including Mail/mimePart.php, are also installed.') . '</p>';
       return $output;
   }
 }

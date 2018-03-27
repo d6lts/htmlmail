@@ -14,3 +14,6 @@ htmlmail.settings:
     htmlmail_postfilter:
       type: integer
       label: 'The filter used on email body'
+    htmlmail_use_mime_mail:
+      type: boolean
+      label: 'Use the PEAR Mime mail class'

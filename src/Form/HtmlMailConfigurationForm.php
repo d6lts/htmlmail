@@ -234,11 +234,25 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
       '#title' => $this->t('Step 3'),
     ];
 
+    $form['filter']['htmlmail_use_mime_mail'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use the Mime Mail class (PEAR).'),
+      '#default_value' => $config->get('htmlmail_use_mime_mail'),
+      '#description' => $this->t('Use the Mime Mail external class to send HTML Mail. Remember to download the external class.'),
+    ];
+
     $form['filter']['htmlmail_html_with_plain'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Provide simple plain/text alternative of the HTML mail.'),
       '#default_value' => $config->get('htmlmail_html_with_plain'),
       '#description' => $this->t('This may increase the quality of your outgoing emails for the spam filters.'),
+      '#states' => [
+        'visible' => [
+          ':input[name="htmlmail_use_mime_mail"]' => [
+            'checked' => TRUE,
+          ],
+        ],
+      ],
     ];
 
     $form['filter']['htmlmail_postfilter'] = [
@@ -283,6 +297,29 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if ($form_state->getValue('htmlmail_use_mime_mail')) {
+      // Try including the files, then cleck for the classes.
+      @include_once 'Edu/Mail/mime.php';
+      @include_once 'Edu/Mail/mimeDecode.php';
+      @include_once 'Edu/Mail/mimePart.php';
+      if (!class_exists('Mail_Mime')
+        || !class_exists('Mail_mimeDecode')
+        || !class_exists('Mail_mimePart')
+      ) {
+
+        $form_state->setErrorByName('htmlmail_use_mime_mail', $this->t('The Mail MIME class was not found. Please download the required class using the <a href="@help">help section</a> commands or disable the option.',
+          ['@help' => '/admin/help/htmlmail']
+        ));
+      }
+    }
+
+    parent::validateForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $this->configFactory->getEditable('htmlmail.settings')
@@ -291,6 +328,7 @@ class HtmlMailConfigurationForm extends ConfigFormBase {
       ->set('htmlmail_theme', $form_state->getValue('htmlmail_theme'))
       ->set('htmlmail_html_with_plain', $form_state->getValue('htmlmail_html_with_plain'))
       ->set('htmlmail_postfilter', $form_state->getValue('htmlmail_postfilter'))
+      ->set('htmlmail_use_mime_mail', $form_state->getValue('htmlmail_use_mime_mail'))
       ->save();
 
     parent::submitForm($form, $form_state);

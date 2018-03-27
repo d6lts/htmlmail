@@ -4,7 +4,6 @@ namespace Drupal\htmlmail\Utility;
 
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\Core\Site\Settings;
 use Drupal\Component\Utility\UrlHelper;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
 
@@ -30,7 +29,16 @@ use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
  *
  * @see http://pear.php.net/package/Mail_mime
  */
-class HTMLMailMime extends Mail_mime {
+
+require_once 'Mail/mime.php';
+require_once 'Mail/mimeDecode.php';
+
+/**
+ * Class HTMLMailMime.
+ *
+ * @package Drupal\htmlmail\Utility
+ */
+class HTMLMailMime extends \Mail_mime {
   /**
    * Holds attached content-ids to to avoid attaching the same file twice.
    *
@@ -38,7 +46,6 @@ class HTMLMailMime extends Mail_mime {
    */
   protected $cids = [];
   protected static $logger;
-  protected static $siteSettings;
   protected static $mimeTypeGuesser;
   protected static $fileSystem;
 
@@ -112,8 +119,6 @@ class HTMLMailMime extends Mail_mime {
    *
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
    *   The logger service.
-   * @param \Drupal\Core\Site\Settings $settings
-   *   The site settings service.
    * @param \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $mimeTypeGuesser
    *   The mime type service.
    * @param \Drupal\Core\File\FileSystemInterface $fileSystem
@@ -121,22 +126,11 @@ class HTMLMailMime extends Mail_mime {
    * @param array $params
    *   The params.
    */
-  public function __construct(LoggerChannelFactoryInterface $logger, Settings $settings, MimeTypeGuesserInterface $mimeTypeGuesser, FileSystemInterface $fileSystem, array $params = []) {
-    parent::__construct($params);
+  public function __construct(LoggerChannelFactoryInterface $logger, MimeTypeGuesserInterface $mimeTypeGuesser, FileSystemInterface $fileSystem, array $params = []) {
     self::$logger = $logger;
-    self::$siteSettings = $settings;
     self::$mimeTypeGuesser = $mimeTypeGuesser;
     self::$fileSystem = $fileSystem;
-  }
-
-  /**
-   * Retrieves the EOL char.
-   *
-   * @return mixed
-   *   The default line ending.
-   */
-  public static function getEndOfLineChar() {
-    return self::$siteSettings->get('mail_line_endings', PHP_EOL);
+    parent::__construct($params);
   }
 
   /**
@@ -164,7 +158,8 @@ class HTMLMailMime extends Mail_mime {
    *   TRUE if successful; otherwise FALSE.
    */
   public function setTxtBody($data, $is_file = FALSE, $append = FALSE) {
-    return self::successful(parent::setTXTBody($data, $is_file, $append));
+    $txt_body = parent::setTXTBody($data, $is_file, $append);
+    return self::successful($txt_body);
   }
 
   /**
@@ -179,7 +174,8 @@ class HTMLMailMime extends Mail_mime {
    *   TRUE if successful; otherwise FALSE.
    */
   public function setHtmlBody($data, $is_file = FALSE) {
-    return self::successful(parent::setHTMLBody($data, $is_file));
+    $html_body = parent::setHTMLBody($data, $is_file);
+    return self::successful($html_body);
   }
 
   /**
@@ -284,6 +280,8 @@ class HTMLMailMime extends Mail_mime {
    *   (optional) The value to use for the Content-Description header.
    * @param string $header_encoding
    *   (optional) The character set to use for this part's MIME headers.
+   * @param array $add_header
+   *   (optional) Extra headers.
    *
    * @return bool
    *   TRUE if successful; otherwise FALSE.
@@ -301,13 +299,14 @@ class HTMLMailMime extends Mail_mime {
     $name_encoding = NULL,
     $filename_encoding = NULL,
     $description = '',
-    $header_encoding = NULL
+    $header_encoding = NULL,
+    array $add_header = []
   ) {
     // @todo Set content_type with mimedetect if possible.
     return self::successful(
       parent::addAttachment($file, $content_type, $name, $is_file, $encoding,
         $disposition, $charset, $language, $location, $name_encoding,
-        $filename_encoding, $description, $header_encoding)
+        $filename_encoding, $description, $header_encoding, $add_header)
     );
   }
 
@@ -316,9 +315,9 @@ class HTMLMailMime extends Mail_mime {
    *
    * @param string $separation
    *   (optional) The string used to separate header and body parts.
-   * @param array $params
+   * @param string $params
    *   (optional) Build parameters for the MailMimeInterface::get() method.
-   * @param array $headers
+   * @param string $headers
    *   (optional) The extra headers that should be passed to the
    *   self::headers() method.
    * @param bool $overwrite
@@ -327,7 +326,7 @@ class HTMLMailMime extends Mail_mime {
    * @return string
    *   The complete message as a string if successful; otherwise FALSE.
    */
-  public function getMessage($separation = NULL, array $params = [], array $headers = [], $overwrite = FALSE) {
+  public function getMessage($separation = NULL, $params = NULL, $headers = NULL, $overwrite = FALSE) {
     return self::successful(
       parent::getMessage($separation, $params, $headers, $overwrite)
     );
@@ -338,9 +337,9 @@ class HTMLMailMime extends Mail_mime {
    *
    * @param string $filename
    *   The output file location.
-   * @param array $params
+   * @param string $params
    *   (optional) Build parameters for the MailMimeInterface::get() method.
-   * @param array $headers
+   * @param string $headers
    *   (optional) The extra headers that should be passed to the
    *   MailMimeInterface::headers() method.
    * @param bool $overwrite
@@ -349,7 +348,7 @@ class HTMLMailMime extends Mail_mime {
    * @return string
    *   TRUE if successful; otherwise FALSE.
    */
-  public function saveMessage($filename, array $params = [], array $headers = [], $overwrite = FALSE) {
+  public function saveMessage($filename, $params = NULL, $headers = NULL, $overwrite = FALSE) {
     return self::successful(
       parent::saveMessage($filename, $params, $headers, $overwrite)
     );
@@ -360,13 +359,13 @@ class HTMLMailMime extends Mail_mime {
    *
    * @param string $filename
    *   The output file location.
-   * @param array $params
+   * @param string $params
    *   (optional) Build parameters for the MailMimeInterface::get() method.
    *
    * @return bool
    *   TRUE if successful; otherwise FALSE.
    */
-  public function saveMessageBody($filename, array $params = []) {
+  public function saveMessageBody($filename, $params = NULL) {
     return self::successful(
       parent::saveMessageBody($filename, $params)
     );
@@ -394,7 +393,7 @@ class HTMLMailMime extends Mail_mime {
    *
    * Searches for inline file references and attaches local files, if possible.
    *
-   * @param array $params
+   * @param string $params
    *   (optional) An associative array used to override the
    *   HTMLMailMime::_build_params values for building this message.
    * @param string $filename
@@ -410,7 +409,7 @@ class HTMLMailMime extends Mail_mime {
    *   - string: The formatted message if $filename is not set and no error
    *     occurred.
    */
-  public function &get(array $params = [], $filename = NULL, $skip_head = FALSE) {
+  public function &get($params = NULL, $filename = NULL, $skip_head = FALSE) {
     if (isset($this->_htmlbody)) {
       $this->_htmlbody = preg_replace_callback(
         [
@@ -421,9 +420,9 @@ class HTMLMailMime extends Mail_mime {
         $this->_htmlbody
       );
     }
-    return self::successful(
-      parent::get($params, $filename, $skip_head)
-    );
+
+    $get_return = parent::get($params, $filename, $skip_head);
+    return self::successful($get_return);
   }
 
   /**
@@ -454,14 +453,24 @@ class HTMLMailMime extends Mail_mime {
    *
    * @param string $message
    *   The complete message, including headers and body.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
+   *   The logger service.
+   * @param \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $mimeTypeGuesser
+   *   The mime type guesser service.
+   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
+   *   The file system service.
    *
    * @return bool|\Drupal\htmlmail\Utility\HTMLMailMime
    *   FALSE if an error occured; otherwise a new MailMIME object containing
    *   the parsed message and its attachments, if any.
    */
-  public static function &parse($message) {
+  public static function &parse(
+    $message,
+    LoggerChannelFactoryInterface $logger,
+    MimeTypeGuesserInterface $mimeTypeGuesser,
+    FileSystemInterface $fileSystem) {
 
-    $decoder = new Mail_mimeDecode($message);
+    $decoder = new \Mail_mimeDecode($message);
     $decoded = $decoder->decode(
       [
         'decode_headers' => TRUE,
@@ -473,7 +482,7 @@ class HTMLMailMime extends Mail_mime {
     if (!self::successful($decoded)) {
       return FALSE;
     }
-    $parsed = new HTMLMailMime(self::$logger, self::$siteSettings, self::$mimeTypeGuesser, self::$fileSystem);
+    $parsed = new HTMLMailMime($logger, $mimeTypeGuesser, $fileSystem);
     self::parseDecoded($parsed, $decoded);
     return $parsed;
   }
@@ -496,7 +505,7 @@ class HTMLMailMime extends Mail_mime {
     $mime_headers = $this->headers();
     return [
       array_diff_key($headers, $mime_headers) + $mime_headers,
-      $this->get(NULL, NULL, TRUE),
+      $this->get([], NULL, TRUE),
     ];
   }
 
@@ -595,7 +604,7 @@ class HTMLMailMime extends Mail_mime {
     foreach ($input as $name => $value) {
       $name = preg_replace(
         [
-          '/([[:alpha:]])([[:alpha:]]+)/e',
+          '/([[:alpha:]])([[:alpha:]]+)/',
           '/^Mime-/',
           '/-Id$/',
         ],
@@ -618,14 +627,16 @@ class HTMLMailMime extends Mail_mime {
    *
    * @param array|string $data
    *   The original message array or string.
+   * @param string $eol
+   *   The end of line characters.
    *
    * @return string
    *   The collapsed message string.
    */
-  public static function concat($data) {
-    $data = preg_replace('/(\r|\r\n|\n)/', self::getEndOfLineChar(), $data);
+  public static function concat($data, $eol) {
+    $data = preg_replace('/(\r|\r\n|\n)/', $eol, $data);
     if (is_array($data)) {
-      $data = implode(self::getEndOfLineChar(), $data);
+      $data = implode($eol, $data);
     }
     return $data;
   }
@@ -637,20 +648,22 @@ class HTMLMailMime extends Mail_mime {
    *   The message headers as a string or an array.
    * @param string|array $body
    *   The message body as a string or an array.
+   * @param string $eol
+   *   The end of line characters.
    *
    * @return string
    *   The fully-encoded email message as a string.
    */
-  public static function encodeEmail(array $headers, $body) {
+  public static function encodeEmail(array $headers, $body, $eol) {
     // Standardize capitalization of header names.
     $headers = self::toHeaders($headers);
     $output = '';
     foreach ($headers as $name => $value) {
       $output .= $name . ': ' . \Mail_mimePart::encodeHeader(
-          $name, $value, 'UTF-8', 'quoted-printable', self::getEndOfLineChar()
-        ) . self::getEndOfLineChar();
+          $name, $value, 'UTF-8', 'quoted-printable', $eol
+        ) . $eol;
     }
-    $output .= self::getEndOfLineChar() . self::concat($body);
+    $output .= $eol . self::concat($body, $eol);
     return $output;
   }
 

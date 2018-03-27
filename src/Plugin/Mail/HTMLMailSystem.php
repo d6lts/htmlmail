@@ -170,7 +170,7 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
     }
 
     // Collapse the message body array.
-    if (class_exists('Mail_mime')) {
+    if ($this->configVariables->get('htmlmail_use_mime_mail')) {
       $body = $this->formatMailMime($message);
       $plain = $message['MailMIME']->getTXTBody();
     }
@@ -421,12 +421,11 @@ class HTMLMailSystem implements MailInterface, ContainerFactoryPluginInterface {
    */
   public function formatMailMime(array &$message) {
     $eol = $this->siteSettings->get('mail_line_endings', PHP_EOL);
-
-    $message['body'] = HTMLMailMime::concat($message['body']);
+    $message['body'] = HTMLMailMime::concat($message['body'], $eol);
     // Build a full email message string.
-    $email = HTMLMailMime::encodeEmail($message['headers'], $message['body']);
+    $email = HTMLMailMime::encodeEmail($message['headers'], $message['body'], $eol);
     // Parse it into MIME parts.
-    if (!($mime = HTMLMailMime::parse($email))) {
+    if (!($mime = HTMLMailMime::parse($email, $this->logger, $this->mimeType, $this->fileSystem))) {
       $this->getLogger()->error('Could not parse email message.');
       return $message;
     }
