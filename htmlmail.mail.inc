@@ -262,7 +262,7 @@ class HTMLMailSystem implements MailSystemInterface {
         // if the parameter is NULL.
         $result = @mail($to, $subject, $body, $txt_headers);
       }
-      else {
+      elseif ((variable_get('site_mail', ini_get('sendmail_from')) == $message['headers']['Return-Path'] || self::_isShellSafe($message['headers']['Return-Path']))) {
         // On most non-Windows systems, the "-f" option to the sendmail command
         // is used to set the Return-Path.
         $extra = '-f' . $message['headers']['Return-Path'];
@@ -319,4 +319,26 @@ class HTMLMailSystem implements MailSystemInterface {
     }
     return implode("\n", $output);
   }
+
+  /**
+   * Disallows potentially unsafe shell characters.
+   *
+   * @param string $string
+   *   The string to be validated.
+   *
+   * @return bool
+   *   True if the string is shell-safe.
+   *
+   * @see https://api.drupal.org/api/drupal/modules%21system%21system.mail.inc/7.x
+   */
+  protected static function _isShellSafe($string) {
+    if (escapeshellcmd($string) !== $string || !in_array(escapeshellarg($string), array("'$string'", "\"$string\""))) {
+      return FALSE;
+    }
+    if (preg_match('/[^a-zA-Z0-9@_\-.]/', $string) !== 0) {
+      return FALSE;
+    }
+    return TRUE;
+  }
+
 }
