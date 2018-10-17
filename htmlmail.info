@@ -7,3 +7,9 @@ dependencies[] = mailsystem
 dependencies[] = autoload
 core = 6.x
 configure = admin/settings/htmlmail
+
+; Information added by Drupal 6 LTS vendors on 2018-10-17
+version = "6.x-2.65"
+core = "6.x"
+project = "htmlmail"
+datestamp = "1539806475"
